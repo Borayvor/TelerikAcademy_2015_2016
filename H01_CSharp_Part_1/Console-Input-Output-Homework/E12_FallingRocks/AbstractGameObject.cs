@@ -11,7 +11,7 @@
         private string empty;
 
         internal AbstractGameObject()
-            : this(0, 0, 0, null)
+            : this(0, 0, 0, " ")
         { }
 
         internal AbstractGameObject(int x, int y, ConsoleColor color, string objectForm)

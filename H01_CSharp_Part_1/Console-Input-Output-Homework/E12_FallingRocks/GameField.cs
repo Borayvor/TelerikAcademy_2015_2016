@@ -4,18 +4,18 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public class GameField
     {
         private bool endOfGame;
         private Dwarf player;
-        private ICollection<Rock> rocksList;
+        private List<Rock> rocksList;
 
         public GameField()
         {
-            Initialize();
-            rocksList = new List<Rock>();
+            Initialize();            
         }
 
         public Dwarf Player
@@ -33,30 +33,40 @@
 
         public void StartPlay()
         {
-            Rock newRock = new Rock();
-                newRock.SetRandom((Console.WindowWidth / 3) * 2);
-                rocksList.Add(newRock);
+            
 
                 while (!endOfGame)
                 {
-                    foreach (var rock in rocksList)
+                    Rock newRock = new Rock();
+                    newRock.SetRandom((Console.WindowWidth / 3) * 2);
+                    rocksList.Add(newRock);
+                                     
+                    for (int rockIndex = 0; rockIndex < rocksList.Count; rockIndex++)
                     {
-                        rock.Y += 1;
+                        rocksList[rockIndex].Clear();
+                        rocksList[rockIndex].Y += 1;
 
-                        if (rock.Y >= Console.WindowHeight)
-                        {
-                            rocksList.Remove(rock);
-                            
+                        if (rocksList[rockIndex].Y >= Console.WindowHeight)
+                        {                            
+                            rocksList.Remove(rocksList[rockIndex]);                            
                         }
 
+                        //if (rock.Y >= Console.WindowHeight - 1)
+                        //{
+                        //    
 
-                        if (rock.X == player.X && rock.Y == player.Y)
-                        {
-                            player.ObjectForm = "X";
-                            
-                           
-                        }
+                        //}
+
+
+                        //if (rock.X == player.X && rock.Y == player.Y)
+                        //{
+                        //    player.ObjectForm = "X"; 
+                        //}
+
+                        rocksList[rockIndex].Print();
                     }
+
+                    Thread.Sleep(150);
                 }
             }
 
@@ -67,6 +77,8 @@
             Console.BufferHeight = Console.WindowHeight;
             Console.BufferWidth = Console.WindowWidth;
             Console.CursorVisible = false;
+
+            rocksList = new List<Rock>();
 
             this.endOfGame = false;
 
