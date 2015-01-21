@@ -1,10 +1,6 @@
 ﻿namespace E11_NumberAsWords
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class NumberAsWords
     {
@@ -46,16 +42,59 @@
             {
                 int powerOfTen = (int)Math.Pow(10, (numberAsString.Length - 1) - i);
                 int value = number / powerOfTen;
-                                
-                number %= powerOfTen;
 
-                if (i == 1 && value == 0)
+                switch (powerOfTen)
                 {
-                    continue;
+                    case 100:
+                        {
+                            numberAsWords += Enum.GetName(typeof(NumbersNames), value);
+                            numberAsWords += " ";
+                            numberAsWords += Enum.GetName(typeof(NumbersNames), powerOfTen);
+                            break;
+                        }
+                    case 10:
+                        {
+                            if (numberAsString.Length > 2)
+                            {
+                                numberAsWords += "and ";
+                            }
+
+                            if (value == 0)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                if (value == 1)
+                                {
+                                    numberAsWords += Enum.GetName(typeof(NumbersNames), number);
+                                    break;
+                                }
+
+                                numberAsWords += Enum.GetName(typeof(NumbersNames), value * powerOfTen);
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            numberAsWords += Enum.GetName(typeof(NumbersNames), value);
+                            break;
+                        }
                 }
 
-                numberAsWords += Enum.GetName(typeof(NumbersNames), value);
-                Console.WriteLine(numberAsWords);
+                if (number >= 20)
+                {
+                    number %= powerOfTen;
+
+                    if (i < numberAsString.Length)
+                    {
+                        numberAsWords += " ";
+                    }
+                }
+                else
+                {
+                    break;
+                }
             }
 
             Console.WriteLine(numberAsWords);
