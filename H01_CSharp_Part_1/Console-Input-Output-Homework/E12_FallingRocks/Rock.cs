@@ -22,13 +22,7 @@
         }
 
         public void Fall()
-        {
-            if (this.Y >= Console.WindowHeight)
-            {
-                this.Clear();
-                return;
-            }
-
+        {            
             this.Clear();
             this.Y += 1;
             this.Print();
