@@ -12,15 +12,16 @@
         private bool endOfGame;
         private Dwarf player;
         private List<Rock> rocksList;
+        private Random randomGenerator;
 
         public GameField()
         {
-            Initialize();            
+            Initialize();
         }
 
         public Dwarf Player
         {
-            get 
+            get
             {
                 return this.player;
             }
@@ -31,44 +32,46 @@
             }
         }
 
+        private Random RandomGenerator
+        {
+            get
+            {
+                return this.randomGenerator;
+            }
+
+            set
+            {
+                this.randomGenerator = value;
+            }
+        }
+
         public void StartPlay()
         {
-            
 
-                while (!endOfGame)
+
+            while (!endOfGame)
+            {
+                Rock newRock = new Rock();
+                newRock.SetRandom((Console.WindowWidth / 3) * 2, RandomGenerator);
+                rocksList.Add(newRock);
+
+                for (int rockIndex = 0; rockIndex < rocksList.Count; rockIndex++)
                 {
-                    Rock newRock = new Rock();
-                    newRock.SetRandom((Console.WindowWidth / 3) * 2);
-                    rocksList.Add(newRock);
-                                     
-                    for (int rockIndex = 0; rockIndex < rocksList.Count; rockIndex++)
+                    if (rocksList[rockIndex].Y < Console.WindowHeight - 1)
+                    {
+                        rocksList[rockIndex].Fall();
+                    }
+                    else
                     {
                         rocksList[rockIndex].Clear();
-                        rocksList[rockIndex].Y += 1;
-
-                        if (rocksList[rockIndex].Y >= Console.WindowHeight)
-                        {                            
-                            rocksList.Remove(rocksList[rockIndex]);                            
-                        }
-
-                        //if (rock.Y >= Console.WindowHeight - 1)
-                        //{
-                        //    
-
-                        //}
-
-
-                        //if (rock.X == player.X && rock.Y == player.Y)
-                        //{
-                        //    player.ObjectForm = "X"; 
-                        //}
-
-                        rocksList[rockIndex].Print();
+                        rocksList.Remove(rocksList[rockIndex]);
                     }
-
-                    Thread.Sleep(150);
+                    
                 }
+
+                Thread.Sleep(150);
             }
+        }
 
         private void Initialize()
         {
@@ -78,12 +81,14 @@
             Console.BufferWidth = Console.WindowWidth;
             Console.CursorVisible = false;
 
-            rocksList = new List<Rock>();
+            this.RandomGenerator = new Random();
+
+            this.rocksList = new List<Rock>();
 
             this.endOfGame = false;
 
             this.Player = new Dwarf(Console.WindowWidth / 3, Console.WindowHeight - 1,
-                ConsoleColor.DarkRed, "(O)");
+                ConsoleColor.DarkMagenta, "(O)");
 
             this.Player.Print();
         }

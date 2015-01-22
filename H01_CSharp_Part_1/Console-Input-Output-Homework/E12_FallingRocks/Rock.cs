@@ -3,27 +3,35 @@
     using System;
 
     public class Rock : AbstractGameObject, IPrintable
-    {
-        //public Rock(int x, int y, ConsoleColor color, string objectForm)
-        //    : base(x, y, color, objectForm)
-        //{
- 
-        //}
-
-        public void SetRandom(int width)
-        {
-            Random generator = new Random();
+    {   
+        public void SetRandom(int width, Random randomGenerator)
+        {            
             char[] symbols = { '^', '@', '*', '&', '+', '%', '$', '#', '!', ';' };
 
             ConsoleColor[] colors = {ConsoleColor.Red, ConsoleColor.DarkCyan,
-                                    ConsoleColor.Black, ConsoleColor.Blue, ConsoleColor.Red, ConsoleColor.Magenta,
-                                    ConsoleColor.DarkYellow, ConsoleColor.DarkRed, ConsoleColor.DarkGray,
-                                    ConsoleColor.DarkGreen, ConsoleColor.DarkBlue};
+                                    ConsoleColor.Black, ConsoleColor.Blue, 
+                                    ConsoleColor.Red, ConsoleColor.Magenta,
+                                    ConsoleColor.DarkYellow, ConsoleColor.DarkRed, 
+                                    ConsoleColor.DarkGray, ConsoleColor.DarkGreen, 
+                                    ConsoleColor.DarkBlue};
 
             this.Y = 0;
-            this.X = generator.Next(0, width);
-            this.Color = colors[generator.Next(0, colors.Length)];
-            this.ObjectForm = symbols[generator.Next(0, symbols.Length)].ToString(); 
+            this.X = randomGenerator.Next(0, width);
+            this.Color = colors[randomGenerator.Next(0, colors.Length)];
+            this.ObjectForm = symbols[randomGenerator.Next(0, symbols.Length)].ToString(); 
+        }
+
+        public void Fall()
+        {
+            if (this.Y >= Console.WindowHeight)
+            {
+                this.Clear();
+                return;
+            }
+
+            this.Clear();
+            this.Y += 1;
+            this.Print();
         }
     }
 }

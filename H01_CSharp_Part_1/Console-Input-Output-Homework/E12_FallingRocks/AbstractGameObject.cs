@@ -8,7 +8,7 @@
         private int y;
         private ConsoleColor color;
         private string objectForm;
-        private string empty;
+        private string empty;        
 
         internal AbstractGameObject()
             : this(0, 0, 0, " ")
@@ -19,7 +19,7 @@
             this.X = x;
             this.Y = y;
             this.Color = color;
-            this.ObjectForm = objectForm;
+            this.ObjectForm = objectForm;            
 
             for (int i = 0; i < this.ObjectForm.Length; i++)
             {
@@ -78,7 +78,7 @@
                 this.objectForm = value;
             }
         }
-
+                
         protected string Empty
         {
             get
@@ -94,7 +94,7 @@
 
 
         public virtual void Print()
-        {
+        {            
             Console.SetCursorPosition(this.X, this.Y);
             Console.ForegroundColor = this.Color;
             Console.Write(this.ObjectForm);
