@@ -54,24 +54,27 @@
                         }
                     case 10:
                         {
-                            if (numberAsString.Length > 2)
+                            if (number % 100 != 0)
                             {
-                                numberAsWords += "and ";
-                            }
-
-                            if (value == 0)
-                            {
-                                continue;
-                            }
-                            else
-                            {
-                                if (value == 1)
+                                if (numberAsString.Length > 2)
                                 {
-                                    numberAsWords += Enum.GetName(typeof(NumbersNames), number);
-                                    break;
+                                    numberAsWords += "and ";
                                 }
 
-                                numberAsWords += Enum.GetName(typeof(NumbersNames), value * powerOfTen);
+                                if (value == 0)
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    if (value == 1)
+                                    {
+                                        numberAsWords += Enum.GetName(typeof(NumbersNames), number);
+                                        break;
+                                    }
+
+                                    numberAsWords += Enum.GetName(typeof(NumbersNames), value * powerOfTen);
+                                }
                             }
                             break;
                         }
