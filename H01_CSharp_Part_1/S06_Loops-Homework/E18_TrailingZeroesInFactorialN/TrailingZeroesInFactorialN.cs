@@ -19,24 +19,17 @@
 
             Console.WriteLine("Please, enter a positive integer number !");
             Console.Write("n = ");
-            int n = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine().Trim());
 
-            int counter = 0;
+            int zeroes = 0, product = 5;
 
-            for (int i = 1; i <= n; i++)
+            while (number >= product)
             {
-                int devider = i;
-
-                while (devider % 5 == 0)
-                {
-                    counter++;
-                    devider /= 5;
-                    // Look at the example
-                    // explaination -> zero is added on every fifth number 
-                }
+                zeroes += number / product;
+                product *= 5;
             }
 
-            Console.WriteLine("There are {0} zeros in N!", counter);
+            Console.WriteLine("There are {0} zeros in {1}!", zeroes, number);
         }
     }
 }
