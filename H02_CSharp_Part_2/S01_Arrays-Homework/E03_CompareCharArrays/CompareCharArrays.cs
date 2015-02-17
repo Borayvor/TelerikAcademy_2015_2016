@@ -30,11 +30,13 @@
                 equal = true;
             }
 
+            int rezult = 0;
+
             if (equal)
             {
                 for (int index = 0; index < arrayOne.Length; index++)
                 {
-                    int rezult = arrayOne[index].CompareTo(arrayTwo[index]);
+                    rezult = arrayOne[index].CompareTo(arrayTwo[index]);
 
                     if (rezult != 0)
                     {
@@ -48,9 +50,17 @@
             {
                 Console.WriteLine("Arrays are equal !");
             }
+            else if (rezult > 0)
+            {
+                Console.WriteLine("Arrays are not equal !");
+                Console.WriteLine("First  -> {0}", arrayTwo);
+                Console.WriteLine("Second -> {0}", arrayOne);
+            }
             else
             {
                 Console.WriteLine("Arrays are not equal !");
+                Console.WriteLine("First  -> {0}", arrayOne);
+                Console.WriteLine("Second -> {0}", arrayTwo);
             }
         }
     }
