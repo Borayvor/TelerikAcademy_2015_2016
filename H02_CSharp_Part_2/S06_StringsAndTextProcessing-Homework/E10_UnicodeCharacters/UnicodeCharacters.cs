@@ -18,7 +18,8 @@
             string text = string.Join("",
                 Console.ReadLine()
                 .Trim()
-                .Select(ch => ("\\u" + ((int)ch).ToString("X4")))
+                .Select(ch => 0xffff)
+                //.Select(ch => ("\\u" + ((int)ch).ToString("X4")))
                 .ToArray());
 
             Console.WriteLine(text);
