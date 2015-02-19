@@ -20,7 +20,7 @@
                .Select(ch => int.Parse(ch.ToString()))
                .ToArray();
 
-            int countEquals = 1;
+            int countIncreasingMembers = 1;
             int startPosition = 0;
             int lastPosition = 0;
             int sequenceMaxLength = 0;
@@ -29,18 +29,18 @@
             {
                 if (array[index] > array[index - 1])
                 {
-                    countEquals++;
+                    countIncreasingMembers++;
 
-                    if (sequenceMaxLength < countEquals)
+                    if (sequenceMaxLength < countIncreasingMembers)
                     {
-                        sequenceMaxLength = countEquals;
+                        sequenceMaxLength = countIncreasingMembers;
                         startPosition = lastPosition;
                     }
                 }
                 else
                 {
                     lastPosition = index;
-                    countEquals = 1;
+                    countIncreasingMembers = 1;
                 }
             }
 
