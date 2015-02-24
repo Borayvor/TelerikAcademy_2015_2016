@@ -36,10 +36,15 @@
 
             Array.Sort(array);
 
-            int result = Array.BinarySearch(array, k);            
+            int result = Array.BinarySearch(array, k);
+
+            if (result < 0)
+            {
+                result = (result * (-1)) + (-2);
+            }
 
             Console.Write("The largest number in the array which is <= {0} is: ", k);
-            if (result < 0)
+            if (result == -1)
             {
                 Console.WriteLine("There is no such element.");
             }
