@@ -56,7 +56,7 @@
             }
 
             for (; indexCommands < code.Count; indexCommands++)
-            {
+            {                
                 var row = code[indexCommands];
                 AllCommands(row);
             }
@@ -105,7 +105,7 @@
                     .Split(new char[] { addition, subtraction })
                     .ToArray();
 
-            if (expression[1].Length > 2)
+            if (arithmeticOperation.Length > 1 && arithmeticOperation[0] != string.Empty)
             {
                 if (!string.IsNullOrWhiteSpace(arithmeticOperation[0]) &&
                 !string.IsNullOrWhiteSpace(arithmeticOperation[1]))
@@ -177,24 +177,26 @@
             int y = 0;
             bool conditionIF = false;
 
-            string[] condition = row.Substring(start, end - start)
+            string rowCondition = row.Substring(start, end - start);
+
+            string[] condition = rowCondition
                 .Split(new char[] { assign, bigger, smaller }
                 .ToArray());
 
             x = GetVariable(condition[0]);
             y = GetVariable(condition[1]);
 
-            if (row.Contains(bigger))
+            if (rowCondition.Contains(bigger))
             {
                 conditionIF = (x > y);
             }
 
-            if (row.Contains(smaller))
+            if (rowCondition.Contains(smaller))
             {
                 conditionIF = (x < y);
             }
 
-            if (row.Contains(assign))
+            if (rowCondition.Contains(assign))
             {
                 conditionIF = (x == y);
             }
