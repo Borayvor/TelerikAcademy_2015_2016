@@ -1,0 +1,24 @@
+New Path:
+Point 0 : X = 14 , Y = 69 , Z = 36
+Point 1 : X = 32 , Y = 30 , Z = 43
+Point 2 : X = 100 , Y = 67 , Z = 2
+Point 3 : X = 15 , Y = 21 , Z = 83
+Point 4 : X = 95 , Y = 76 , Z = 46
+
+
+New Path:
+Point 0 : X = 93 , Y = 88 , Z = 39
+Point 1 : X = 7 , Y = 56 , Z = 68
+Point 2 : X = 49 , Y = 67 , Z = 33
+Point 3 : X = 56 , Y = 63 , Z = 1
+Point 4 : X = 64 , Y = 16 , Z = 7
+
+
+New Path:
+Point 0 : X = 12 , Y = 96 , Z = 78
+Point 1 : X = 18 , Y = 84 , Z = 66
+Point 2 : X = 41 , Y = 67 , Z = 44
+Point 3 : X = 47 , Y = 56 , Z = 20
+Point 4 : X = 67 , Y = 43 , Z = 50
+
+
