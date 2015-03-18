@@ -1,77 +1,21 @@
 ﻿namespace E12_FallingRocks
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
-    public class Scoreboard : IDrawable
+    public class Scoreboard : AbstractGameObject, IPrintable
     {
-        private int x;
-        private int y;
-        private ConsoleColor color;
-        private int amount;
-        private string message;
+        private int amount;        
 
-        public Scoreboard(int xInitial, int yInitial, ConsoleColor colorInitial,
-            string messageInitial, int amountIntitial)
+        public Scoreboard(int x, int y, ConsoleColor color, string message, int amountIntitial)
+            : base(x, y, color, message)
         {
-            this.X = xInitial;
-            this.Y = yInitial;
-            this.Color = colorInitial;
-            this.Message = messageInitial;    
-            this.Amount = amountIntitial;
+            this.Amount = amountIntitial;                       
         }
-
-        public int X
-        {
-            get
-            {
-                return this.x;
-            }
-
-            set
-            {
-                this.x = value;
-            }
-        }
-
-        public int Y
-        {
-            get
-            {
-                return this.y;
-            }
-
-            set
-            {
-                this.y = value;
-            }
-        }
-
-        public ConsoleColor Color
-        {
-            get
-            {
-                return this.color;
-            }
-
-            set
-            {
-                this.color = value;
-            }
-        }
-
-        public string Message
-        {
-            get
-            {
-                return this.message;
-            }
-
-            set
-            {
-                this.message = value;
-            }
-        }
-
+           
         public int Amount
         {
             get
@@ -83,6 +27,13 @@
             {
                 this.amount = value;
             }
-        }               
+        }
+
+        
+        public override void Print()
+        {
+            base.Print();
+            Console.Write(" " + this.Amount);
+        }                
     }
 }

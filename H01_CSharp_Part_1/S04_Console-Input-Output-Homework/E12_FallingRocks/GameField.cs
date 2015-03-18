@@ -6,14 +6,16 @@
 
     public class GameField
     {
+        private const string PLAYER_LIVE_FORM = "(O)";
+        private const string PLAYER_DEAD_FORM = "(X)";
         private const int PLAYER_START_POINTS = 0;
         private const int PLAYER_START_LIVES = 5;
 
         private bool endOfGame;
-        private int playGroundWidth;
         private Dwarf player;
         private List<Rock> rocksList;
-        private Random randomGenerator;        
+        private Random randomGenerator;
+        private int playGroundWidth;
         private Scoreboard lives;
         private Scoreboard points;
        
@@ -50,6 +52,8 @@
 
         public void StartPlay()
         {
+            char[] symbols = { '^', '@', '*', '&', '+', '%', '$', '#', '!', ';' };
+
             ConsoleColor[] colors = {ConsoleColor.Red, ConsoleColor.DarkCyan,
                                     ConsoleColor.Black, ConsoleColor.Blue, 
                                     ConsoleColor.Red, ConsoleColor.Magenta,
@@ -61,17 +65,17 @@
             {
                 int y = 0;
                 int x = randomGenerator.Next(0, this.playGroundWidth);
+                ConsoleColor color = colors[randomGenerator.Next(0, colors.Length)];
+                string form = symbols[randomGenerator.Next(0, symbols.Length)].ToString();
 
-                ConsoleColor color = colors[randomGenerator.Next(0, colors.Length)];                                
-
-                Rock newRock = new Rock(x, y, color, randomGenerator);
+                Rock newRock = new Rock(x, y, color, form);
                 this.rocksList.Add(newRock);
 
                 for (int rockIndex = 0; rockIndex < this.rocksList.Count; rockIndex++)
                 {
                     if (this.rocksList[rockIndex].Y < Console.WindowHeight - 1)
                     {
-                        // this.rocksList[rockIndex].Fall();
+                        this.rocksList[rockIndex].Fall();
                     }
                     else
                     {
@@ -79,17 +83,17 @@
                             this.rocksList[rockIndex].X < this.Player.X + this.Player.ObjectForm.Length)
                         {
                             this.lives.Amount--;
-                            //this.lives.Draw();
+                            this.lives.Print();
 
-                            //this.Player.Clear();
-                            //this.Player.ObjectForm = PLAYER_DEAD_FORM;
-                            //this.Player.Draw();
+                            this.Player.Clear();
+                            this.Player.ObjectForm = PLAYER_DEAD_FORM;
+                            this.Player.Print();
 
-                            //Thread.Sleep(700);
+                            Thread.Sleep(700);
 
-                            //this.Player.Clear();
-                            //this.Player.ObjectForm = PLAYER_LIVE_FORM;
-                            //this.Player.Draw();
+                            this.Player.Clear();
+                            this.Player.ObjectForm = PLAYER_LIVE_FORM;
+                            this.Player.Print();
 
                             if (this.lives.Amount == 0)
                             {
@@ -100,11 +104,11 @@
                         else
                         {                            
                             this.points.Amount++;
-                            //this.points.Draw();                           
+                            this.points.Print();                           
                         }
 
-                        //this.Player.Draw();
-                        //this.rocksList[rockIndex].Clear();
+                        this.Player.Print();
+                        this.rocksList[rockIndex].Clear();
                         this.rocksList.Remove(this.rocksList[rockIndex]);                        
                     }
                     
@@ -113,7 +117,7 @@
                 Thread.Sleep(150);
             }
         }
-               
+
         private void Initialize()
         {
             Console.Clear();
@@ -142,11 +146,11 @@
                 ConsoleColor.White, "POINTS", PLAYER_START_POINTS);
 
             this.Player = new Dwarf(Console.WindowWidth / 3, Console.WindowHeight - 1,
-                ConsoleColor.DarkMagenta);
+                ConsoleColor.DarkMagenta, PLAYER_LIVE_FORM);
 
-            //this.lives.Draw();
-            //this.points.Draw();
-            //this.Player.Draw();
+            this.lives.Print();
+            this.points.Print();
+            this.Player.Print();
         }
     }
 }

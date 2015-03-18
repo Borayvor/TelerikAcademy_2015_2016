@@ -2,16 +2,19 @@
 {
     using System;
 
-    public class Rock : AbstractGameObject, IDrawable
+    public class Rock : AbstractGameObject, IPrintable
     {
-        private const char[] SYMBOLS = { '^', '@', '*', '&', '+', '%', '$', '#', '!', ';' };
-
-        public Rock(int x, int y, ConsoleColor color, Random randomGenerator)
-            : base(x, y, color)
+        public Rock(int x, int y, ConsoleColor color, string objectForm)
+            : base(x, y, color, objectForm)
         {
-            this.ObjectForm = SYMBOLS[randomGenerator.Next(0, SYMBOLS.Length)].ToString();
-        }  
-        
-    
+ 
+        }
+       
+        public void Fall()
+        {            
+            this.Clear();
+            this.Y += 1;
+            this.Print();
+        }
     }
 }

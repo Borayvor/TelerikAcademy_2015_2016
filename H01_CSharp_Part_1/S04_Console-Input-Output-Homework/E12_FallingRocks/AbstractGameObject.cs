@@ -2,7 +2,7 @@
 {
     using System;
 
-    public abstract class AbstractGameObject : IDrawable
+    public abstract class AbstractGameObject : IPrintable
     {
         private int x;
         private int y;
@@ -10,11 +10,12 @@
         private string objectForm;
         private string empty;        
                 
-        internal AbstractGameObject(int xInitial, int yInitial, ConsoleColor colorInitial)
+        internal AbstractGameObject(int x, int y, ConsoleColor color, string objectForm)
         {
-            this.X = xInitial;
-            this.Y = yInitial;
-            this.Color = colorInitial;
+            this.X = x;
+            this.Y = y;
+            this.Color = color;
+            this.ObjectForm = objectForm;            
 
             for (int i = 0; i < this.ObjectForm.Length; i++)
             {
@@ -85,6 +86,20 @@
             {
                 this.empty = value;
             }
+        }
+
+
+        public virtual void Print()
+        {            
+            Console.SetCursorPosition(this.X, this.Y);
+            Console.ForegroundColor = this.Color;
+            Console.Write(this.ObjectForm);
+        }
+
+        public virtual void Clear()
+        {
+            Console.SetCursorPosition(this.X, this.Y);
+            Console.Write(this.Empty);
         }
     }
 }
