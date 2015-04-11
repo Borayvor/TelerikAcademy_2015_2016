@@ -1,0 +1,48 @@
+﻿.body-board {
+    border: 1px solid black;
+}
+body table {
+  background: white;
+  border-radius: 0.4em;
+  border-spacing: 0;
+  border-spacing: 1em;  
+}
+body table th {
+  padding-bottom: 0.4em;
+  border-bottom: 2px solid black;
+  border-spacing: 0;
+}
+body table th a {
+  font-size: 1.5em;
+  color: #00AAEF;
+  margin: 10px;
+}
+body table th a:visited {
+  color: #4cff00;
+}
+body table td#demo {
+  border: 2px solid black;
+}
+body table td#demo table {
+  border-spacing: 0;
+  padding-bottom: 0.8em;
+}
+body table td#demo table fieldset {
+  border: 2px solid black;
+}
+body table td#demo table fieldset legend {
+  margin-left: 10%;
+}
+
+body table td#limits {
+  padding-right: 0.5em;
+}
+body table td#limits label span.left {
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+body table td#limits input {
+  display: block;
+  margin-bottom: 4em;
+}

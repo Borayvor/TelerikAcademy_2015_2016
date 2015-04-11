@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>PersonalData</title>
+    <style>
+        table {
+            border-collapse:collapse;
+        }
+        table, td   {                    
+                    border: 2px solid black;                                                      
+                    margin: 0;
+                    padding: 0;                                                              
+                    }                     
+        .td-right { text-align: right; }
+        .td-center { 
+            text-align: center; 
+        }
+        .input10 {
+            width: 10%;
+        }
+        .input90 {
+            width: 90%;
+        }
+        #country {
+            width: 50%;
+        }
+        #footer {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <form>
+    <table>        
+        <tr>
+            <td class="td-right">
+                <label for="ln">Last Name</label>
+            </td>
+            <td colspan="4">                
+                    <input type="text" name="Last Name" title="Last Name" class="input90" id="ln"/>                
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="fn">First Name</label>
+            </td>
+            <td colspan="4">                
+                    <input type="text" name="First Name" title="First Name" class="input90" id="fn"/>                
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="address">Address</label>
+            </td>
+            <td colspan="4">               
+                    <textarea name="Address" title="Address" aria-valuetext="" class="input90" id="address"></textarea>               
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="sity">Sity</label>
+            </td>
+            <td>                
+                    <input type="text" name="Sity" title="Sity" value="" id="sity"/>               
+            </td>
+            <td class="td-right">
+                <label for="state">State</label>
+            </td>
+            <td>                
+                    <input type="text" name="State" title="State" value="" id="state"/>                
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="pc">ZIP/Postal Code</label>
+            </td>
+            <td colspan="4">                
+                    <input type="text" name="Postal Code" title="Postal Code" value="" class="input10" id="pc"/>               
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="country">Country</label>
+            </td>
+            <td colspan="4">                
+                    <select name="Country" title="Country" id="country">
+                          <option value="1" selected="selected">Bulgaria</option>
+                          <option value="2">Japan</option>
+                          <option value="3">Holland</option>
+                    </select>               
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="cc">Phone(country code, area code, number)</label>
+            </td>
+            <td colspan="4">                
+                    <label for="cc">(+</label>
+                    <input type="text" title="Country Code" value="359" pattern="[0-9]{3}" class="input10" id="cc"/>
+                    <label for="cc">)</label>
+                    <select name="Country" title="Area Code" class="input10" id="ac">
+                          <option value="1" selected="selected">88</option>
+                          <option value="2">89</option>
+                          <option value="3">98</option>
+                          <option value="4">99</option>
+                    </select>
+                    <input type="text" required="required" title="Telephon number" value="" pattern="[0-9]{6}" id="number"/>                
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="email">E-Mail</label>
+            </td>
+            <td colspan="4">                
+                    <input type="email" required="required" title="E-Mail"pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@
+(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" value="" class="input90" id="email"/>                
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="month">Birth date</label>
+            </td>
+            <td colspan="4">                
+                    <label for="month">Month </label>
+                    <input type="text" required="required" title="Month" pattern="0[1-9]|1[012]" value="" id="month"/>
+                    <label for="day">Day </label>
+                    <input type="text" required="required" title="Day" pattern="0[1-9]|[12][0-9]|3[01]" value="" id="day"/>
+                    <label for="year">Year (4 digit) </label>
+                    <input type="text" required="required" title="Year" pattern="(19|20)\d\d" value="" id="year"/>               
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="gender">Gender</label>
+            </td>
+            <td colspan="4">              
+                    <select name="Gender" title="Gender" id="gender">
+                          <option value="1" selected="selected">Male</option>
+                          <option value="2">Female</option>                          
+                    </select>               
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label>Starting date</label>
+            </td>
+            <td  colspan="4">                             
+                    <input type="radio" name="Starting date" title="Spring" value="Spring 2006" id="spring"/> 
+                    <label for="spring">Spring 2006</label>
+                    <input type="radio" name="Starting date" title="Summer" value="Summer 2006" id="summer"/>
+                    <label for="summer">Summer 2006</label>                 
+                
+            </td>
+        </tr>
+        <tr>
+            <td class="td-right">
+                <label for="comments">Comments/Questions</label>
+            </td>
+            <td  colspan="4" class="submit">                
+                    <textarea class="input90" id="comments">
+                        Please, send me more information about the lodging !
+                    </textarea>               
+            </td>
+        </tr> 
+        <tfoot id="footer">
+            <tr>
+                <td colspan="5" class="td-center">
+                    <input type="submit" name="Submit" title="Submit" value="Submit" />
+                    <input type="reset" name="Reset" title="Reset" value="Clear This Form" />
+                </td>
+            </tr>
+        </tfoot>       
+    </table>
+    </form>
+</body>
+</html>
