@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Calculator</title>
+    <style>
+        table {
+            background-color:#6c94cc;
+            height:300px;
+            width:250px;
+            border-radius:10px;
+            position: static;            
+        }           
+        table, th, td
+                    {                                                       
+                    margin: 0;
+                    padding: 0;                                    
+                    text-align: center;                                                                            
+                    }
+        th, td {
+            height: 20%;
+            width: 20%;
+        }  
+       
+   .display {            
+            width:230px;
+            position:static;
+            left:15px;
+            top:20px;
+            height:40px;
+            }
+            .display input
+            {
+            width:230px;
+            position:static;
+            left:2px;
+            top:2px;
+            height:30px;
+            color:black;
+            background-color:#bccd95;
+            font-size:21px;
+            text-align:right;
+            }
+            
+           .button  {
+                    width:100%;
+                    height:100%;
+                    border:none;
+                    border-radius:8px;                    
+                    cursor:pointer;
+                    border-top:2px solid transparent;
+                    }
+  .button.black {
+                color:white;
+                background-color:#303030;
+                border-bottom:black 2px solid;
+                border-top:2px #303030 solid;
+                } 
+  .button.orange
+                {
+                        
+                color:black;
+                background-color:#FF9933;
+                border-bottom:black 2px solid;
+                border-top:2px #FF9933 solid;
+                }
+  .button.white  {
+                color:black;
+                background-color:white;
+                border-bottom:black 2px solid;
+                }
+  .button.green {                
+                
+                color: black;
+                background-color: #5ccf4a;
+                border-bottom: black 2px solid;
+            }
+    .black:active
+                {
+                border-top:black 2px solid;
+                border-bottom:#1c1cbd 2px solid;
+                }
+   .orange:active
+                {
+                border-top:black 2px solid;
+                border-bottom:#FF9933 2px solid;
+                }
+    .green:active
+                {
+                border-top:black 2px solid;
+                border-bottom:#5ccf4a 2px solid;
+                }
+   .white:active
+                {
+                border-top:black 2px solid;
+                border-bottom:white 2px solid;
+                }
+    </style>
+    <script>
+        function c(val) {
+            document.getElementById("d").value = val;
+        }
+        function v(val) {
+            document.getElementById("d").value += val;
+        }
+        function e() {
+            try {
+                c(eval(document.getElementById("d").value))
+            }
+            catch (e) {
+                c('Error')
+            }
+        }
+    </script>
+</head>
+<body>    
+        <div>
+            <table>
+                <tr class="display">
+                    <th colspan="5">
+                        <input type="text" readonly: size="18" id="d" autofocus="autofocus"/>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="7" onclick='v("7")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="8" onclick='v("8")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="9" onclick='v("9")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button white" 
+                            value="/" onclick='v("/")'/>
+                    </td>
+                    <td rowspan="2">
+                        <input type="button" class="button orange" 
+                            value="C" onclick='c("")'/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="4" onclick='v("4")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="5" onclick='v("5")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="6" onclick='v("6")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button white" 
+                            value="*" onclick='v("*")'/>
+                    </td>            
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="1" onclick='v("1")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="2" onclick='v("2")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="3" onclick='v("3")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button white" 
+                            value="-" onclick='v("-")'/>
+                    </td>
+                    <td rowspan="2">
+                        <input type="button" class="button orange" 
+                            value="=" onclick='e()'/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" class="button green" 
+                            value="0" onclick='v("0")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button black" 
+                            value="." onclick='v(".")'/>
+                    </td>
+                    <td>
+                        <input type="button" class="button white" 
+                            value="+" onclick='v("+")'/>
+                    </td>              
+                </tr>
+            </table>
+        </div>   
+</body>
+</html>
