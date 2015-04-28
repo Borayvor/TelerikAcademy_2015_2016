@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>WindowsCalculator</title>
+    <link href="WindowsCalculatorStyle.css" rel="stylesheet" />
+</head>
+<body>
+    <section>
+        <div>
+            <div>
+                <ul id="menu">
+                    <li>
+                        <span>V</span>iew
+                    </li>
+                    <li>
+                       <span>E</span>dit     
+                    </li>
+                    <li>
+                        <span>H</span>elp
+                    </li>
+                </ul>
+                <input type="text" value="88544550" dir="rtl" id="disply" />
+                <div id="bits">
+                    <ul>
+                        <li>
+                            0000
+                        </li>
+                        <li>
+                            0000
+                        </li>
+                        <li>
+                            0000
+                        </li>
+                        <li>
+                            0000
+                        </li>
+                        <li>
+                            0000
+                        </li>
+                        <li>
+                            0000
+                        </li>
+                        <li>
+                            0000
+                        </li>
+                        <li>
+                            0000
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="bitsNumber">
+                            63&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li class="bitsNumber">
+                            47&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li class="bitsNumber">
+                            &nbsp;&nbsp;32
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            0000
+                        </li>
+                        <li>
+                            0000
+                        </li>
+                        <li>
+                            1000
+                        </li>
+                        <li>
+                            0111
+                        </li>
+                        <li>
+                            0001
+                        </li>
+                        <li>
+                            1011
+                        </li>
+                        <li>
+                            1011
+                        </li>
+                        <li>
+                            0111
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="bitsNumber">
+                            31&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li class="bitsNumber">
+                            15&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li class="bitsNumber">
+                            &nbsp;&nbsp;&nbsp;0
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="left">
+                        <div class="numeralSystems">
+                            <p>
+                                <input type="radio" name="numeralSystem" id="hex"/>
+                                <label for="hex">Hex</label>                            
+                            </p>
+                            <p>
+                                <input type="radio" checked="checked" name="numeralSystem" id="dec"/>
+                                <label for="dec">Dec</label>                            
+                            </p>
+                            <p>
+                                <input type="radio" name="numeralSystem" id="oct"/>
+                                <label for="oct">Oct</label>                            
+                            </p>
+                            <p>
+                                <input type="radio" name="numeralSystem" id="bin"/>
+                                <label for="bin">Bin</label>
+                            </p>
+                        </div>
+                        <div class="numeralSystems">
+                            <p>
+                                <input type="radio" checked="checked" name="bitsLength" id="qword" />
+                                <label for="qword">Qword</label>                            
+                            </p>
+                            <p>
+                                <input type="radio" name="bitsLength" id="dword"/>
+                                <label for="dword">Dword</label>                            
+                            </p>
+                            <p>
+                                <input type="radio" name="bitsLength" id="word"/>
+                                <label for="word">Word</label>                            
+                            </p>
+                            <p>
+                                <input type="radio" name="bitsLength" id="byte"/>
+                                <label for="byte">Byte</label>
+                            </p>
+                        </div>
+                    </div>
+                    <div id="buttons">
+                        <div >
+                            <button class="disabled" disabled="disabled">
+                                 &nbsp
+                            </button>
+                            <button class="enabled">
+                                Mod
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                A
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                MC
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                MR
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                MS
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                M+
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                M-
+                            </button>
+                        </div>
+                        <div>
+                            <button class="enabled">
+                                (
+                            </button>
+                            <button class="enabled">
+                                )
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                B
+                            </button>
+                            <button class="enabled">
+                                ←
+                            </button>
+                            <button class="enabled">
+                                CE
+                            </button>
+                            <button class="enabled">
+                                C
+                            </button>
+                            <button class="enabled">
+                                ±
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                √
+                            </button>
+                        </div>
+                        <div>
+                            <button class="enabled">
+                                RoL
+                            </button>
+                            <button class="enabled">
+                                RoR
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                C
+                            </button>
+                            <button class="enabled">
+                                7
+                            </button>
+                            <button class="enabled">
+                                8
+                            </button>
+                            <button class="enabled">
+                                9
+                            </button>
+                            <button class="enabled">
+                                /
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                %
+                            </button>
+                        </div>
+                        <div>
+                            <button class="enabled">
+                                Or
+                            </button>
+                            <button class="enabled">
+                                Xor
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                D
+                            </button>
+                            <button class="enabled">
+                                4
+                            </button>
+                            <button class="enabled">
+                                5
+                            </button>
+                            <button class="enabled">
+                                6
+                            </button>
+                            <button class="enabled">
+                                *
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                1/χ
+                            </button>
+                        </div>
+                        <button class="enabled" id="equals">
+                            =
+                        </button>
+                        <div>
+                            <button class="enabled">
+                                Lsh
+                            </button>
+                            <button class="enabled">
+                                Rsh
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                E
+                            </button>
+                            <button class="enabled">
+                                1
+                            </button>
+                            <button class="enabled">
+                                2
+                            </button>
+                            <button class="enabled">
+                                3
+                            </button>
+                            <button class="enabled">
+                                -
+                            </button>
+                        </div>
+                        <div>
+                            <button class="enabled">
+                                Not
+                            </button>
+                            <button class="enabled">
+                                And
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                F
+                            </button>
+                            <button class="enabled" id="zero">
+                                0
+                            </button>
+                            <button class="disabled" disabled="disabled">
+                                .
+                            </button>
+                            <button class="enabled">
+                                +
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+</body>
+</html>
