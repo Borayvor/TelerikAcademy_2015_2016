@@ -1,0 +1,157 @@
+﻿
+body, section, article, h1, h2, h3, h4, dl, dt, dd, ul, li, p, img {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 5px;
+    background: #F1F1F1;
+    font: 14px Arial, sans-serif;
+}
+
+aside { 
+    padding-top: 10px;
+    text-align: center; 
+}
+
+h1, h2, p { 
+    margin-bottom: 10px; 
+}
+
+h1, h2 {
+    margin-top: 10px;
+}
+
+h2 {
+    padding: 3px;
+    background: #808080;
+    color: #fff;
+    font-size: 100%;
+}
+
+a { 
+    color: #961917; 
+}
+
+ul {
+   list-style-type: none;     
+}
+
+
+.img-block {
+    margin-left: 50px;
+    display: block;
+}
+
+.img-inline {
+    display: inline;
+    float: left;
+}
+
+.icon-home { 
+    background: #F1F1F1;
+    color: black;    
+}
+
+[class ^= "width"], [class *= "width"]  {
+    float: left;
+    margin-left: 10px;
+}
+
+.width150 { 
+    min-width: 150px; 
+}
+
+.width450 { 
+    min-width: 450px;
+}
+
+.container {
+    margin: 10px auto;
+    padding: 0 10px;
+    min-width : 770px; 
+    border: 1px solid #000;
+}
+
+.search input[type = "search"] { 
+    min-width: 90px; 
+}
+
+section nav article header h4 {     
+    margin-top: 10px;
+    color: #961917; 
+}
+
+section nav article ul li a { 
+    color: #000;
+    font-size: 0.9em;
+    text-decoration: none;
+}       
+        
+section nav article ul li a:hover { 
+    text-decoration: underline;
+}
+
+.turnPage li {
+    display: inline-block;
+    padding: 3px;
+    width: 130px;
+    border: 1px solid black;
+    color: #0F0F0F;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+}
+
+.turnPage li a {
+    color: #000; 
+    text-decoration: none;
+}
+
+.turnPage li a:hover { 
+    text-decoration: underline;
+}
+
+.prev::after, .next::after {
+    position: absolute;
+    top: 3px;
+}
+
+.prev::after {
+    left: 3px;
+    content: "◄";
+}
+
+.next::after {
+    right: 3px;
+    content: "►";
+}
+
+.box {
+    margin-bottom: 2px;
+    padding: 2px;
+    border: 1px solid #8A8A8A;
+    background: white;
+}
+
+.box h2 { 
+    margin: -2px -2px 0 -2px; 
+}
+
+.content {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #A1A1A1;
+    background: #fff;
+}
+
+aside h2 {
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+
+.pull-left {
+    float: left;
+    margin-right: 10px;    
+}

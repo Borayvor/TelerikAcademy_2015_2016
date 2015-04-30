@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Computers_Shop</title>
+    <link href="Computers_Shop_Style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div id="table">
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#">Apple</a>
+                    </li>
+                    <li>
+                        <a href="#">Toshiba</a>
+                    </li>
+                    <li>
+                        <a href="#">Lenovo</a>
+                    </li>
+                    <li>
+                        <a href="#">Dell</a>
+                    </li>
+                    <li>
+                        <a href="#">Asus</a>
+                    </li>
+                    <li>
+                        <a href="#">Acer</a>
+                    </li>
+                    <li>
+                        <a href="#">HP</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <hr />
+        <article>
+            <section id="demo_tab">
+                <div class="product">
+                    <h3>Apple MacBook Air</h3>
+                    <img src="images/computer.png" alt="product" />
+                    <ul>
+                        <li>64 GB SSD</li>
+                        <li>2 GB DDR</li>
+                        <li>Intel Core i5</li>
+                    </ul>
+                    <span>1300 USD</span>
+                </div>
+                <div class="product">
+                    <h3>Apple MacBook Air</h3>
+                    <img src="images/computer.png" alt="product" />
+                    <ul>
+                        <li>64 GB SSD</li>
+                        <li>2 GB DDR</li>
+                        <li>Intel Core i5</li>
+                    </ul>
+                    <span>1300 USD</span>
+                </div>
+                <div class="product">
+                    <h3>Apple MacBook Air</h3>
+                    <img src="images/computer.png" alt="product" />
+                    <ul>
+                        <li>64 GB SSD</li>
+                        <li>2 GB DDR</li>
+                        <li>Intel Core i5</li>
+                    </ul>
+                    <span>1300 USD</span>
+                </div>
+                <div class="product">
+                    <h3>Apple MacBook Air</h3>
+                    <img src="images/computer.png" alt="product" />
+                    <ul>
+                        <li>64 GB SSD</li>
+                        <li>2 GB DDR</li>
+                        <li>Intel Core i5</li>
+                    </ul>
+                    <span>1300 USD</span>
+                </div>
+                <div class="product">
+                    <h3>Apple MacBook Air</h3>
+                    <img src="images/computer.png" alt="product" />
+                    <ul>
+                        <li>64 GB SSD</li>
+                        <li>2 GB DDR</li>
+                        <li>Intel Core i5</li>
+                    </ul>
+                    <span>1300 USD</span>
+                </div>
+                <div class="product">
+                    <h3>Apple MacBook Air</h3>
+                    <img src="images/computer.png" alt="product" />
+                    <ul>
+                        <li>64 GB SSD</li>
+                        <li>2 GB DDR</li>
+                        <li>Intel Core i5</li>
+                    </ul>
+                    <span>1300 USD</span>
+                </div>
+            </section>
+            <section>
+                <aside>
+                    <form id="filterForm" name="filterForm" method="get" action="#">
+                        <dl>
+                            <dt>
+                                <span>Min price:</span>
+                                <output name="minPrice">500 USD</output>
+                            </dt>
+                            <dd>
+                                <input type="range" name="minPriceFilter" min="50" max="3000" step="1" value="500"
+                                       oninput="minPrice.value = this.value + ' USD'" />
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <span>Max price:</span>
+                                <output name="maxPrice">1500 USD</output>
+                            </dt>
+                            <dd>
+                                <input type="range" name="maxPriceFilter" min="50" max="3000" step="1" value="1500"
+                                       oninput="maxPrice.value = this.value + ' USD'" />
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt>
+                                <span>Min RAM:</span>
+                                <output name="minRam">4 GB</output>
+                            </dt>
+                            <dd>
+                                <input type="range" name="minRamFilter" min="1" max="16" step="1" value="4"
+                                       oninput="minRam.value = this.value + ' GB'" />
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <span>Max RAM:</span>
+                                <output name="maxRam">16 GB</output>
+                            </dt>
+                            <dd>
+                                <input type="range" name="maxRamFilter" min="1" max="16" step="1" value="16"
+                                       oninput="maxRam.value = this.value + ' GB'" />
+                            </dd>
+                        </dl>
+                    </form>
+                </aside>
+            </section>
+        </article>
+    </div>
+</body>
+</html>
