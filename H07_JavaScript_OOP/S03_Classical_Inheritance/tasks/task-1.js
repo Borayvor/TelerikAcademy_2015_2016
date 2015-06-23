@@ -15,65 +15,69 @@
 	*	all methods and property setters must return thisPerson, if they are not supposed to return other value
 		*	enables method-chaining
 */
+
 function solve() {
-    var Person = (function () {        
+    var Person = (function () {
+        var thisPerson;
                 
-        function Person(firstname, lastname, age) {           
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.age = age;
+        function Person(firstname, lastname, age) {
+            thisPerson = this;
+
+            thisPerson.firstname = firstname;
+            thisPerson.lastname = lastname;
+            thisPerson.age = age;
         }
 
         Object.defineProperty(Person.prototype, 'firstname', {
             get: function () {
-                return this._firstname;
+                return thisPerson._firstname;
             },
             set: function (value) {
                 checkName(value);
-                this._firstname = value;
-                return this;
+                thisPerson._firstname = value;
+                return thisPerson;
             }
         });
 
         Object.defineProperty(Person.prototype, 'lastname', {
             get: function () {
-                return this._lastname;
+                return thisPerson._lastname;
             },
             set: function (value) {
                 checkName(value);
-                this._lastname = value;
-                return this;
+                thisPerson._lastname = value;
+                return thisPerson;
             }
         });
 
         Object.defineProperty(Person.prototype, 'age', {
             get: function () {
-                return this._age;
+                return thisPerson._age;
             },
             set: function (value) {
                 checkAge(value)
-                this._age = +value;
-                return this;
+                thisPerson._age = +value;
+                return thisPerson;
             }
         });
         
         Object.defineProperty(Person.prototype, 'fullname', {
             get: function () {
-                return this.firstname + ' ' + this.lastname;
+                return thisPerson.firstname + ' ' + thisPerson.lastname;
             },
             set: function (value) {
                 var names = value.split(' ');
                 checkName(names[0]);
                 checkName(names[1]);
-                this.firstname = names[0];
-                this.lastname = names[1];
-                return this;
+                thisPerson.firstname = names[0];
+                thisPerson.lastname = names[1];
+                return thisPerson;
             }
         });
 
         Person.prototype.introduce = function () {
-            return 'Hello! My name is ' + this.fullname +
-                ' and I am ' + this.age + '-years-old';
+            return 'Hello! My name is ' + thisPerson.fullname +
+                ' and I am ' + thisPerson.age + '-years-old';
         };
 
         function checkAge(age) {
