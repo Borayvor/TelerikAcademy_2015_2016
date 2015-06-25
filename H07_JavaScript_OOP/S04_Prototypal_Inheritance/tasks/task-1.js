@@ -75,7 +75,7 @@ function solve() {
                 return this;
             },
             appendChild: function ( child ) {
-                if ( isNotString( child ) ) {
+                if ( typeof child === 'object' ) {
                     child.parent = this;
                 }
 
