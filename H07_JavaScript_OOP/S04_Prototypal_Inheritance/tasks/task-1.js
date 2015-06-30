@@ -84,19 +84,28 @@ function solve() {
                 return this;
             },
             addAttribute: function ( name, value ) {
-                if ( isNotString( name ) ) {
-                    throw new Error( '"name" must be string !' );
+                if ( !( isString( name ) ) ) {
+                    throw new Error( 'Name of Attribute must be string !' );
                 }
 
                 if ( isEmptyString( name ) ) {
-                    throw new Error( '"name" must not be empty !' );
+                    throw new Error( 'Name of Attribute must not be empty !' );
                 }
 
                 if ( !/^[A-Za-z0-9\-]+$/g.test( name ) ) {
-                    throw new Error( '"name" must not contain bad characters !' );
+                    throw new Error( 'Name of Attribute must not contain bad characters !' );
                 }
 
                 this.attributes[name] = value;
+
+                return this;
+            },
+            removeAttribute: function ( name ) {
+                if ( this.attributes[name] ) {
+                    delete this.attributes[name];
+                } else {
+                    throw new Error( 'No such Attribute !' );
+                }
 
                 return this;
             },
@@ -107,7 +116,7 @@ function solve() {
                 return this._type;
             },
             set type( value ) {
-                if ( isNotString( value ) ) {
+                if ( !( isString( value ) ) ) {
                     throw new Error( '"type" must be string !' );
                 }
 
@@ -170,7 +179,7 @@ function solve() {
             var result = '<' + element.type + getSortedAttributes( element.attributes ) + '>';
 
             element.children.forEach( function ( item ) {
-                isNotString( item ) ? result += item.innerHTML : result += item;
+                !( isString( item ) ) ? result += item.innerHTML : result += item;
             } );
 
             if ( element.children.length ) {
@@ -184,8 +193,8 @@ function solve() {
             return result;
         }
 
-        function isNotString( text ) {
-            return ( typeof text !== 'string' );
+        function isString( text ) {
+            return ( typeof text === 'string' );
         }
 
         function isEmptyString( text ) {
