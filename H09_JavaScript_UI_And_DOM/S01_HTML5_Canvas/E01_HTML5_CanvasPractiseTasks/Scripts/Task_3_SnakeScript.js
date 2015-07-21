@@ -4,13 +4,15 @@
     var snake,
         bodySection,
         isMoved = false,
+        isAppleEaten = false,
+        currentScore,
         CONSTANTS = {
             OBJECT_SIZE: 20,
             HEAD_COLOR: 'black',
             BODY_COLOR: 'green',
             APPLE_COLOR: 'red',
         },
-        dir = 'right',
+        dir,
         directions = {
             left: {
                 x: -1,
@@ -98,9 +100,7 @@
 
     snake = ( function () {
         var snake = Object.create( [] );
-        var snakeColor,
-            _bodySectionSize = 20,
-            bodyStartLength = 4;
+        var bodyStartLength = 4;
 
         Object.defineProperty( snake, 'init', {
             value: function ( x, y ) {
@@ -108,23 +108,23 @@
                     len = bodyStartLength;
 
                 this.push( Object.create( bodySection ).init( x, y,
-                    _bodySectionSize, CONSTANTS.HEAD_COLOR ) );
+                    CONSTANTS.OBJECT_SIZE, CONSTANTS.HEAD_COLOR ) );
 
                 for ( i = 0; i < len; i += 1 ) {
                     this.push( Object.create( bodySection )
-                        .init( x - ( ( i + 1 ) * _bodySectionSize ), y,
-                        _bodySectionSize, CONSTANTS.BODY_COLOR ) );
+                        .init( x - ( ( i + 1 ) * CONSTANTS.OBJECT_SIZE ), y,
+                        CONSTANTS.OBJECT_SIZE, CONSTANTS.BODY_COLOR ) );
                 }
 
                 return this;
             }
         } );
 
-        Object.defineProperty( snake, 'bodySectionSize', {
-            get: function () {
-                return this._bodySectionSize;
-            }
-        } );
+        //Object.defineProperty( snake, 'bodySectionSize', {
+        //    get: function () {
+        //        return this._bodySectionSize;
+        //    }
+        //} );
 
         Object.defineProperty( snake, 'addBodySection', {
             value: function ( direction ) {
@@ -191,6 +191,12 @@
             }
         }
 
+        ctx.save();
+        ctx.fillStyle = 'purple';
+        ctx.font = '20px Arial';
+        ctx.fillText( 'Score ' + currentScore, 20, 30 );
+        ctx.restore();
+
         ctx.restore();
     };
 
@@ -200,12 +206,11 @@
             applePosition;
 
         if ( sn[0].x === apple.x && sn[0].y === apple.y ) {
-
             applePosition = getRandomPosition();
             apple.init( applePosition.x, applePosition.y,
                 CONSTANTS.OBJECT_SIZE, CONSTANTS.APPLE_COLOR );
 
-            sn.addBodySection( directions[dir] );
+            isAppleEaten = true;
         }
 
         if ( sn[0].x < 0 || canvas.width < ( sn[0].x + sn[0].size ) ) {
@@ -265,6 +270,11 @@
         var sn,
             apple,
             applePosition;
+
+        isMoved = false;
+        isAppleEaten = false;
+        dir = 'right';
+        currentScore = 0;
 
         ctx.strokeRect( 0, 0, canvas.width, canvas.height );
 
