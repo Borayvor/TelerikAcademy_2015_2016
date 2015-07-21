@@ -244,12 +244,22 @@
         }
     };
 
+    function updateSnake( sn ) {
+        if ( isAppleEaten ) {
+            sn.addBodySection( directions[dir] );
+            isAppleEaten = false;
+            currentScore += 1;
+        } else {
+            sn.move( directions[dir] );
+        }
+    }
+
     function update( sn, apple ) {
-        sn.move( directions[dir] );  
         checkForCollision( sn, apple );
+        updateSnake( sn );
         draw( sn, apple );
         isMoved = true;
-    };
+    }
 
     function snakeGame() {
         var sn,
