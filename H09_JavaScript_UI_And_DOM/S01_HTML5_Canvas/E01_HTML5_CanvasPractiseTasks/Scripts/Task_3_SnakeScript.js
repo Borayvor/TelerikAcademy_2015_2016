@@ -1,16 +1,31 @@
 ﻿( function () {
     var canvas = document.getElementById( 'canvas' );
     var ctx = canvas.getContext( '2d' );
+    var inputElement = document.getElementById( 'playerName' );
+
+    var sn,
+           apple,
+           applePosition,
+           msg;
+
     var snake,
         bodySection,
         isMoved = false,
         isAppleEaten = false,
+        isPlayerScoreSave = false,
+        isGameEnd = false,
+        isGameStart = false,
+        isSaveKeyOn = false,
+        isPause = true,
+        isGameOff = true,
+        scoreInfo = [],
         currentScore,
         CONSTANTS = {
             OBJECT_SIZE: 20,
             HEAD_COLOR: 'black',
             BODY_COLOR: 'green',
             APPLE_COLOR: 'red',
+            EMPTY_STRING: '',
         },
         dir,
         directions = {
@@ -45,6 +60,13 @@
         } else if ( key.keyCode === 40 && dir !== 'up' && isMoved ) {
             dir = 'down';
             isMoved = false;
+        } else if ( key.keyCode === 13 && isGameEnd && !isPlayerScoreSave && isPause ) {
+            isSaveKeyOn = true;
+        } else if ( key.keyCode === 32 && isGameEnd && !isGameStart && isPlayerScoreSave ) {
+            isGameOff = false;
+            isPause = false;
+            isGameStart = true;
+            isGameEnd = false;
         }
     };
 
@@ -68,6 +90,8 @@
             },
             set: function ( value ) {
                 this._x = value;
+
+                return this;
             }
         } );
 
@@ -77,6 +101,8 @@
             },
             set: function ( value ) {
                 this._y = value;
+
+                return this;
             }
         } );
 
@@ -92,6 +118,8 @@
             },
             set: function ( value ) {
                 this._color = value;
+
+                return this;
             }
         } );
 
@@ -120,11 +148,6 @@
             }
         } );
 
-        //Object.defineProperty( snake, 'bodySectionSize', {
-        //    get: function () {
-        //        return this._bodySectionSize;
-        //    }
-        //} );
 
         Object.defineProperty( snake, 'addBodySection', {
             value: function ( direction ) {
@@ -198,12 +221,11 @@
         ctx.restore();
 
         ctx.restore();
-    };
+    }
 
     function checkForCollision( sn, apple ) {
         var i,
-            len = sn.length,
-            applePosition;
+            len = sn.length;
 
         if ( sn[0].x === apple.x && sn[0].y === apple.y ) {
             applePosition = getRandomPosition();
@@ -214,42 +236,51 @@
         }
 
         if ( sn[0].x < 0 || canvas.width < ( sn[0].x + sn[0].size ) ) {
-            throw new Error( 'Out of range !' );
-        };
+            isGameStart = false;
+            isGameEnd = true;
+            isPause = true;
+            msg = 'You are Death !';
+        }
 
         if ( sn[0].y < 0 || canvas.height < ( sn[0].y + sn[0].size ) ) {
-            throw new Error( 'Out of range !' );
-        };
+            isGameStart = false;
+            isGameEnd = true;
+            isPause = true;
+            msg = 'You are Death !';
+        }
 
         for ( i = 1; i < len; i += 1 ) {
             if ( sn[0].x === sn[i].x && sn[0].y === sn[i].y ) {
-                throw new Error( 'Canibal !' );
-            };
-        };
-    };
+                isGameStart = false;
+                isGameEnd = true;
+                isPause = true
+                msg = 'You are Cannibal !';
+            }
+        }
+    }
 
     function getRandomIntInclusive( min, max ) {
         return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
-    };
+    }
 
     function getRandomPosition() {
         var x = getRandomIntInclusive( 0,
             Math.round(( canvas.width - 2 - CONSTANTS.OBJECT_SIZE )
-            / CONSTANTS.OBJECT_SIZE ) ) 
+            / CONSTANTS.OBJECT_SIZE ) )
             * CONSTANTS.OBJECT_SIZE;
 
         var y = getRandomIntInclusive( 0,
             Math.round(( canvas.height - 2 - CONSTANTS.OBJECT_SIZE )
-            / CONSTANTS.OBJECT_SIZE ) ) 
+            / CONSTANTS.OBJECT_SIZE ) )
             * CONSTANTS.OBJECT_SIZE;
 
         return {
             x: x,
             y: y
-        }
-    };
+        };
+    }
 
-    function updateSnake( sn ) {
+    function updateSnake() {
         if ( isAppleEaten ) {
             sn.addBodySection( directions[dir] );
             isAppleEaten = false;
@@ -259,45 +290,108 @@
         }
     }
 
-    function update( sn, apple ) {
+    function update() {
         checkForCollision( sn, apple );
         updateSnake( sn );
         draw( sn, apple );
         isMoved = true;
     }
 
-    function snakeGame() {
-        var sn,
-            apple,
-            applePosition;
+    function drawInitGameField() {
+        ctx.save();
+        ctx.clearRect( 0, 0, canvas.width, canvas.height );
+        ctx.strokeStyle = 'red';
+        ctx.strokeRect( 0, 0, canvas.width, canvas.height );
+        ctx.restore();
+    }
 
-        isMoved = false;
-        isAppleEaten = false;
+    function finalMessage() {
+        ctx.save();
+        ctx.fillStyle = 'purple';
+        ctx.font = '62px Arial';
+        ctx.fillText( msg, 150, 200 );
+        ctx.fillText( 'Game Over !', 180, 270 );
+        ctx.fillText( 'Please enter your name !', 70, 340 );
+        if ( isSaveKeyOn ) {
+            ctx.fillText( 'Press spacebar for', 120, 430 );
+            ctx.fillText( 'new game !', 180, 500 );
+        }
+        ctx.restore();
+    }
+
+    function savePlayerScore() {
+        var playerName,
+            ul,
+            li;
+
+        if ( !isGameStart && isGameEnd && !isPlayerScoreSave ) {
+            inputElement.disabled = false;
+            inputElement.focus();
+
+            if ( isSaveKeyOn ) {
+                playerName = inputElement.value;
+                scoreInfo[playerName] = currentScore;
+
+                ul = document.getElementById( 'scoreList' );
+
+                li = document.createElement( 'li' );
+                li.innerHTML = playerName + ' - ' + ( scoreInfo[playerName] );
+                ul.appendChild( li );
+
+                isPlayerScoreSave = true;
+                inputElement.value = CONSTANTS.EMPTY_STRING;
+                inputElement.disabled = true;
+            }
+        }
+    }
+
+    function animate() {
+
+        var play = setInterval( function () {
+
+            if ( !isGameOff ) {
+                newGame();
+            }
+
+            if ( isPause && !isGameStart && isGameEnd ) {
+                draw( sn, apple );
+                finalMessage();
+            } else {
+                update( sn, apple );
+            }
+
+            savePlayerScore();
+
+        }, 110 );
+    }
+
+    function newGame() {
+
         dir = 'right';
         currentScore = 0;
+        isSaveKeyOn = false;
+        isPlayerScoreSave = false;
+        isGameOff = true;
 
-        ctx.strokeRect( 0, 0, canvas.width, canvas.height );
+        inputElement.value = CONSTANTS.EMPTY_STRING;
+        inputElement.disabled = true;
+
+        drawInitGameField();
 
         sn = Object.create( snake ).init( 100, 100 );
 
         applePosition = getRandomPosition();
-
         apple = Object.create( bodySection ).init( applePosition.x, applePosition.y,
             CONSTANTS.OBJECT_SIZE, CONSTANTS.APPLE_COLOR );
 
         draw( sn, apple );
+    }
 
-        var play = setInterval( function () {
-            try {
-                update( sn, apple );
-            } catch ( e ) {
-                alert( 'Game Over !' );
-                clearInterval( play );
-            }
-        }, 100 );
+    function snakeGame() {
+        newGame();
 
-    };
-
+        animate();
+    }
 
     return snakeGame();
-}() )
+}() );

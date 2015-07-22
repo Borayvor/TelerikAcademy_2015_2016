@@ -1,0 +1,19 @@
+﻿div {
+    display:inline-block;
+    float: left;
+}
+
+#scoreData {
+    border: 1px solid black;
+    margin-left: 5px;
+    padding: 5px;
+    height: 590px;
+}
+
+label {
+    display: block;
+}
+
+ul {
+    list-style:none;
+}
