@@ -31,7 +31,7 @@ function solve() {
         }
 
         children = element.childNodes;
-        len = children.length;        
+        len = children.length;
 
         for ( i = 0; i < len; i += 1 ) {
             currentChild = children[i];
@@ -52,32 +52,27 @@ function solve() {
             clickedButton = ev.target;
             nextElement = clickedButton.nextElementSibling;
 
-            while ( nextElement ) {
-                if ( nextElement.className === 'content' ) {
-                    content = nextElement;
+            if ( nextElement.className === 'content' ) {
+                content = nextElement;
 
-                    while ( nextElement ) {
-                        if ( nextElement.className === 'button' ) {
+                while ( nextElement ) {
+                    if ( nextElement.className === 'button' ) {
 
-                            if ( content.style.display === 'none' ) {
-                                content.style.display = '';
-                                clickedButton.innerHTML = 'hide';
-                            } else {
-                                content.style.display = 'none';
-                                clickedButton.innerHTML = 'show';
-                            }
-
-                            break;
+                        if ( content.style.display === 'none' ) {
+                            content.style.display = '';
+                            clickedButton.innerHTML = 'hide';
+                        } else {
+                            content.style.display = 'none';
+                            clickedButton.innerHTML = 'show';
                         }
 
-                        nextElement = nextElement.nextElementSibling;
+                        break;
                     }
 
-                    break;
-                } else {
                     nextElement = nextElement.nextElementSibling;
                 }
-            }
+            }           
+
         }, false );
     };
 };
