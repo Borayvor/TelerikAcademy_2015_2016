@@ -1,10 +1,7 @@
 /* globals $ */
 
 /* 
-
-Create a function that takes an id or DOM element and:
-  
-
+Create a function that takes an id or DOM element and:  
 */
 
 function solve() {
@@ -34,47 +31,54 @@ function solve() {
         }
 
         children = element.childNodes;
-        len = children.length;
+        len = children.length;        
 
         for ( i = 0; i < len; i += 1 ) {
             currentChild = children[i];
 
             if ( currentChild.className === 'button' ) {
                 currentChild.innerHTML = 'hide';
+            }
+        }
 
-                currentChild.addEventListener( 'click', function ( ev ) {
-                    var clickedButton = ev.target;
-                    var nextElement = clickedButton.nextElementSibling;
+        element.addEventListener( 'click', function ( ev ) {
+            var clickedButton,
+                nextElement;
+
+            if ( ev.target.className !== 'button' ) {
+                return;
+            }
+
+            clickedButton = ev.target;
+            nextElement = clickedButton.nextElementSibling;
+
+            while ( nextElement ) {
+                if ( nextElement.className === 'content' ) {
+                    content = nextElement;
 
                     while ( nextElement ) {
-                        if ( nextElement.className === 'content' ) {
-                            content = nextElement;
+                        if ( nextElement.className === 'button' ) {
 
-                            while ( nextElement ) {
-                                if ( nextElement.className === 'button' ) {
-
-                                    if ( content.style.display === 'none' ) {
-                                        content.style.display = '';
-                                        clickedButton.innerHTML = 'hide';
-                                    } else {
-                                        content.style.display = 'none';
-                                        clickedButton.innerHTML = 'show';
-                                    }
-
-                                    break;
-                                }
-
-                                nextElement = nextElement.nextElementSibling;
+                            if ( content.style.display === 'none' ) {
+                                content.style.display = '';
+                                clickedButton.innerHTML = 'hide';
+                            } else {
+                                content.style.display = 'none';
+                                clickedButton.innerHTML = 'show';
                             }
 
                             break;
-                        } else {
-                            nextElement = nextElement.nextElementSibling;
                         }
+
+                        nextElement = nextElement.nextElementSibling;
                     }
-                } );
+
+                    break;
+                } else {
+                    nextElement = nextElement.nextElementSibling;
+                }
             }
-        }
+        }, false );
     };
 };
 
