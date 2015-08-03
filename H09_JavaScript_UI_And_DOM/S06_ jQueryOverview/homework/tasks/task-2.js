@@ -43,8 +43,6 @@ function solve() {
             var $content = $button.next( '.content' ),
                 contentLength = $content.length;
 
-            $content = $button.next( '.content' );
-
             if ( contentLength !== 0 ) {
                 if ( $content.css( 'display' ) === 'none' ) {
                     $button.text( 'hide' );
