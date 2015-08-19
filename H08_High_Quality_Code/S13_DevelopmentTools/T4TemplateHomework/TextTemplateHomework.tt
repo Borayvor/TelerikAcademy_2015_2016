@@ -1,0 +1,34 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".html" #>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>
+			TextTemplateHomework
+		</title>
+		<style>
+			body, div, p, a, ul, li, input, label {
+				margin: 0;
+				padding: 0;
+			} 
+
+			#base {
+				width: 30%;
+				margin: 50px;
+				padding: 10px;
+				color: purple;
+				background-color: #d0e4fe;
+			}
+
+			#base a {
+				color: purple;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="base">
+			<a href="https://github.com/Borayvor/TelerikAcademy_2015_2016">My homeworks</a>
+		</div>
+	</body>
+</html>
