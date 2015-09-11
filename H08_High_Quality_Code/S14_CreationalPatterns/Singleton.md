@@ -12,8 +12,8 @@
 * когато единствената инстанция трябва да бъде разширяема чрез създаване на подкласове и клиентите трябва да могат да използват разширена инстанция, без да променят своя код.
 
 ### 4. Структура.
-[logo]
-[logo]: https://github.com/Borayvor/TelerikAcademy_2015_2016/blob/master/H08_High_Quality_Code/S14_CreationalPatterns/Singleton.jpg
+![схема]
+[схема]: https://github.com/Borayvor/TelerikAcademy_2015_2016/blob/master/H08_High_Quality_Code/S14_CreationalPatterns/Singleton.jpg
 
 ### 5. Участници.
 * Singleton:
