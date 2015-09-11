@@ -15,7 +15,7 @@
 | Singleton               |
 | :----------------------:|
 |-------------------------|
-| static Instance()       |
+| static Instance()    @--|-----------| return uniqueInstance |
 | SingletonOperation()    |
 | GetSingletonData()      |
 |-------------------------|
