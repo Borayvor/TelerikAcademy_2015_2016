@@ -14,12 +14,12 @@
 ### 4. Структура.
 | Singleton               |
 | :----------------------:|
+|-------------------------|
 | static Instance()       |
 | SingletonOperation()    |
 | GetSingletonData()      |
-| ----------------------- |
+|-------------------------|
 | return  uniqueInstance  |
-| ----------------------- |
 
 ### 5. Участници.
 * Singleton:
