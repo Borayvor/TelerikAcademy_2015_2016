@@ -38,7 +38,8 @@
 * Повече гъвкавост от класовите операции.
 
 ### 8. Примерен код.
-```namespace Singleton
+```
+namespace Singleton
 {
     public sealed class Singleton
     {
