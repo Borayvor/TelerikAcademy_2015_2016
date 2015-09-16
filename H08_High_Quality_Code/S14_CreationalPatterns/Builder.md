@@ -16,7 +16,7 @@
 * искате да представите библиотека класове за продукти и да разкриете само техните интерфейси, а не имплементациите им.
 
 ### 4. Структура.
-![схема](https://github.com/Borayvor/TelerikAcademy_2015_2016/blob/master/H08_High_Quality_Code/S14_CreationalPatterns/Builder.jpg)
+![схема](https://github.com/Borayvor/TelerikAcademy_2015_2016/blob/master/H08_High_Quality_Code/S14_CreationalPatterns/Diagrams/Builder.jpg)
 
 ### 5. Участници.
 * Director:
