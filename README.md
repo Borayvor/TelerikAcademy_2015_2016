@@ -1,4 +1,4 @@
 TelerikAcademy
 ==============
 
-TelerikAcademyHomeworks_2015_2016
+# Telerik Academy Homeworks ( 2015 - 2016 )
