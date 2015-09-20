@@ -31,14 +31,14 @@
 ![схема](https://github.com/Borayvor/TelerikAcademy_2015_2016/blob/master/H08_High_Quality_Code/S16_BehavioralPatterns/Diagrams/strategy.jpg)
 
 ### 5. Участници.
-* **Strategy** :
+* **Strategy** (SortStrategy) :
     * декларира интерфейс, общ за всички поддържани алгоритми. Context използва този интерфейс, за да извика алгоритъма, 
     дефиниран от ConcreteStrategy.
     
-* **ConcreteStrategy** :
+* **ConcreteStrategy** (QuickSort, ShellSort, MergeSort) :
     * имплементира алгоритъма посредством интерфейса на Strategy.
 
-* **Context** :
+* **Context** (SortedList) :
     * конфигурира се чрез обект ConcreteStrategy.
     * пази референция към обект Strategy.
     * може да дефинира интерфейс, даващ възможност на Strategy да осъществява достъп до неговите данни.
@@ -64,11 +64,12 @@
 ### 8. Примерен код.
 ```
 using System;
+using System.Collections.Generic;
  
-namespace DoFactory.GangOfFour.Strategy.Structural
+namespace DoFactory.GangOfFour.Strategy.RealWorld
 {
   /// <summary>
-  /// MainApp startup class for Structural
+  /// MainApp startup class for Real-World 
   /// Strategy Design Pattern.
   /// </summary>
   class MainApp
@@ -78,17 +79,23 @@ namespace DoFactory.GangOfFour.Strategy.Structural
     /// </summary>
     static void Main()
     {
-      Context context;
+      // Two contexts following different strategies
+      SortedList studentRecords = new SortedList();
  
-      // Three contexts following different strategies
-      context = new Context(new ConcreteStrategyA());
-      context.ContextInterface();
+      studentRecords.Add("Samual");
+      studentRecords.Add("Jimmy");
+      studentRecords.Add("Sandra");
+      studentRecords.Add("Vivek");
+      studentRecords.Add("Anna");
  
-      context = new Context(new ConcreteStrategyB());
-      context.ContextInterface();
+      studentRecords.SetSortStrategy(new QuickSort());
+      studentRecords.Sort();
  
-      context = new Context(new ConcreteStrategyC());
-      context.ContextInterface();
+      studentRecords.SetSortStrategy(new ShellSort());
+      studentRecords.Sort();
+ 
+      studentRecords.SetSortStrategy(new MergeSort());
+      studentRecords.Sort();
  
       // Wait for user
       Console.ReadKey();
@@ -98,63 +105,75 @@ namespace DoFactory.GangOfFour.Strategy.Structural
   /// <summary>
   /// The 'Strategy' abstract class
   /// </summary>
-  abstract class Strategy
+  abstract class SortStrategy
   {
-    public abstract void AlgorithmInterface();
+    public abstract void Sort(List<string> list);
   }
  
   /// <summary>
   /// A 'ConcreteStrategy' class
   /// </summary>
-  class ConcreteStrategyA : Strategy
+  class QuickSort : SortStrategy
   {
-    public override void AlgorithmInterface()
+    public override void Sort(List<string> list)
     {
-      Console.WriteLine(
-        "Called ConcreteStrategyA.AlgorithmInterface()");
+      list.Sort(); // Default is Quicksort
+      Console.WriteLine("QuickSorted list ");
     }
   }
  
   /// <summary>
   /// A 'ConcreteStrategy' class
   /// </summary>
-  class ConcreteStrategyB : Strategy
+  class ShellSort : SortStrategy
   {
-    public override void AlgorithmInterface()
+    public override void Sort(List<string> list)
     {
-      Console.WriteLine(
-        "Called ConcreteStrategyB.AlgorithmInterface()");
+      //list.ShellSort(); not-implemented
+      Console.WriteLine("ShellSorted list ");
     }
   }
  
   /// <summary>
   /// A 'ConcreteStrategy' class
   /// </summary>
-  class ConcreteStrategyC : Strategy
+  class MergeSort : SortStrategy
   {
-    public override void AlgorithmInterface()
+    public override void Sort(List<string> list)
     {
-      Console.WriteLine(
-        "Called ConcreteStrategyC.AlgorithmInterface()");
+      //list.MergeSort(); not-implemented
+      Console.WriteLine("MergeSorted list ");
     }
   }
  
   /// <summary>
   /// The 'Context' class
   /// </summary>
-  class Context
+  class SortedList
   {
-    private Strategy _strategy;
+    private List<string> _list = new List<string>();
+    private SortStrategy _sortstrategy;
  
-    // Constructor
-    public Context(Strategy strategy)
+    public void SetSortStrategy(SortStrategy sortstrategy)
     {
-      this._strategy = strategy;
+      this._sortstrategy = sortstrategy;
     }
  
-    public void ContextInterface()
+    public void Add(string name)
     {
-      _strategy.AlgorithmInterface();
+      _list.Add(name);
+    }
+ 
+    public void Sort()
+    {
+      _sortstrategy.Sort(_list);
+ 
+      // Iterate over list and display results
+      foreach (string name in _list)
+      {
+        Console.WriteLine(" " + name);
+      }
+      Console.WriteLine();
     }
   }
 }

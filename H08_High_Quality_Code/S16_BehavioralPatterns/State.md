@@ -23,14 +23,14 @@ Listening, Closed. Когато обектът TCPConnection получи зая
 ![схема](https://github.com/Borayvor/TelerikAcademy_2015_2016/blob/master/H08_High_Quality_Code/S16_BehavioralPatterns/Diagrams/state.jpg)
 
 ### 5. Участници.
-* **Context** :
+* **Context** (Account) :
     * дефинира интерфейса, който представлява интерес за клиентите.
     * поддържа инстанция на подклас на State, дефинираща текущото състояние.
     
-* **State** :
+* **State** (State) :
     * дефинира интерфейс за капсулиране на поведението, асоциирано с определено състояние на Context.
 
-* **ConcreteState** :
+* **ConcreteState** (RedState, SilverState, GoldState) :
     * всеки подклас имплементира поведение, свързано с едно състояние на Context.
 
 ### 6. Взаимодействия.
@@ -50,10 +50,10 @@ Listening, Closed. Когато обектът TCPConnection получи зая
 ```
 using System;
  
-namespace DoFactory.GangOfFour.State.Structural
+namespace DoFactory.GangOfFour.State.RealWorld
 {
   /// <summary>
-  /// MainApp startup class for Structural
+  /// MainApp startup class for Real-World 
   /// State Design Pattern.
   /// </summary>
   class MainApp
@@ -63,14 +63,16 @@ namespace DoFactory.GangOfFour.State.Structural
     /// </summary>
     static void Main()
     {
-      // Setup context in a state
-      Context c = new Context(new ConcreteStateA());
+      // Open a new account
+      Account account = new Account("Jim Johnson");
  
-      // Issue requests, which toggles state
-      c.Request();
-      c.Request();
-      c.Request();
-      c.Request();
+      // Apply financial transactions
+      account.Deposit(500.0);
+      account.Deposit(300.0);
+      account.Deposit(550.0);
+      account.PayInterest();
+      account.Withdraw(2000.00);
+      account.Withdraw(1100.00);
  
       // Wait for user
       Console.ReadKey();
@@ -82,60 +84,261 @@ namespace DoFactory.GangOfFour.State.Structural
   /// </summary>
   abstract class State
   {
-    public abstract void Handle(Context context);
+    protected Account account;
+    protected double balance;
+ 
+    protected double interest;
+    protected double lowerLimit;
+    protected double upperLimit;
+ 
+    // Properties
+    public Account Account
+    {
+      get { return account; }
+      set { account = value; }
+    }
+ 
+    public double Balance
+    {
+      get { return balance; }
+      set { balance = value; }
+    }
+ 
+    public abstract void Deposit(double amount);
+    public abstract void Withdraw(double amount);
+    public abstract void PayInterest();
   }
+ 
  
   /// <summary>
   /// A 'ConcreteState' class
+  /// <remarks>
+  /// Red indicates that account is overdrawn 
+  /// </remarks>
   /// </summary>
-  class ConcreteStateA : State
+  class RedState : State
   {
-    public override void Handle(Context context)
+    private double _serviceFee;
+ 
+    // Constructor
+    public RedState(State state)
     {
-      context.State = new ConcreteStateB();
+      this.balance = state.Balance;
+      this.account = state.Account;
+      Initialize();
+    }
+ 
+    private void Initialize()
+    {
+      // Should come from a datasource
+      interest = 0.0;
+      lowerLimit = -100.0;
+      upperLimit = 0.0;
+      _serviceFee = 15.00;
+    }
+ 
+    public override void Deposit(double amount)
+    {
+      balance += amount;
+      StateChangeCheck();
+    }
+ 
+    public override void Withdraw(double amount)
+    {
+      amount = amount - _serviceFee;
+      Console.WriteLine("No funds available for withdrawal!");
+    }
+ 
+    public override void PayInterest()
+    {
+      // No interest is paid
+    }
+ 
+    private void StateChangeCheck()
+    {
+      if (balance > upperLimit)
+      {
+        account.State = new SilverState(this);
+      }
     }
   }
  
   /// <summary>
   /// A 'ConcreteState' class
+  /// <remarks>
+  /// Silver indicates a non-interest bearing state
+  /// </remarks>
   /// </summary>
-  class ConcreteStateB : State
+  class SilverState : State
   {
-    public override void Handle(Context context)
+    // Overloaded constructors
+ 
+    public SilverState(State state) :
+      this(state.Balance, state.Account)
     {
-      context.State = new ConcreteStateA();
+    }
+ 
+    public SilverState(double balance, Account account)
+    {
+      this.balance = balance;
+      this.account = account;
+      Initialize();
+    }
+ 
+    private void Initialize()
+    {
+      // Should come from a datasource
+      interest = 0.0;
+      lowerLimit = 0.0;
+      upperLimit = 1000.0;
+    }
+ 
+    public override void Deposit(double amount)
+    {
+      balance += amount;
+      StateChangeCheck();
+    }
+ 
+    public override void Withdraw(double amount)
+    {
+      balance -= amount;
+      StateChangeCheck();
+    }
+ 
+    public override void PayInterest()
+    {
+      balance += interest * balance;
+      StateChangeCheck();
+    }
+ 
+    private void StateChangeCheck()
+    {
+      if (balance < lowerLimit)
+      {
+        account.State = new RedState(this);
+      }
+      else if (balance > upperLimit)
+      {
+        account.State = new GoldState(this);
+      }
+    }
+  }
+ 
+  /// <summary>
+  /// A 'ConcreteState' class
+  /// <remarks>
+  /// Gold indicates an interest bearing state
+  /// </remarks>
+  /// </summary>
+  class GoldState : State
+  {
+    // Overloaded constructors
+    public GoldState(State state)
+      : this(state.Balance, state.Account)
+    {
+    }
+ 
+    public GoldState(double balance, Account account)
+    {
+      this.balance = balance;
+      this.account = account;
+      Initialize();
+    }
+ 
+    private void Initialize()
+    {
+      // Should come from a database
+      interest = 0.05;
+      lowerLimit = 1000.0;
+      upperLimit = 10000000.0;
+    }
+ 
+    public override void Deposit(double amount)
+    {
+      balance += amount;
+      StateChangeCheck();
+    }
+ 
+    public override void Withdraw(double amount)
+    {
+      balance -= amount;
+      StateChangeCheck();
+    }
+ 
+    public override void PayInterest()
+    {
+      balance += interest * balance;
+      StateChangeCheck();
+    }
+ 
+    private void StateChangeCheck()
+    {
+      if (balance < 0.0)
+      {
+        account.State = new RedState(this);
+      }
+      else if (balance < lowerLimit)
+      {
+        account.State = new SilverState(this);
+      }
     }
   }
  
   /// <summary>
   /// The 'Context' class
   /// </summary>
-  class Context
+  class Account
   {
     private State _state;
+    private string _owner;
  
     // Constructor
-    public Context(State state)
+    public Account(string owner)
     {
-      this.State = state;
+      // New accounts are 'Silver' by default
+      this._owner = owner;
+      this._state = new SilverState(0.0, this);
     }
  
-    // Gets or sets the state
+    // Properties
+    public double Balance
+    {
+      get { return _state.Balance; }
+    }
+ 
     public State State
     {
       get { return _state; }
-      set
-      {
-        _state = value;
-        Console.WriteLine("State: " +
-          _state.GetType().Name);
-      }
+      set { _state = value; }
     }
  
-    public void Request()
+    public void Deposit(double amount)
     {
-      _state.Handle(this);
+      _state.Deposit(amount);
+      Console.WriteLine("Deposited {0:C} --- ", amount);
+      Console.WriteLine(" Balance = {0:C}", this.Balance);
+      Console.WriteLine(" Status = {0}",
+        this.State.GetType().Name);
+      Console.WriteLine("");
+    }
+ 
+    public void Withdraw(double amount)
+    {
+      _state.Withdraw(amount);
+      Console.WriteLine("Withdrew {0:C} --- ", amount);
+      Console.WriteLine(" Balance = {0:C}", this.Balance);
+      Console.WriteLine(" Status = {0}\n",
+        this.State.GetType().Name);
+    }
+ 
+    public void PayInterest()
+    {
+      _state.PayInterest();
+      Console.WriteLine("Interest Paid --- ");
+      Console.WriteLine(" Balance = {0:C}", this.Balance);
+      Console.WriteLine(" Status = {0}\n",
+        this.State.GetType().Name);
     }
   }
-}  
+}
 ```
