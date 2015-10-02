@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<catalogue>
+  <album>
+    <name>Somewhere Far Beyond</name>
+    <artist>Blind Guardian</artist>
+    <year>1992</year>
+    <producer>Karo Studios</producer>
+    <price>19.98</price>
+    <songs>
+      <song>
+        <title>The Bard's Song (In the Forest)</title>
+        <duration>3:09</duration>
+      </song>
+      <song>
+        <title>The Quest for Tanelorn</title>
+        <duration>5:53</duration>
+      </song>
+    </songs>
+  </album>
+</catalogue>

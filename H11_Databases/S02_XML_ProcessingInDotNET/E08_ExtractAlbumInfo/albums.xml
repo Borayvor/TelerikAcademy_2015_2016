@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<albums>
+	<album>
+		<name>Keeper of the Seven Keys, Part 1</name>
+		<artist>Halloween</artist>
+	</album>
+	<album>
+		<name>Keeper of the Seven Keys, Part 2</name>
+		<artist>Halloween</artist>
+	</album>
+	<album>
+		<name>Metallica</name>
+		<artist>METALLICA</artist>
+	</album>
+	<album>
+		<name>Somewhere Far Beyond</name>
+		<artist>Blind Guardian</artist>
+	</album>
+</albums>
