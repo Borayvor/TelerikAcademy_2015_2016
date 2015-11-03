@@ -1,0 +1,3 @@
+<connectionStrings>
+    <add name="MusicStoreSystemDatabase" connectionString="Data Source=.\SQLEXPRESS;Initial Catalog=MusicStoreSystem;Integrated Security=true;" providerName="System.Data.SqlClient" />
+  </connectionStrings>
