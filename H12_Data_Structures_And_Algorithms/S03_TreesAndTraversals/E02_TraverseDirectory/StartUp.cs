@@ -22,7 +22,9 @@
 
         private static void TraverseDirectory(string root)
         {
-            foreach (string file in Directory.GetFiles(root).Where(file => file.EndsWith(Extension)))
+            var files = Directory.GetFiles(root).Where(file => file.EndsWith(Extension));
+            
+            foreach (string file in files)
             {
                 Console.WriteLine(file);
             }
