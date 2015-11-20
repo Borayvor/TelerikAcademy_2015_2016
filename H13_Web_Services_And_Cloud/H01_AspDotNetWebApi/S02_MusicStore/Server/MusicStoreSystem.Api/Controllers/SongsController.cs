@@ -3,8 +3,11 @@
     using System.Linq;
     using System.Web.Http;
     using System.Web.Http.Cors;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Models.Songs;
     using MusicStore.Common.Constants;
+    using MusicStoreSystem.Models;
     using Services.Data.Songs;
 
     [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -20,9 +23,11 @@
         // GET: api/Songs
         public IHttpActionResult GetSongs()
         {
+            Mapper.CreateMap<Song, SongDetailsResponseModel>();
+
             var result = this.songs
                 .All()
-                .Select(SongDetailsResponseModel.FromModel)
+                .ProjectTo<SongDetailsResponseModel>()
                 .ToList();
 
             return this.Ok(result);
@@ -33,7 +38,7 @@
         {
             var result = this.songs
                 .All(page, pageSize)
-                .Select(SongDetailsResponseModel.FromModel)
+                .ProjectTo<SongDetailsResponseModel>()
                 .ToList();
 
             return this.Ok(result);

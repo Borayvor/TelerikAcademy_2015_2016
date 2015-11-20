@@ -2,26 +2,12 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq.Expressions;
+    using Infrastructure.Mapping;
     using MusicStore.Common.Constants;
     using MusicStoreSystem.Models;
 
-    public class SongDetailsResponseModel
+    public class SongDetailsResponseModel : IMapFrom<Song>
     {
-        public static Expression<Func<Song, SongDetailsResponseModel>> FromModel
-        {
-            get
-            {
-                return x => new SongDetailsResponseModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Year = x.Year,
-                    Genre = x.Genre
-                };
-            }
-        }
-
         public int Id { get; set; }
 
         [Required]
@@ -34,5 +20,8 @@
         [MinLength(ValidationConstants.MinGenreLength)]
         [MaxLength(ValidationConstants.MaxGenreLength)]
         public string Genre { get; set; }
+
+        [Required]
+        public int AlbumId { get; set; }
     }
 }
