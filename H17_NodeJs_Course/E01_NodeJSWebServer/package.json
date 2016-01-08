@@ -1,0 +1,17 @@
+{
+  "name": "NodeJS-Web-Server-Homework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {    
+    "formidable": "^1.0.17",
+    "fs-extra": "^0.26.3",
+    "jade": "^1.11.0",
+    "uuid": "^2.0.1"
+  }
+}

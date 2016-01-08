@@ -1,0 +1,11 @@
+doctype html
+html(lang="en")
+head
+    meta(charset="UTF-8")
+    title File Upload    
+body
+    h2(class='jumbotron') Download gallery:
+    each file in files
+        a(href='/files/' + file style='margin-top: 5px') !{file}
+        br
+    a(href='/' style='margin-top: 5px') home

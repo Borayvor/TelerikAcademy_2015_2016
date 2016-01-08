@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>File upload</title>    
+</head>
+
+<body>
+    <nav>
+        <a href="/files">Browse</a>
+    </nav>
+    <form style="margin-top: 20px" action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="upload" multiple="multiple">
+        <br>
+        <input type="submit" value="Upload File">
+    </form>
+</body>
+
+</html>
