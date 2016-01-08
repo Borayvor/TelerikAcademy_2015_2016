@@ -1,0 +1,29 @@
+﻿<div class="well">
+    <div class="col-sm-4 text-center panel panel-primary">
+        <h5><strong>First Player: </strong><span>{{vm.game.FirstPlayerName}}</span></h5>
+    </div>
+    <div class="col-sm-4 text-center panel panel-primary">
+        <h4><strong>Game State: </strong><span>{{vm.game.State | gameState}}</span></h4>
+    </div>
+    <div class="col-sm-4 text-center panel panel-primary">
+        <h5><strong>Second Player: </strong><span>{{vm.game.SecondPlayerName || 'No second player yet'}}</span></h5>
+    </div>
+</div>
+<div class="col-xs-offset-2 col-xs-8 text-center container-fluid" ng-show="vm.game">
+
+    <div class="row-fluid">
+        <div class="col-xs-4 board-field" ng-repeat="field in (vm.game.Board | collectionSubset:0:2) track by $index">
+            <img class="img-responsive" ng-src="{{'../../resources/images/' + field + '.png'}}" ng-click="vm.play(1,$index)" />
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-xs-4 board-field" ng-repeat="field in (vm.game.Board | collectionSubset:3:5) track by $index">
+            <img class="img-responsive" ng-src="{{'../../resources/images/' + field + '.png'}}" ng-click="vm.play(2,$index)" />
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-xs-4 board-field" ng-repeat="field in (vm.game.Board | collectionSubset:6:8) track by $index">
+            <img class="img-responsive" ng-src="{{'../../resources/images/' + field + '.png'}}" ng-click="vm.play(3,$index)" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿<div class="well">
+    <div class="row text-center">
+        <div>
+            <button ng-if="vm.isAuthenticated()" class="btn btn-primary col-md-offset-3 col-md-6" ng-click="vm.createGame();">Create New Game</button>
+        </div>
+    </div>
+</div>
+<div class="container text-center">
+    <h2>Available games</h2>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">First Player</th>
+            <th class="text-center">Second Player</th>
+            <th class="text-center">Game State</th>
+            <th class="text-center" ng-show="vm.isAuthenticated()">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="game in vm.games">
+            <td>{{$index+1}}</td>
+            <td>{{game.FirstPlayerName}}</td>
+            <td>{{game.SecondPlayerName || 'No second player yet'}}</td>
+            <td>{{game.State | gameState}}</td>
+            <td ng-show="vm.isAuthenticated()" class="col-md-2"><button class="btn btn-primary" ng-click="vm.joinGame(game.Id)">Join game</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
