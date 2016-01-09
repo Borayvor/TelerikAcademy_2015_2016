@@ -4,32 +4,21 @@
     let http = require('http'),
         formidable = require('formidable'),
         fs = require('fs-extra'),
-        uuid = require('uuid'), 
+        uuid = require('uuid'),
         jade = require('jade');
 
     let port = 8765,
         uploadPath = './uploads';
 
     function getExtension(fileName) {
-        
+
         return fileName.substring(fileName.lastIndexOf('.'));
     }
 
     let server = http.createServer(function (req, res) {
 
-        if (req.url === '/') {
-            fs.readFile('./views/upload.html', function (error, html) {
-                if (error) {
-                    res.writeHead(404);
-                    console.log(error);
-                } else {
-                    res.writeHead(200, { 'content-type': 'text/html' });
-                    res.end(html);
-                }
-            });
-        }
-        
-        if (req.url === '/files') {
+        if (req.url === '/' || req.url === '/files') {
+
             fs.readFile('./views/all-files.jade', function (err, jadeFile) {
                 if (err) {
                     res.writeHead(404);
@@ -50,6 +39,19 @@
                     res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.end(output);
                 })
+            });            
+        }
+
+        if (req.url === '/upload') {
+            fs.readFile('./views/upload.html', function (error, html) {
+                if (error) {
+                    res.writeHead(404);
+                    console.log(error);
+                } else {
+                    res.writeHead(200, { 'content-type': 'text/html' });
+                }
+
+                res.end(html);
             });
         }
 
@@ -57,16 +59,13 @@
             let form = new formidable.IncomingForm();
 
             form.parse(req, function (error, fields, files) {
-                fs.readFile('./views/successful-upload.html', function (error, html) {
-                    if (error) {
-                        res.writeHead(404);
-                        console.log(error);
-                    } else {
-                        res.writeHead(200, { 'content-type': 'text/html' });
-                        res.end(html);
-                    }
-                });
+                if (error) {
+                    console.log(error);
+                } else {
+                    res.writeHead(200, { 'content-type': 'text/html' });
+                }
 
+                res.end();
             });
 
             form.on('end', function (fields, files) {
