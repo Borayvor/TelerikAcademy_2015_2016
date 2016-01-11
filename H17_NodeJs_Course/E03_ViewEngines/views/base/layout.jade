@@ -1,0 +1,29 @@
+doctype html
+
+html(lang="en")
+
+head
+    meta(charset="UTF-8")
+    title Mobile store
+    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+    
+body
+    nav(class='navbar navbar-inverse')
+      div(class='container-fluid')
+        div(class='navbar-header')
+          div(class='navbar-brand', href='/') Mobile store
+        ul(class='nav navbar-nav')
+          each cat in [{path: '/', name: 'Home'},{path: '/phones', name: 'Phones'},{path: '/tablets', name: 'Tablets'},{path: '/wearables', name: 'Wearables'}]
+            li
+              a(href=cat.path)= cat.name
+    
+    div(class='container')         
+        block content
+   
+    hr 
+   
+    footer(style='text-align: center;')
+        h4(class='footer') &copy; Mobile store
+       
+    script(src='/jquery/dist/jquery.min.js')
+    script(src='/bootstrap/dist/js/bootstrap.min.js')

@@ -1,0 +1,11 @@
+extends base/layout
+
+block content
+    
+        h1 Our smartphones:
+        each phone in data
+            li
+                p(style='font-size: 20px;')
+                    = phone.name + '. Price: ' + phone.price
+                div(class='image-container')
+                    img(src=phone.imgUrl style="width: 30%")

@@ -1,0 +1,11 @@
+extends base/layout
+
+block content
+    
+    h1 Our wearable:
+    each wearable in data
+            li
+                p(style='font-size: 20px;')
+                    = wearable.name + ' for ' + wearable.price + '$'
+                div(class='image-container')
+                    img(src=wearable.imgUrl style="width: 30%")

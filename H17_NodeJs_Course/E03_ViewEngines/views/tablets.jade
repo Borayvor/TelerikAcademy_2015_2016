@@ -1,0 +1,11 @@
+extends base/layout
+
+block content
+    
+        h1 Our tablets:
+        each tablet in data
+            li
+                p(style='font-size: 20px;')
+                    = tablet.name + ' for only ' + tablet.price + '€'
+                div(class='image-container')
+                    img(src=tablet.imgUrl style="width: 30%")
