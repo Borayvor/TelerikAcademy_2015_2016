@@ -1,0 +1,41 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="E01_UsingMasterPages.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>User profile</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link href="css/bootstrap.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+    <form id="formMain" runat="server">
+        <header class="jumbotron">
+            <h1>User profile Demo</h1>
+            <nav class="nav navbar-default">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="~/" runat="server">Personal Info</a>
+                    </li>
+                    <li>
+                        <a href="~/Friends.aspx" runat="server">Friends</a>
+                    </li>
+                    <li>
+                        <a href="~/AdditionalInfo.aspx" runat="server">Additional Info</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section id="main-content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
+            </asp:ContentPlaceHolder>
+        </section>
+        <footer id="footer">
+            (c) 2016 by Telerik Academy.
+       
+        </footer>
+    </form>
+</body>
+</html>
