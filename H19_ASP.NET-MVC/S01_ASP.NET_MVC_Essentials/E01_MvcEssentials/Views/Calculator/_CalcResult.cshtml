@@ -11,10 +11,12 @@ else
     <div id="kilo">Storage (Kilo = 1024 bits)</div>
 }
 
+<br />
+
 @foreach (var item in Model.Units)
 {
     <div class="table table-bordered table-striped">
-        <span class="type-name">@Html.DisplayFor(i => ((StorageUnit)item).Name)</span>
+        <span class="type-name">@Html.DisplayFor(i => ((StorageUnit)item).Name)</span>&nbsp;
         <span class="type-value">@Html.DisplayFor(i => ((StorageUnit)item).RelativeValue)</span>
     </div>
 }
