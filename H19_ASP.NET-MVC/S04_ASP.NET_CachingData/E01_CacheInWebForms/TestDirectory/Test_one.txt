@@ -1,0 +1,7 @@
+ var filePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\*.*";
+
+            if (!File.Exists(filePath))
+            {
+                File.WriteAllText(filePath, "content");
+            }
+			
