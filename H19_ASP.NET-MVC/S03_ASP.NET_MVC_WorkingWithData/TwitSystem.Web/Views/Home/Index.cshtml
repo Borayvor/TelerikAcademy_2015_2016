@@ -1,0 +1,28 @@
+﻿
+@model TwitSystem.Web.Models.HomePageViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    @(Html.Kendo()
+    .Grid(Model.AllTags)
+    .Name("AllTags")
+    .Columns(columns =>
+    {
+        columns.Template(c => @Html.ActionLink(c.Name, c.Name)).Title("All Tags");
+    })
+    .HtmlAttributes(new { @class = "col-xs-12 col-sm-4 pull-left" }))
+
+    @(Html.Kendo()
+    .Grid(Model.AllUsers)
+    .Name("AllUsers")
+    .Columns(columns =>
+    {
+        columns.Template(c => @Html.ActionLink(c.UserName, c.UserName)).Title("All Users");
+    })
+    .HtmlAttributes(new { @class = "col-xs-12 col-sm-offset-1 col-sm-4 " }))
+</div>
+
+

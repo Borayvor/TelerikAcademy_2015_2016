@@ -1,0 +1,16 @@
+﻿@model TwitSystem.Web.Models.UsersResponseViewModel
+
+@{
+    ViewBag.Title = "My Profile";
+}
+
+
+<div>
+    @(Html.Kendo()
+        .Grid(Model.Tweets)
+        .Name("UserProfile")
+        .Columns(columns =>
+        {            
+            columns.Template(c => @Html.ActionLink(c.Content, "MyProfile")).Title("My Tweets");
+        }))
+</div>
