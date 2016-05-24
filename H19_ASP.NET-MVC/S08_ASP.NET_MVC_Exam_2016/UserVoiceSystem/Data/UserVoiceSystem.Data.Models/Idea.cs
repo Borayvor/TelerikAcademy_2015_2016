@@ -21,6 +21,7 @@
         public string Title { get; set; }
 
         [MaxLength(10000)]
+        [MinLength(2)]
         public string Description { get; set; }
 
         public string AuthorId { get; set; }

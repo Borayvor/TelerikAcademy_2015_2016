@@ -20,6 +20,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = string.Empty }, null)</li>
+
+                    @*@if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Ideas", "Index", "Ideas", new { area = string.Empty }, null)</li>
+                        <li>@Html.ActionLink("Comments", "Index", "Comments", new { area = string.Empty }, null)</li>
+                    }*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,6 +40,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryUnobtrusive")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

@@ -16,9 +16,123 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+input {
+    margin-bottom: 5px;
 }
+
+#create-idea {
+    margin-bottom: 20px;
+}
+
+#suggestion-form .btn {
+    background-color: grey;
+}
+
+#ideas-view-list nav .ideas-order ul li {
+    background-color: silver;
+    padding: 5px;
+}
+
+#ideas-view-list nav .ideas-order ul li a {
+    color: black;
+}
+
+    #ideas-view-list nav .ideas-order ul li.active {
+        background-color: purple;        
+    }
+
+    #ideas-view-list nav .ideas-order ul li.active a {
+        color: white;
+    }
+
+#ideas-view-list .votes {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.idea-form-display {    
+    margin-bottom: 60px;
+    min-height: 90px;  
+    padding-left: 100px;  
+    position: relative;
+}
+
+.idea-vote-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+}
+
+.idea-votes-count {
+    background-color: #FCFDFF;
+    border: 1px solid #CFD7E6;
+    border-radius: 3px;
+    color: #8F9BB3;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 3px;
+    padding: 12px 0 9px 0;
+    text-align: center;
+}
+
+.idea-votes-count strong {
+    color: #292C33;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.idea-vote-status {
+    position: relative;
+}
+
+.idea-vote-form-toggle {
+    display: none;
+    border: 1px solid #8F9BB3;
+    background-color: #FCFDFF;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+    .idea-vote-form-toggle fieldset {
+        padding-left: 80px;
+    }
+
+        .idea-vote-form-toggle fieldset legend {
+            float: left;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 2em;
+            margin: 0 0 0 -80px;
+            text-align: center;
+            width: 80px;
+            border: none;
+        }
+
+        .idea-vote-form-toggle fieldset .idea-vote-buttons {
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+            .idea-vote-form-toggle fieldset .idea-vote-buttons .btn {
+                display: inline-block;
+                margin: 0;
+                overflow: hidden;
+                padding: 0 1em;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            .idea-vote-form-toggle fieldset .idea-vote-buttons .idea-vote-meta {
+                margin-top: 10px;
+            }
+
+            .idea-data {
+                margin-bottom: 15px;
+            }

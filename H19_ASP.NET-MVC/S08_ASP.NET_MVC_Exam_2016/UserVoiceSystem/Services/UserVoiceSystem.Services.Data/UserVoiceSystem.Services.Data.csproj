@@ -42,9 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentsService.cs" />
+    <Compile Include="Common\ICommentsService.cs" />
+    <Compile Include="Common\IIdeasService.cs" />
+    <Compile Include="IdeasService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\UserVoiceSystem.Common\UserVoiceSystem.Common.csproj">
+      <Project>{701f322f-aa01-4ddc-90b6-6935981c1e73}</Project>
+      <Name>UserVoiceSystem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data\UserVoiceSystem.Data.Common\UserVoiceSystem.Data.Common.csproj">
       <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
       <Name>UserVoiceSystem.Data.Common</Name>

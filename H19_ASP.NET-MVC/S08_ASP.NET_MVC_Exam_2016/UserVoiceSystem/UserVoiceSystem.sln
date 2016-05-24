@@ -37,8 +37,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{552215
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserVoiceSystem.Common", "Common\UserVoiceSystem.Common\UserVoiceSystem.Common.csproj", "{701F322F-AA01-4DDC-90B6-6935981C1E73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alphabet", "Alphabet\Alphabet.csproj", "{C8032357-EA42-465E-B813-4924AE19A7CB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,10 +87,6 @@ Global
 		{701F322F-AA01-4DDC-90B6-6935981C1E73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{701F322F-AA01-4DDC-90B6-6935981C1E73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{701F322F-AA01-4DDC-90B6-6935981C1E73}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8032357-EA42-465E-B813-4924AE19A7CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8032357-EA42-465E-B813-4924AE19A7CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8032357-EA42-465E-B813-4924AE19A7CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8032357-EA42-465E-B813-4924AE19A7CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +103,5 @@ Global
 		{C3A300EF-D136-4334-9211-466B9E699339} = {0C12FAF3-85BC-43E1-ABB2-6799213942CB}
 		{7C55353F-CB74-4E8E-B272-42DA1C9C2194} = {0C12FAF3-85BC-43E1-ABB2-6799213942CB}
 		{701F322F-AA01-4DDC-90B6-6935981C1E73} = {55221524-1A19-4E35-9026-360D2D8B28AB}
-		{C8032357-EA42-465E-B813-4924AE19A7CB} = {33E0499A-81F4-4CE7-A1BF-6E7103399834}
 	EndGlobalSection
 EndGlobal

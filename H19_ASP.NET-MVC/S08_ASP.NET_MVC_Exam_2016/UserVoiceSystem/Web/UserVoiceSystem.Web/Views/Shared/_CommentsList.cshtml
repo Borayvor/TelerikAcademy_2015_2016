@@ -1,0 +1,49 @@
+﻿@using UserVoiceSystem.Web.ViewModels.Comments
+
+@model CommentsListViewModel
+
+@foreach (var comment in Model.Comments)
+{
+    <div class="row">
+        <div class="comment-meta-data">
+            <span>@comment.AuthorEmail</span>&nbsp;<span>commented @comment.CreatedOn</span>
+        </div>
+        <div class="comment-content">
+            @comment.Content
+        </div>
+    </div>
+}
+
+
+<nav>
+    <ul class="pagination">
+        @if (Model.CurrentPage != 1)
+        {
+            <li>
+                <a href="/Idea?page=@(Model.CurrentPage - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            var className = string.Empty;
+            if (Model.CurrentPage == i)
+            {
+                className = "active";
+            }
+            <li class="@className"><a href="/Idea?page=@(i)">@(i)</a></li>
+        }
+
+        @if (Model.CurrentPage != Model.TotalPages)
+        {
+            <li>
+                <a href="/Idea?page=@(Model.CurrentPage + 1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
+
+</nav>

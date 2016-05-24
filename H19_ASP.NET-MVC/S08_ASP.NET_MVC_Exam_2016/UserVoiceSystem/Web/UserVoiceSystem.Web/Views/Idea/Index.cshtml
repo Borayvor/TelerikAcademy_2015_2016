@@ -1,0 +1,40 @@
+﻿@using UserVoiceSystem.Web.ViewModels.Ideas
+
+@model IdeaDetailsViewModel
+
+@{
+    ViewBag.Title = "Idea Details Page";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div>
+    <div class="row">
+        <div class="idea-vote-badge col-sm-1 col-xs-1">
+            <div class="idea-votes-count">
+                <strong>@Model.VotesCount</strong>
+                <span>votes</span>
+            </div>
+        </div>
+        <div class="col-sm-11 col-xs-11">
+            <div class="idea-data">
+                <h4 class="idea-title"></h4>
+                <p class="idea-description">
+                    @Html.Raw(@Model.Description.Replace("\n", "<br />"))
+                </p>
+            </div>
+            <div class="idea-meta-data">
+                <span class="pull-left">Created: @Model.CreatedOn</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="create-comment" class="row">
+        @Html.Action("ChildActionCreateComment", "Comment")
+    </div>
+
+    <div id="comments-list" class="row">
+        @Html.Partial("_CommentsList", Model)
+    </div>
+
+</div>
