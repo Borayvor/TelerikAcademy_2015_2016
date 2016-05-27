@@ -3,19 +3,24 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web.Mvc;
     using AutoMapper;
+    using Comments;
     using Data.Models;
     using Infrastructure.Mapping;
+    using Services.Web;
+    using Services.Web.Common;
 
     public class IdeaDetailsViewModel : IMapFrom<Idea>, IHaveCustomMappings
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         public string Title { get; set; }
 
         public string Description { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<CommentGetViewModel> Comments { get; set; }
 
         public int? TotalPages { get; set; }
 
@@ -26,6 +31,15 @@
         public int VotesCount { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string Url
+        {
+            get
+            {
+                IIdentifierProvider identifier = new IdentifierProvider();
+                return $"/suggestions/{identifier.EncodeIdTitle(this.Id, this.Title)}";
+            }
+        }
 
         public void CreateMappings(IMapperConfiguration configuration)
         {
