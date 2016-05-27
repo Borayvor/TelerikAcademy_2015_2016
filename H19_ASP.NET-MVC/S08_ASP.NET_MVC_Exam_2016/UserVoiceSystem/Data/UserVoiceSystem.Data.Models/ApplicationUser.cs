@@ -1,6 +1,7 @@
 ﻿namespace UserVoiceSystem.Data.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -19,11 +20,14 @@
             this.comments = new HashSet<Comment>();
         }
 
-        [Required]
         [MaxLength(15)]
         [MinLength(7)]
         [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
         public string Ip { get; set; }
+
+        [DefaultValue(10)]
+        [Range(0, 10, ErrorMessage = "Out of range !")]
+        public int VotePoints { get; set; }
 
         public virtual ICollection<Idea> Ideas
         {

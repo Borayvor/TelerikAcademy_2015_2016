@@ -1,98 +1,44 @@
-﻿@using UserVoiceSystem.Web.ViewModels.Home
+﻿@using UserVoiceSystem.Web.ViewModels.Ideas
 @model IdeasListViewModel
 
-@foreach (var idea in Model.Ideas)
-{
-    <div class="idea-form-display">
-        <div class="idea-vote-badge col-sm-1 col-xs-1">
-            <div class="idea-votes-count">
-                <strong>@idea.VotesCount</strong>
-                <span>votes</span>
-            </div>
-            <div class="idea-vote-status">
-                @using (Html.BeginForm())
-                {
-                    <button type="button" class="btn idea-vote-form-triger">Vote</button>
-                    <div class="idea-vote-form-toggle">
-                        <fieldset>
-                            <legend>Vote</legend>
-                            <div class="idea-vote-buttons">
-                                <button class="idea-vote-button-1-votes btn" type="submit" value="1">1 vote</button>
-                                <button class="idea-vote-button-2-votes btn" type="submit" value="2">2 votes</button>
-                                <button class="idea-vote-button-3-votes btn" type="submit" value="3">3 votes</button>
+<div id="ideas-home-view-list">
+    @foreach (var idea in Model.Ideas)
+    {
+        @Html.Partial("_IdeaHome", idea)
+    }
+</div>
 
-                                <button class="idea-vote-button-0-votes btn" type="submit" value="0" disabled="disabled">Remove votes</button>
-                                <div class="idea-vote-meta">
-                                    <span class="idea-votes-remaining">
-                                        You have 10 votes left !
-                                    </span>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                }
-
-            </div>
-        </div>
-        <div class="col-sm-11 col-xs-11">
-            <div class="idea-data">
-                <h4 class="idea-title">
-                    <a href="@idea.Url">@idea.Title</a>
-                </h4>
-
-                @if (@idea.Description.Length > 300)
-                {
-                    <p class="idea-description">
-                        @Html.Raw(@idea.Description.Replace("\n", "<br />").Substring(0, 300))... <a href="@idea.Url">more</a>
-                    </p>
-                }
-                else
-                {
-                    <p class="idea-description">
-                        @Html.Raw(@idea.Description.Replace("\n", "<br />"))
-                    </p>
-                }
-
-            </div>
-            <div class="idea-meta-data">
-                <span class="pull-left">Comments: @idea.CommentsCount</span>
-                <span class="pull-right">Created: @idea.CreatedOn</span>
-            </div>
-        </div>
-
-    </div>
-}
-
-
-<nav>
-    <ul class="pagination">
-        @if (Model.CurrentPage != 1)
-        {
-            <li>
-                <a href="/Home/Index?order=@(Model.Order)&page=@(Model.CurrentPage - 1)" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-        }
-
-        @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            var className = string.Empty;
-            if (Model.CurrentPage == i)
+<div class="text-center">
+    <nav>
+        <ul class="pagination">
+            @if (Model.CurrentPage != 1)
             {
-                className = "active";
+                <li>
+                    <a href="/Home/Index?order=@(Model.Order)&page=@(Model.CurrentPage - 1)&search=@(Model.Search)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
             }
-            <li class="@className"><a href="/Home/Index?order=@(Model.Order)&page=@(i)">@(i)</a></li>
-        }
 
-        @if (Model.CurrentPage != Model.TotalPages)
-        {
-            <li>                
-                <a href="/Home/Index?order=@(Model.Order)&page=@(Model.CurrentPage + 1)" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        }
-    </ul>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                var className = string.Empty;
+                if (Model.CurrentPage == i)
+                {
+                    className = "active";
+                }
+                <li class="@className"><a href="/Home/Index?order=@(Model.Order)&page=@(i)&search=@(Model.Search)">@(i)</a></li>
+            }
 
-</nav>
+            @if (Model.CurrentPage != Model.TotalPages)
+            {
+                <li>
+                    <a href="/Home/Index?order=@(Model.Order)&page=@(Model.CurrentPage + 1)&search=@(Model.Search)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+

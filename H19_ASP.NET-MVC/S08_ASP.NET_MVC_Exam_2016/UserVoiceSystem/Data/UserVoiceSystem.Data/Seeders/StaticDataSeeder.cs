@@ -34,7 +34,8 @@
             {
                 Ip = UserIp,
                 UserName = UserNameEmail,
-                Email = UserNameEmail
+                Email = UserNameEmail,
+                VotePoints = 10
             };
 
             userManager.Create(user, UserPassword);

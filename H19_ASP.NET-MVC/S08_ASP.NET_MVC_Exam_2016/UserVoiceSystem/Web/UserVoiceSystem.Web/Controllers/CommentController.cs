@@ -6,10 +6,10 @@
     using Infrastructure.Filters;
     using Microsoft.AspNet.Identity;
     using Services.Data.Common;
-    using Services.Web;
+    using Services.Web.Common;
     using ViewModels.Comments;
 
-    public class CommentController : Controller
+    public class CommentController : BaseController
     {
         private readonly ICommentsService comments;
         private readonly IIdentifierProvider identifier;
@@ -18,12 +18,6 @@
         {
             this.comments = comments;
             this.identifier = identifier;
-        }
-
-        // GET: Comment
-        public ActionResult Index()
-        {
-            return this.View();
         }
 
         [HttpGet]
@@ -38,10 +32,7 @@
         {
             if (commentModel != null && this.ModelState.IsValid)
             {
-                var comment = new Comment
-                {
-                    Content = commentModel.Content
-                };
+                var comment = this.Mapper.Map<Comment>(commentModel);
 
                 if (this.User.Identity.IsAuthenticated)
                 {
@@ -50,16 +41,12 @@
 
                 this.comments.Create(comment);
 
-                return this.View();
+                var commentViewModel = this.Mapper.Map<CommentGetViewModel>(comment);
+
+                return this.PartialView(commentViewModel);
             }
 
             throw new HttpException(400, "Invalid comment !");
-        }
-
-        [ChildActionOnly]
-        public ActionResult ChildActionCreateComment()
-        {
-            return this.PartialView("_CreateComment");
         }
     }
 }

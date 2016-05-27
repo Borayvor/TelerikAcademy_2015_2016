@@ -1,0 +1,74 @@
+﻿@using UserVoiceSystem.Web.ViewModels.Ideas
+@model IdeaGetViewModel
+
+<div class="idea-form-display">
+    <div class="idea-vote-badge col-sm-1 col-xs-1">
+        <div id="idea-votes-count">
+            <strong>@Model.VotesCount</strong>
+            <span>votes</span>
+        </div>
+        <div class="idea-vote-status">
+            @using (Ajax.BeginForm(
+                    "Vote",
+                    "Idea",
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "idea-votes-count",
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "POST"
+                    }))
+            {
+                <button type="button" class="btn idea-vote-form-triger">Vote</button>
+                    <div class="idea-vote-form-toggle">
+                        <div class="idea-vote-form-close">X</div>
+                        <fieldset>
+                            <legend>Vote</legend>
+                            <div class="idea-vote-buttons">
+                               
+                                    <button class="idea-vote-button-1-votes btn" name="voteValue" type="submit" value="1">1 vote</button>
+                               
+                                    <button class="idea-vote-button-2-votes btn" name="voteValue" type="submit" value="2">2 votes</button>
+                                
+                                    <button class="idea-vote-button-3-votes btn" name="voteValue" type="submit" value="3">3 votes</button>
+                               
+                                    <button class="idea-vote-button-0-votes btn" name="voteValue" type="submit" value="0">Remove votes</button>
+                               
+                                <div class="idea-vote-meta">
+                                    <span class="idea-votes-remaining">
+                                        You have 10 votes left !
+                                    </span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+            }
+
+        </div>
+    </div>
+    <div class="col-sm-11 col-xs-11">
+        <div class="idea-data">
+            <h4 class="idea-title">
+                <a href="@Model.Url">@Model.Title</a>
+            </h4>
+
+            @if (Model.Description.Length > 300)
+            {
+                <p class="idea-description">
+                    @Html.Raw(@Model.Description.Replace("\n", "<br />").Substring(0, 300))... <a href="@Model.Url">more</a>
+                </p>
+            }
+            else
+            {
+                <p class="idea-description">
+                    @Html.Raw(@Model.Description.Replace("\n", "<br />"))
+                </p>
+            }
+
+        </div>
+        <div class="idea-meta-data">
+            <span class="pull-left">Comments: @Model.CommentsCount</span>
+            <span class="pull-right">Created: @Model.CreatedOn</span>
+        </div>
+    </div>
+</div>
+

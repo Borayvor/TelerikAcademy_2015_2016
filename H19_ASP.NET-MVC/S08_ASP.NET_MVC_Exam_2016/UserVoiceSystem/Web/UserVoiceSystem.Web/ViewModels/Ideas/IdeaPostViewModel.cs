@@ -5,7 +5,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class IdeaPostViewModel : IMapFrom<Idea>
+    public class IdeaPostViewModel : IMapFrom<Idea>, IMapTo<Idea>
     {
         [Required]
         [MaxLength(100)]

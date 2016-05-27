@@ -3,8 +3,9 @@
     using System.Web.Mvc;
     using AutoMapper;
     using Infrastructure.Mapping;
-    using UserVoiceSystem.Services.Web;
+    using Services.Web.Common;
 
+    [HandleError]
     public abstract class BaseController : Controller
     {
         public ICacheService Cache { get; set; }

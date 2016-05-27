@@ -1,15 +1,17 @@
 ﻿namespace UserVoiceSystem.Web.Controllers
 {
+    using System.Linq;
     using System.Web;
     using System.Web.Mvc;
     using Data.Models;
     using Infrastructure.Filters;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Services.Data.Common;
-    using Services.Web;
+    using Services.Web.Common;
     using ViewModels.Ideas;
 
-    public class IdeaController : Controller
+    public class IdeaController : BaseController
     {
         private readonly IIdeasService ideas;
         private readonly IIdentifierProvider identifier;
@@ -21,12 +23,24 @@
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Suggestions(string idAndTitle)
         {
-            return this.View();
+            var id = this.identifier.DecodeIdTitle(idAndTitle);
+
+            var idea = this.ideas.GetAll()
+                .Where(x => x.Id == id)
+                .To<IdeaDetailsViewModel>()
+                .FirstOrDefault();
+
+            if (idea == null)
+            {
+                throw new HttpException(404, "Idea not found !");
+            }
+
+            return this.View(idea);
         }
 
-        [HttpGet]
+        [AjaxGet]
         public ActionResult Create()
         {
             return this.PartialView();
@@ -38,11 +52,7 @@
         {
             if (ideaModel != null && this.ModelState.IsValid)
             {
-                var idea = new Idea
-                {
-                    Title = ideaModel.Title,
-                    Description = ideaModel.Description
-                };
+                var idea = this.Mapper.Map<Idea>(ideaModel);
 
                 if (this.User.Identity.IsAuthenticated)
                 {
@@ -51,16 +61,19 @@
 
                 this.ideas.Create(idea);
 
-                return this.RedirectToAction("Index", "Home");
+                var ideaViewModel = this.Mapper.Map<IdeaGetViewModel>(idea);
+
+                return this.PartialView("_IdeaHome", ideaViewModel);
             }
 
             throw new HttpException(400, "Invalid idea !");
         }
 
-        [ChildActionOnly]
-        public ActionResult ChildActionCreateIdea()
+        [AjaxPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Vote()
         {
-            return this.PartialView("_CreateIdea");
+            return this.View();
         }
     }
 }

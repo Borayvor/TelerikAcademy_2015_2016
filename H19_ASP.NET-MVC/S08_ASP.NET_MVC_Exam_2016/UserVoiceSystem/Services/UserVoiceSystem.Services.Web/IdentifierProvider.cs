@@ -2,6 +2,7 @@
 {
     using System;
     using System.Text;
+    using Common;
 
     public class IdentifierProvider : IIdentifierProvider
     {
@@ -15,10 +16,26 @@
             return int.Parse(bytesAsString);
         }
 
+        public int DecodeIdTitle(string urlIdTitle)
+        {
+            var urlArray = urlIdTitle.Split('-');
+
+            int id = 0;
+
+            int.TryParse(urlArray[0], out id);
+
+            return id;
+        }
+
         public string EncodeId(int id)
         {
             var plainTextBytes = Encoding.UTF8.GetBytes(id + Salt);
             return Convert.ToBase64String(plainTextBytes);
+        }
+
+        public string EncodeIdTitle(int id, string title)
+        {
+            return id + "-" + title;
         }
     }
 }

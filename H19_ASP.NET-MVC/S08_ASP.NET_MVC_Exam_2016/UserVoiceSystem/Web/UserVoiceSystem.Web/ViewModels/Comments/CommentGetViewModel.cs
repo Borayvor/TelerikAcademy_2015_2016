@@ -1,12 +1,14 @@
 ﻿namespace UserVoiceSystem.Web.ViewModels.Comments
 {
     using System;
+    using System.Web.Mvc;
     using AutoMapper;
     using Data.Models;
     using Infrastructure.Mapping;
 
     public class CommentGetViewModel : IMapFrom<Comment>, IHaveCustomMappings
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         public string Content { get; set; }

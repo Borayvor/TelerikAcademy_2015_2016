@@ -6,7 +6,7 @@
     "Create", 
     "Idea", 
     new AjaxOptions {
-    UpdateTargetId = "ideas-list",
+    UpdateTargetId = "ideas-home-view-list",
     InsertionMode = InsertionMode.Replace,
     HttpMethod = "POST" }))
 {
@@ -28,8 +28,4 @@
                 <input type="submit" value="Post Idea" class="btn" />
             </div>
         </div>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

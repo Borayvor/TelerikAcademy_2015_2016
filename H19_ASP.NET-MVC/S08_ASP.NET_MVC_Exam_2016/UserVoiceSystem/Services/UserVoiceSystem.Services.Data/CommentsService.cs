@@ -4,7 +4,7 @@
     using Common;
     using UserVoiceSystem.Data.Common;
     using UserVoiceSystem.Data.Models;
-    using Web;
+    using Web.Common;
 
     public class CommentsService : ICommentsService
     {
@@ -26,9 +26,9 @@
             return allComments;
         }
 
-        public Comment GetById(string id)
+        public Comment GetById(string idTitle)
         {
-            var intId = this.identifierProvider.DecodeId(id);
+            var intId = this.identifierProvider.DecodeIdTitle(idTitle);
             var comment = this.comments.GetById(intId);
 
             return comment;

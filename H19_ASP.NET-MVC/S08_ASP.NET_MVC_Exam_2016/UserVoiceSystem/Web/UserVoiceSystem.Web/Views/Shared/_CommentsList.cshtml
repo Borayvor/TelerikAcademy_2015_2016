@@ -1,12 +1,12 @@
-﻿@using UserVoiceSystem.Web.ViewModels.Comments
+﻿@using UserVoiceSystem.Web.ViewModels.Ideas
 
-@model CommentsListViewModel
+@model IdeaDetailsViewModel
 
 @foreach (var comment in Model.Comments)
-{
-    <div class="row">
+{    
+    <div class="row comment-view-idea">
         <div class="comment-meta-data">
-            <span>@comment.AuthorEmail</span>&nbsp;<span>commented @comment.CreatedOn</span>
+            <span>@comment.Author.Email</span>&nbsp;<span>commented @comment.CreatedOn</span>
         </div>
         <div class="comment-content">
             @comment.Content

@@ -223,7 +223,7 @@
     <Compile Include="ViewModels\Comments\CommentPostViewModel.cs" />
     <Compile Include="ViewModels\Comments\CommentsListViewModel.cs" />
     <Compile Include="ViewModels\Ideas\IdeaDetailsViewModel.cs" />
-    <Compile Include="ViewModels\Home\IdeasListViewModel.cs" />
+    <Compile Include="ViewModels\Ideas\IdeasListViewModel.cs" />
     <Compile Include="ViewModels\Ideas\IdeaGetViewModel.cs" />
     <Compile Include="ViewModels\Ideas\IdeaPostViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
@@ -305,15 +305,18 @@
     <Content Include="Scripts\jquery-2.2.3.min.map" />
     <Content Include="Views\Shared\_CreateIdea.cshtml" />
     <Content Include="Views\Shared\_IdeasList.cshtml" />
-    <Content Include="Views\Idea\Index.cshtml" />
-    <Content Include="Views\Comment\_CreateComment.cshtml" />
+    <Content Include="Views\Idea\Suggestions.cshtml" />
+    <Content Include="Views\Shared\_CreateComment.cshtml" />
     <Content Include="Views\Shared\_CommentsList.cshtml" />
+    <Content Include="Views\Shared\_IdeaHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Administration\Views\Shared\" />
+    <Folder Include="ViewModels\Home\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

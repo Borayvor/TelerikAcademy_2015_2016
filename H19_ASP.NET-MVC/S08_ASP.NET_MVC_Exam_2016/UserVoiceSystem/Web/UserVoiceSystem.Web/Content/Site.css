@@ -33,17 +33,17 @@ input {
     padding: 5px;
 }
 
-#ideas-view-list nav .ideas-order ul li a {
-    color: black;
-}
+    #ideas-view-list nav .ideas-order ul li a {
+        color: black;
+    }
 
     #ideas-view-list nav .ideas-order ul li.active {
-        background-color: purple;        
+        background-color: purple;
     }
 
-    #ideas-view-list nav .ideas-order ul li.active a {
-        color: white;
-    }
+        #ideas-view-list nav .ideas-order ul li.active a {
+            color: white;
+        }
 
 #ideas-view-list .votes {
     border: 1px solid gray;
@@ -51,10 +51,10 @@ input {
     padding: 5px;
 }
 
-.idea-form-display {    
+.idea-form-display {
     margin-bottom: 60px;
-    min-height: 90px;  
-    padding-left: 100px;  
+    min-height: 90px;
+    padding-left: 100px;
     position: relative;
 }
 
@@ -77,13 +77,13 @@ input {
     text-align: center;
 }
 
-.idea-votes-count strong {
-    color: #292C33;
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
+    .idea-votes-count strong {
+        color: #292C33;
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
 
 .idea-vote-status {
     position: relative;
@@ -133,6 +133,19 @@ input {
                 margin-top: 10px;
             }
 
-            .idea-data {
-                margin-bottom: 15px;
-            }
+.idea-data {
+    margin-bottom: 15px;
+}
+
+#create-comment {
+    margin-bottom: 15px;
+}
+
+.comment-view-idea {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.comment-view-idea .comment-meta-data {
+    margin-bottom: 5px;
+}

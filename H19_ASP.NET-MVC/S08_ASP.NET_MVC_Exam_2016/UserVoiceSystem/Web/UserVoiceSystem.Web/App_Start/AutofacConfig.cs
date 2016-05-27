@@ -13,6 +13,7 @@
     using Data.Common;
     using Services.Data.Common;
     using Services.Web;
+    using Services.Web.Common;
 
     public static class AutofacConfig
     {

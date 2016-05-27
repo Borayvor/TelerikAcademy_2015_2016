@@ -1,7 +1,6 @@
-﻿namespace UserVoiceSystem.Web.ViewModels.Home
+﻿namespace UserVoiceSystem.Web.ViewModels.Ideas
 {
     using System.Collections.Generic;
-    using Ideas;
 
     public class IdeasListViewModel
     {

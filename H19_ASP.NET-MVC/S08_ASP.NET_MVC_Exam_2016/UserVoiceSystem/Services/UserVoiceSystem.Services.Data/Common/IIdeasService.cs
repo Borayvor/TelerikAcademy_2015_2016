@@ -6,7 +6,7 @@
 
     public interface IIdeasService
     {
-        IQueryable<Idea> GetAll(IdeasOrder orderBy);
+        IQueryable<Idea> GetAll(IdeasOrder orderBy = IdeasOrder.TopIdeas);
 
         Idea GetById(string id);
 

@@ -1,22 +1,23 @@
 ﻿namespace UserVoiceSystem.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
-
+    using Data.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
-
-    using UserVoiceSystem.Data.Models;
-    using UserVoiceSystem.Web.ViewModels.Account;
+    using ViewModels.Account;
 
     [Authorize]
     public class AccountController : BaseController
     {
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
+
+        private readonly Random randomGenerator = new Random();
 
         private ApplicationSignInManager signInManager;
 
@@ -170,7 +171,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Ip = model.Ip, VotePoints = model.VotePoints };
                 var result = await this.UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

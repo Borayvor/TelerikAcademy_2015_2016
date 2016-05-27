@@ -1,4 +1,4 @@
-﻿@using UserVoiceSystem.Web.ViewModels.Home
+﻿@using UserVoiceSystem.Web.ViewModels.Ideas
 @using UserVoiceSystem.Common;
 @model IdeasListViewModel
 
@@ -9,43 +9,66 @@
 
 <section id="create-idea">
     <div class="row">
-        @Html.Action("ChildActionCreateIdea", "Idea")
+        @Html.Partial("_CreateIdea", new IdeaPostViewModel())
     </div>
 </section>
 
 <section id="ideas-view-list">
+    <div class="container">
+        <nav class="nav">
+            <div class="ideas-order pull-left">
+                <ul class="list-inline">
+                    <li class="active" name="TopIdeas">
+                        <a href="/Home/Index?order=@((int)IdeasOrder.TopIdeas)&page=1">Top Ideas</a>
 
-    <nav class="nav row">
-        <div class="ideas-order pull-left">
-            <ul class="list-inline">
-                <li class="active" name="TopIdeas">
-                    <a href="/Home/Index?order=@((int)IdeasOrder.TopIdeas)&page=1">Top Ideas</a>
+                    </li>
+                    <li name="NewIdeas">
+                        <a href="/Home/Index?order=@((int)IdeasOrder.New)&page=1">New</a>
+                    </li>
+                </ul>
+            </div>
 
-                </li>
-                <li name="NewIdeas">
-                    <a href="/Home/Index?order=@((int)IdeasOrder.New)&page=1">New</a>
-                </li>
-            </ul>
-        </div>
-        <div class="pull-right">
-            @using (Ajax.BeginForm("Search", null,
-                              new AjaxOptions
-                              {
-                                  UpdateTargetId = "ideas-list",
-                                  InsertionMode = InsertionMode.Replace,
-                                  HttpMethod = "POST"
-                              }, new { id = "searchForm" }))
-            {
-                @Html.AntiForgeryToken()
-                <input type="text" name="search" placeholder="Search ideas...">
+            <div class="pull-right">
+                @using (Ajax.BeginForm("Search", null,
+                      new AjaxOptions
+                      {
+                          UpdateTargetId = "ideas-list",
+                          InsertionMode = InsertionMode.Replace,
+                          HttpMethod = "POST"
+                      }, new { id = "searchForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="text" name="search" placeholder="Search ideas...">
 
-                <input type="submit" value="Search" class="btn" />
-            }
-        </div>
-    </nav>
+                    <input type="submit" value="Search" class="btn" />
+                }
+            </div>
+        </nav>
+    </div>
 
-
-    <div id="ideas-list row">
+    <div id="ideas-list" class="row">
         @Html.Partial("_IdeasList", Model)
     </div>
 </section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryUnobtrusive")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(".idea-vote-form-triger").click(function () {
+            var $btn = $(this);
+
+            $btn.hide();
+            
+            $(".idea-vote-form-toggle").show();
+        })
+
+        $(".idea-vote-form-close").click(function () {
+            
+            $(".idea-vote-form-triger").show();
+
+            $(".idea-vote-form-toggle").hide();
+        })
+    </script>
+}

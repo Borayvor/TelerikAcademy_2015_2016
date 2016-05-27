@@ -1,4 +1,4 @@
-﻿namespace UserVoiceSystem.Services.Web
+﻿namespace UserVoiceSystem.Services.Web.Common
 {
     using System;
 

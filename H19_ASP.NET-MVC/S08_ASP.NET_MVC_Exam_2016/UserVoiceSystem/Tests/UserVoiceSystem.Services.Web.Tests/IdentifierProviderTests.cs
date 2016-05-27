@@ -1,5 +1,6 @@
 ﻿namespace UserVoiceSystem.Services.Web.Tests
 {
+    using Common;
     using NUnit.Framework;
 
     [TestFixture]

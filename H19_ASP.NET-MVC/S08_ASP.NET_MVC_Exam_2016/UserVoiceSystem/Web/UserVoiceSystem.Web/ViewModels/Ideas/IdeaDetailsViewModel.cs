@@ -17,6 +17,10 @@
 
         public IEnumerable<Comment> Comments { get; set; }
 
+        public int? TotalPages { get; set; }
+
+        public int? CurrentPage { get; set; }
+
         public int CommentsCount { get; set; }
 
         public int VotesCount { get; set; }

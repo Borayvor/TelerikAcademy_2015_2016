@@ -5,7 +5,7 @@
     using UserVoiceSystem.Common;
     using UserVoiceSystem.Data.Common;
     using UserVoiceSystem.Data.Models;
-    using Web;
+    using Web.Common;
 
     public class IdeasService : IIdeasService
     {
@@ -18,7 +18,7 @@
             this.identifierProvider = identifierProvider;
         }
 
-        public IQueryable<Idea> GetAll(IdeasOrder orderBy)
+        public IQueryable<Idea> GetAll(IdeasOrder orderBy = IdeasOrder.TopIdeas)
         {
             switch (orderBy)
             {
@@ -34,9 +34,9 @@
             }
         }
 
-        public Idea GetById(string id)
+        public Idea GetById(string idTitle)
         {
-            var intId = this.identifierProvider.DecodeId(id);
+            var intId = this.identifierProvider.DecodeIdTitle(idTitle);
             var idea = this.ideas.GetById(intId);
 
             return idea;
