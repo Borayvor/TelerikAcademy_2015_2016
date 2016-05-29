@@ -25,8 +25,8 @@
         [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
         public string Ip { get; set; }
 
-        [DefaultValue(10)]
         [Range(0, 10, ErrorMessage = "Out of range !")]
+        [DefaultValue(10)]
         public int VotePoints { get; set; }
 
         public virtual ICollection<Idea> Ideas

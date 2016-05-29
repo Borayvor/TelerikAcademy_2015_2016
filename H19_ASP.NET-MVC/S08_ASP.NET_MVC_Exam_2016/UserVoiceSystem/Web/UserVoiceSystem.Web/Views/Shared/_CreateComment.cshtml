@@ -17,19 +17,23 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="col-xs-12">
             @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
-            @Html.LabelFor(m => m.Content, new { @class = "col-xs-2", @Value = "648 comments" })
-            @Html.TextBoxFor(m => m.Content, new { @class = "form-control", @placeholder = "Add a comment..." })
+            @Html.LabelFor(m => m.Content, new { @class = "col-xs-2" })
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", @placeholder = "Add a comment...", @rows = 5 })
         </div>
         <div class="col-xs-12">
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-            @Html.TextAreaFor(m => m.Email, new { @class = "form-control", @placeholder = "Your email address" })
+            @Html.HiddenFor(m => m.IdeaId)
+            @Html.ValidationMessageFor(m => m.AuthorEmail, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.AuthorEmail, new { @class = "form-control", @placeholder = "Your email address" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-xs-2">
-            <input type="submit" value="Post Comment" class="btn" />
+    if (User.Identity.IsAuthenticated)
+    {
+        <div class="form-group">
+            <div class="col-xs-2">
+                <input type="submit" value="Post Comment" class="btn" />
+            </div>
         </div>
-    </div>
+    }
 }
 
 

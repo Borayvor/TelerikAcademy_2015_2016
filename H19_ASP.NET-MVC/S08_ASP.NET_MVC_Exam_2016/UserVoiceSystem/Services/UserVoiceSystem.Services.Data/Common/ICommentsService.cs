@@ -5,7 +5,7 @@
 
     public interface ICommentsService
     {
-        IQueryable<Comment> GetAll(int ideaId);
+        IQueryable<Comment> GetAll();
 
         Comment GetById(string id);
 

@@ -8,7 +8,7 @@
     {
         IQueryable<Idea> GetAll(IdeasOrder orderBy = IdeasOrder.TopIdeas);
 
-        Idea GetById(string id);
+        Idea GetById(string idTitle);
 
         void Create(Idea idea);
 

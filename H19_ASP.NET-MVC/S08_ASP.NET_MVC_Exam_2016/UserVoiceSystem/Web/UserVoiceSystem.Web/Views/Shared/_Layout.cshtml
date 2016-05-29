@@ -4,7 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - UserVoiceSystem</title>
+    @Styles.Render("~/Content/bootstrapCss")
+    @Styles.Render("~/Content/kendo/css")
     @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/kendo")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,11 +26,11 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = string.Empty }, null)</li>
 
-                    @*@if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Ideas", "Index", "Ideas", new { area = string.Empty }, null)</li>
-                        <li>@Html.ActionLink("Comments", "Index", "Comments", new { area = string.Empty }, null)</li>
-                    }*@
+                        <li>@Html.ActionLink("Ideas", "Index", "IdeasAdministration", new { area = "Administration" }, null)</li>
+                        <li>@Html.ActionLink("Comments", "Index", "CommentsAdministration", new { area = "Administration" }, null)</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -38,8 +43,7 @@
             <p>&copy; @DateTime.Now.Year - UserVoiceSystem</p>
         </footer>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")    
+         
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

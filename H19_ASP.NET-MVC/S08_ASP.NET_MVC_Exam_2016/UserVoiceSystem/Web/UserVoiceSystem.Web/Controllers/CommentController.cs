@@ -26,6 +26,7 @@
             return this.PartialView();
         }
 
+        [Authorize]
         [AjaxPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CommentPostViewModel commentModel)

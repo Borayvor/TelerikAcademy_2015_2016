@@ -46,8 +46,10 @@
             idea.CurrentPage = page;
 
             idea.Comments = idea.Comments
+                .AsQueryable()
                 .Skip(pagesToSkip)
-                .Take(GlobalConstants.CommentsPerIdeaPage);
+                .Take(GlobalConstants.CommentsPerIdeaPage)
+                .ToList();
 
             return this.View(idea);
         }
@@ -58,6 +60,7 @@
             return this.PartialView();
         }
 
+        [Authorize]
         [AjaxPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IdeaPostViewModel ideaModel)

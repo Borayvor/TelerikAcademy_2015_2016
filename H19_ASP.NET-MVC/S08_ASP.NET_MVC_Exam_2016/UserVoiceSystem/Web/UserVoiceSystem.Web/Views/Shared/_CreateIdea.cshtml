@@ -3,12 +3,14 @@
 
 
 @using (Ajax.BeginForm(
-    "Create", 
-    "Idea", 
-    new AjaxOptions {
-    UpdateTargetId = "ideas-home-view-list",
-    InsertionMode = InsertionMode.Replace,
-    HttpMethod = "POST" }))
+                "Create",
+                "Idea",
+                new AjaxOptions
+                {
+                    UpdateTargetId = "ideas-home-view-list",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "POST"
+                }))
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
@@ -23,9 +25,12 @@
             @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "Enter description" })
         </div>
     </div>
+    if (User.Identity.IsAuthenticated)
+    {
         <div class="form-group">
             <div class="col-xs-2">
                 <input type="submit" value="Post Idea" class="btn" />
             </div>
         </div>
+    }
 }

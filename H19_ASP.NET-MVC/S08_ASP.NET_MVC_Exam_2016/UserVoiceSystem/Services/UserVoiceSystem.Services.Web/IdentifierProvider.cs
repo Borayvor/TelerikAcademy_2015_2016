@@ -35,7 +35,9 @@
 
         public string EncodeIdTitle(int id, string title)
         {
-            return id + "-" + title;
+            var encodedTitle = title.Replace(".", "Dot");
+
+            return id + "-" + encodedTitle;
         }
     }
 }

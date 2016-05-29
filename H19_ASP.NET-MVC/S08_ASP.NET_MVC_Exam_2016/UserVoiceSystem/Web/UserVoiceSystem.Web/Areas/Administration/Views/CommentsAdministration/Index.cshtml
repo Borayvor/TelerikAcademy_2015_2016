@@ -1,0 +1,59 @@
+﻿@using UserVoiceSystem.Web.Areas.Administration.ViewModels.Comments
+@model IQueryable<CommentOutputViewModel>
+
+@{
+    ViewBag.Title = "Comments";
+}
+<h2>@ViewBag.Title</h2>
+<div>
+    @(Html.Kendo().Grid<CommentOutputViewModel>()
+            .Name("CommentsGrid")
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.Id);
+                columns.Bound(c => c.Idea);
+                columns.Bound(c => c.Content).Width(400);
+                columns.Bound(c => c.AuthorEmail);
+                columns.Bound(c => c.CreatedOn).Format("{0:yyyy-MM-dd HH:mm}");
+                columns.Bound(c => c.ModifiedOn).Format("{0:yyyy-MM-dd HH:mm}");
+                columns.Command(command => { command.Edit(); command.Destroy(); });
+            })
+            .ColumnMenu()
+            .Editable(editable => editable.Mode(GridEditMode.PopUp))
+            .Scrollable(scr => scr.Height(600))
+            .Groupable()
+            .Sortable()
+            .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(true)
+                .ButtonCount(5))
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .ServerOperation(false)
+                .Events(events => events.Error("error_handler"))
+                .PageSize(4)
+                .Model(model => model.Id(m => m.Id))
+                .Read(read => read.Action("Read", "CommentsAdministration"))
+                .Update(update => update.Action("Update", "CommentsAdministration"))
+                .Destroy(update => update.Action("Destroy", "CommentsAdministration"))
+            )
+    )
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+}

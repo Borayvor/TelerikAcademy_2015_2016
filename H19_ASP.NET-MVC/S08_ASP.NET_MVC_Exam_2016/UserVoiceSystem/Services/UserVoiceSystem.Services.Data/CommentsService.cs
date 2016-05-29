@@ -17,10 +17,9 @@
             this.identifierProvider = identifierProvider;
         }
 
-        public IQueryable<Comment> GetAll(int ideaId)
+        public IQueryable<Comment> GetAll()
         {
             var allComments = this.comments.All()
-                .Where(x => x.IdeaId == ideaId)
                 .OrderByDescending(x => x.CreatedOn);
 
             return allComments;

@@ -7,8 +7,10 @@
             <strong>@Model.VotesCount</strong>
             <span>votes</span>
         </div>
-        <div class="idea-vote-status">
-            @using (Ajax.BeginForm(
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="idea-vote-status">
+                @using (Ajax.BeginForm(
                     "Vote",
                     "Idea",
                     new AjaxOptions
@@ -17,22 +19,22 @@
                         InsertionMode = InsertionMode.Replace,
                         HttpMethod = "POST"
                     }))
-            {
-                <button type="button" class="btn idea-vote-form-triger">Vote</button>
+                {
+                    <button type="button" class="btn idea-vote-form-triger">Vote</button>
                     <div class="idea-vote-form-toggle">
                         <div class="idea-vote-form-close">X</div>
                         <fieldset>
                             <legend>Vote</legend>
                             <div class="idea-vote-buttons">
-                               
-                                    <button class="idea-vote-button-1-votes btn" name="voteValue" type="submit" value="1">1 vote</button>
-                               
-                                    <button class="idea-vote-button-2-votes btn" name="voteValue" type="submit" value="2">2 votes</button>
-                                
-                                    <button class="idea-vote-button-3-votes btn" name="voteValue" type="submit" value="3">3 votes</button>
-                               
-                                    <button class="idea-vote-button-0-votes btn" name="voteValue" type="submit" value="0">Remove votes</button>
-                               
+
+                                <button class="idea-vote-button-1-votes btn" name="voteValue" type="submit" value="1">1 vote</button>
+
+                                <button class="idea-vote-button-2-votes btn" name="voteValue" type="submit" value="2">2 votes</button>
+
+                                <button class="idea-vote-button-3-votes btn" name="voteValue" type="submit" value="3">3 votes</button>
+
+                                <button class="idea-vote-button-0-votes btn" name="voteValue" type="submit" value="0">Remove votes</button>
+
                                 <div class="idea-vote-meta">
                                     <span class="idea-votes-remaining">
                                         You have 10 votes left !
@@ -41,9 +43,14 @@
                             </div>
                         </fieldset>
                     </div>
-            }
+                }
 
-        </div>
+            </div>
+        }
+        else
+        {
+            <button type="button" class="btn">Vote</button>
+        }
     </div>
     <div class="col-sm-11 col-xs-11">
         <div class="idea-data">
@@ -71,4 +78,3 @@
         </div>
     </div>
 </div>
-
