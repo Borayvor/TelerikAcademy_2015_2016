@@ -77,21 +77,5 @@
 
             throw new HttpException(400, "Invalid idea !");
         }
-
-        [AjaxGet]
-        public ActionResult Vote()
-        {
-            return this.PartialView();
-        }
-
-        [Authorize]
-        [AjaxPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Vote(int voteValue)
-        {
-
-
-            return this.PartialView();
-        }
     }
 }

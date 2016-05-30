@@ -1,7 +1,6 @@
 ﻿namespace UserVoiceSystem.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Common;
@@ -54,29 +53,18 @@
             int totalpages = 0;
             var pagesToSkip = (page - 1) * GlobalConstants.ItemsPerPageHome;
 
-            IEnumerable<IdeaGetViewModel> ideas;
-
-            if (string.IsNullOrWhiteSpace(search))
-            {
-                totalpages = (int)Math.Ceiling(allIdeas.Count() / (decimal)GlobalConstants.ItemsPerPageHome);
-
-                ideas = allIdeas
-                .Skip(pagesToSkip)
-                .Take(GlobalConstants.ItemsPerPageHome)
-                .To<IdeaGetViewModel>()
-                .ToList();
-            }
-            else
+            if (!string.IsNullOrWhiteSpace(search))
             {
                 allIdeas = allIdeas.Where(idea => idea.Title.ToLower().Contains(search.ToLower()));
-                totalpages = (int)Math.Ceiling(allIdeas.Count() / (decimal)GlobalConstants.ItemsPerPageHome);
-
-                ideas = allIdeas
-                .Skip(pagesToSkip)
-                .Take(GlobalConstants.ItemsPerPageHome)
-                .To<IdeaGetViewModel>()
-                .ToList();
             }
+
+            totalpages = (int)Math.Ceiling(allIdeas.Count() / (decimal)GlobalConstants.ItemsPerPageHome);
+
+            var ideas = allIdeas
+            .Skip(pagesToSkip)
+            .Take(GlobalConstants.ItemsPerPageHome)
+            .To<IdeaGetViewModel>()
+            .ToList();
 
             var newViewModel = new IdeasListViewModel
             {
