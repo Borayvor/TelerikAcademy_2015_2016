@@ -7,7 +7,6 @@
     using Common;
     using Data.Models;
     using Infrastructure.Filters;
-    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Services.Data.Common;
     using Services.Web.Common;
@@ -28,30 +27,27 @@
         public ActionResult Suggestions(string idAndTitle, int page = 1)
         {
             var id = this.identifier.DecodeIdTitle(idAndTitle);
-            var pagesToSkip = (page - 1) * GlobalConstants.CommentsPerIdeaPage;
+            var idea = this.ideas.GetById(idAndTitle);
+            var ideaViewModel = this.Mapper.Map<IdeaDetailsViewModel>(idea);
 
-            var idea = this.ideas.GetAll()
-                .Where(x => x.Id == id)
-                .To<IdeaDetailsViewModel>()
-                .FirstOrDefault();
-
-            if (idea == null)
+            if (ideaViewModel == null)
             {
                 throw new HttpException(404, "Idea not found !");
             }
 
-            var totalpages = (int)Math.Ceiling(idea.CommentsCount / (decimal)GlobalConstants.CommentsPerIdeaPage);
+            var totalpages = (int)Math.Ceiling(ideaViewModel.CommentsCount / (decimal)GlobalConstants.CommentsPerIdeaPage);
+            var pagesToSkip = (page - 1) * GlobalConstants.CommentsPerIdeaPage;
 
-            idea.TotalPages = totalpages;
-            idea.CurrentPage = page;
+            ideaViewModel.TotalPages = totalpages;
+            ideaViewModel.CurrentPage = page;
 
-            idea.Comments = idea.Comments
+            ideaViewModel.Comments = ideaViewModel.Comments
                 .AsQueryable()
                 .Skip(pagesToSkip)
                 .Take(GlobalConstants.CommentsPerIdeaPage)
                 .ToList();
 
-            return this.View(idea);
+            return this.View(ideaViewModel);
         }
 
         [AjaxGet]
@@ -76,21 +72,26 @@
 
                 this.ideas.Create(idea);
 
-                ////var ideaViewModel = this.Mapper.Map<IdeaGetViewModel>(idea);
-
-                ////return this.PartialView("_IdeaHome", ideaViewModel);
-
                 return this.RedirectToAction("Index", "Home");
             }
 
             throw new HttpException(400, "Invalid idea !");
         }
 
-        [AjaxPost]
-        [ValidateAntiForgeryToken]
+        [AjaxGet]
         public ActionResult Vote()
         {
-            return this.View();
+            return this.PartialView();
+        }
+
+        [Authorize]
+        [AjaxPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Vote(int voteValue)
+        {
+
+
+            return this.PartialView();
         }
     }
 }

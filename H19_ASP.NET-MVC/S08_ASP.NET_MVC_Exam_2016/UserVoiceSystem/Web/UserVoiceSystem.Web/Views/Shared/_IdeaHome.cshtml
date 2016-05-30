@@ -20,6 +20,7 @@
                         HttpMethod = "POST"
                     }))
                 {
+                    @Html.AntiForgeryToken()
                     <button type="button" class="btn idea-vote-form-triger">Vote</button>
                     <div class="idea-vote-form-toggle">
                         <div class="idea-vote-form-close">X</div>
