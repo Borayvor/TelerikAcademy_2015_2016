@@ -7,6 +7,7 @@
     using Common;
     using Data.Models;
     using Infrastructure.Filters;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Services.Data.Common;
     using Services.Web.Common;
@@ -24,7 +25,7 @@
         }
 
         [HttpGet]
-        public ActionResult Suggestions(string idAndTitle, int page = 1)
+        public ActionResult Suggestions(string idAndTitle)
         {
             var id = this.identifier.DecodeIdTitle(idAndTitle);
             var idea = this.ideas.GetById(idAndTitle);
@@ -34,18 +35,6 @@
             {
                 throw new HttpException(404, "Idea not found !");
             }
-
-            var totalpages = (int)Math.Ceiling(ideaViewModel.CommentsCount / (decimal)GlobalConstants.CommentsPerIdeaPage);
-            var pagesToSkip = (page - 1) * GlobalConstants.CommentsPerIdeaPage;
-
-            ideaViewModel.TotalPages = totalpages;
-            ideaViewModel.CurrentPage = page;
-
-            ideaViewModel.Comments = ideaViewModel.Comments
-                .AsQueryable()
-                .Skip(pagesToSkip)
-                .Take(GlobalConstants.CommentsPerIdeaPage)
-                .ToList();
 
             return this.View(ideaViewModel);
         }
@@ -72,7 +61,25 @@
 
                 this.ideas.Create(idea);
 
-                return this.RedirectToAction("Index", "Home");
+                var allIdeas = this.ideas
+                    .GetAll(IdeasOrder.New)
+                    .Skip(1)
+                    .Take(GlobalConstants.IdeasPerHomePage)
+                    .To<IdeaGetViewModel>()
+                    .ToList();
+
+                var totalpages = (int)Math.Ceiling(allIdeas.Count() / (decimal)GlobalConstants.IdeasPerHomePage);
+
+                var newViewModel = new IdeasListViewModel
+                {
+                    Ideas = allIdeas,
+                    CurrentPage = 1,
+                    TotalPages = totalpages,
+                    Order = (int)IdeasOrder.New,
+                    Search = string.Empty
+                };
+
+                return this.PartialView("_IdeasList", newViewModel);
             }
 
             throw new HttpException(400, "Invalid idea !");

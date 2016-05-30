@@ -51,18 +51,18 @@
             var allIdeas = this.ideas.GetAll((IdeasOrder)order);
 
             int totalpages = 0;
-            var pagesToSkip = (page - 1) * GlobalConstants.ItemsPerPageHome;
+            var pagesToSkip = (page - 1) * GlobalConstants.IdeasPerHomePage;
 
             if (!string.IsNullOrWhiteSpace(search))
             {
                 allIdeas = allIdeas.Where(idea => idea.Title.ToLower().Contains(search.ToLower()));
             }
 
-            totalpages = (int)Math.Ceiling(allIdeas.Count() / (decimal)GlobalConstants.ItemsPerPageHome);
+            totalpages = (int)Math.Ceiling(allIdeas.Count() / (decimal)GlobalConstants.IdeasPerHomePage);
 
             var ideas = allIdeas
             .Skip(pagesToSkip)
-            .Take(GlobalConstants.ItemsPerPageHome)
+            .Take(GlobalConstants.IdeasPerHomePage)
             .To<IdeaGetViewModel>()
             .ToList();
 

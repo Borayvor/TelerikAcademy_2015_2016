@@ -1,11 +1,9 @@
 ﻿namespace UserVoiceSystem.Web.ViewModels.Ideas
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
-    using Comments;
     using Data.Models;
     using Infrastructure.Mapping;
     using Services.Web;
@@ -19,12 +17,6 @@
         public string Title { get; set; }
 
         public string Description { get; set; }
-
-        public IEnumerable<CommentGetViewModel> Comments { get; set; }
-
-        public int? TotalPages { get; set; }
-
-        public int? CurrentPage { get; set; }
 
         public int CommentsCount { get; set; }
 

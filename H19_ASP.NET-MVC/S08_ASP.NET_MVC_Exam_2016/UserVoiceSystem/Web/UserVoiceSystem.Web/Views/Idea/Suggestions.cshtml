@@ -31,11 +31,11 @@
     </div>
 
     <div id="create-comment" class="row">
-        @Html.Partial("_CreateComment", new CommentPostViewModel())
+        @Html.Partial("_CreateComment", new CommentPostViewModel(Model.Id, Model.Url))
     </div>
 
-    <div id="comments-list" class="container">        
-        @Html.Partial("_CommentsList", Model)
+    <div id="comments-list" class="container">
+        @Html.Action("GetCommentsForIdea", "Comment", new { ideaId = Model.Id, ideaUrl = Model.Url })
     </div>
 
 </div>

@@ -7,7 +7,7 @@
                 new AjaxOptions
                 {
                     UpdateTargetId = "comments-list",
-                    InsertionMode = InsertionMode.InsertBefore,
+                    InsertionMode = InsertionMode.Replace,
                     HttpMethod = "POST"
                 }))
 {
@@ -19,12 +19,8 @@
             @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
             @Html.LabelFor(m => m.Content, new { @class = "col-xs-2" })
             @Html.TextAreaFor(m => m.Content, new { @class = "form-control", @placeholder = "Add a comment...", @rows = 5 })
-        </div>
-        <div class="col-xs-12">
             @Html.HiddenFor(m => m.IdeaId)
-            @Html.ValidationMessageFor(m => m.AuthorEmail, "", new { @class = "text-danger" })
-            @Html.TextBoxFor(m => m.AuthorEmail, new { @class = "form-control", @placeholder = "Your email address" })
-        </div>
+        </div>       
     </div>
     if (User.Identity.IsAuthenticated)
     {
