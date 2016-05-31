@@ -42,6 +42,38 @@
             return idea;
         }
 
+        ////public IdeasListViewModel GetIdeasList(int order, int page, string search)
+        ////{
+        ////    var allIdeas = this.ideas.GetAll((IdeasOrder)order);
+
+        ////    int totalpages = 0;
+        ////    var pagesToSkip = (page - 1) * GlobalConstants.IdeasPerHomePage;
+
+        ////    if (!string.IsNullOrWhiteSpace(search))
+        ////    {
+        ////        allIdeas = allIdeas.Where(idea => idea.Title.ToLower().Contains(search.ToLower()));
+        ////    }
+
+        ////    totalpages = (int)Math.Ceiling(allIdeas.Count() / (decimal)GlobalConstants.IdeasPerHomePage);
+
+        ////    var ideas = allIdeas
+        ////    .Skip(pagesToSkip)
+        ////    .Take(GlobalConstants.IdeasPerHomePage)
+        ////    .To<IdeaGetViewModel>()
+        ////    .ToList();
+
+        ////    var newViewModel = new IdeasListViewModel
+        ////    {
+        ////        Ideas = ideas,
+        ////        CurrentPage = page,
+        ////        TotalPages = totalpages,
+        ////        Order = order,
+        ////        Search = search
+        ////    };
+
+        ////    return newViewModel;
+        ////}
+
         public void Create(Idea idea)
         {
             this.ideas.Add(idea);
