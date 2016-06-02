@@ -20,6 +20,7 @@
             this.comments = new HashSet<Comment>();
         }
 
+        [Required]
         [MaxLength(15)]
         [MinLength(7)]
         [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]

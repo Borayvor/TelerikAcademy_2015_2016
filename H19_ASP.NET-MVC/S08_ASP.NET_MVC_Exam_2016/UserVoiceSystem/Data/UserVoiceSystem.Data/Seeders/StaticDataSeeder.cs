@@ -383,7 +383,7 @@ so in C# the deault parameter is visible but only with the system default value 
                 {
                     IdeaId = ideaId,
                     Points = Random.Next(1, 4),
-                    Ip = Random.Next(0, 256) + "." + Random.Next(0, 256) + "." + Random.Next(0, 256) + "." + Random.Next(0, 256),
+                    AuthorIp = Random.Next(0, 256) + "." + Random.Next(0, 256) + "." + Random.Next(0, 256) + "." + Random.Next(0, 256),
                 });
             }
 

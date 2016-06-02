@@ -75,17 +75,19 @@
                 this.comments.Create(comment);
 
                 var commentsForIdea = this.comments.GetAll()
-                    .Where(x => x.IdeaId == commentModel.IdeaId)
+                    .Where(x => x.IdeaId == commentModel.IdeaId);
+
+                var totalpages = (int)Math.Ceiling(commentsForIdea.Count() / (decimal)GlobalConstants.CommentsPerIdeaPage);
+
+                var pagedComments = commentsForIdea
                     .Skip(1)
                     .Take(GlobalConstants.CommentsPerIdeaPage)
                     .To<CommentGetViewModel>()
                     .ToList();
 
-                var totalpages = (int)Math.Ceiling(commentsForIdea.Count() / (decimal)GlobalConstants.CommentsPerIdeaPage);
-
                 var viewModel = new CommentsListViewModel
                 {
-                    Comments = commentsForIdea,
+                    Comments = pagedComments,
                     CurrentPage = 1,
                     TotalPages = totalpages,
                     Url = commentModel.Url

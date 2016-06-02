@@ -8,7 +8,8 @@
         [Required]
         [MaxLength(15)]
         [MinLength(7)]
-        public string Ip { get; set; }
+        [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
+        public string AuthorIp { get; set; }
 
         [Range(1, 3, ErrorMessage = "Out of range !")]
         public int Points { get; set; }

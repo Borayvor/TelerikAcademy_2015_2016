@@ -13,6 +13,7 @@
         [DisplayName("I suggest you ...")]
         public string Title { get; set; }
 
+        [Required]
         [MaxLength(10000)]
         [MinLength(2)]
         public string Description { get; set; }

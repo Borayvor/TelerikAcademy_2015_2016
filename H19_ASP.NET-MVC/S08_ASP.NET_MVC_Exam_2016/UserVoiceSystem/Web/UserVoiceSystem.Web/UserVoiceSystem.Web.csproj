@@ -217,6 +217,7 @@
     <Compile Include="Controllers\IdeaController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
+    <Compile Include="Controllers\VotesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -246,6 +247,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Votes\VotePostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -437,6 +439,7 @@
     <Folder Include="ViewModels\Home\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Votes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

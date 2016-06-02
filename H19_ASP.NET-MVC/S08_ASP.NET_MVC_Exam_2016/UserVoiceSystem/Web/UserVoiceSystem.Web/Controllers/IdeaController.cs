@@ -27,6 +27,11 @@
         [HttpGet]
         public ActionResult Suggestions(string idAndTitle)
         {
+            if (string.IsNullOrWhiteSpace(idAndTitle))
+            {
+                throw new HttpException(404, "Idea not found !");
+            }
+
             var id = this.identifier.DecodeIdTitle(idAndTitle);
             var idea = this.ideas.GetById(idAndTitle);
             var ideaViewModel = this.Mapper.Map<IdeaDetailsViewModel>(idea);
@@ -61,18 +66,19 @@
 
                 this.ideas.Create(idea);
 
-                var allIdeas = this.ideas
-                    .GetAll(IdeasOrder.New)
+                var allIdeas = this.ideas.GetAll(IdeasOrder.New);
+
+                var totalpages = (int)Math.Ceiling(allIdeas.Count() / (decimal)GlobalConstants.IdeasPerHomePage);
+
+                var pagedIdeas = allIdeas
                     .Skip(1)
                     .Take(GlobalConstants.IdeasPerHomePage)
                     .To<IdeaGetViewModel>()
                     .ToList();
 
-                var totalpages = (int)Math.Ceiling(allIdeas.Count() / (decimal)GlobalConstants.IdeasPerHomePage);
-
                 var newViewModel = new IdeasListViewModel
                 {
-                    Ideas = allIdeas,
+                    Ideas = pagedIdeas,
                     CurrentPage = 1,
                     TotalPages = totalpages,
                     Order = (int)IdeasOrder.New,
