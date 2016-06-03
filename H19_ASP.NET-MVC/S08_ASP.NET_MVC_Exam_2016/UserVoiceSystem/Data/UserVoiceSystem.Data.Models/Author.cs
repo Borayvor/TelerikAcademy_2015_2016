@@ -2,6 +2,7 @@
 {
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using Common.Models;
 
     public class Author : BaseModel<int>
@@ -10,9 +11,8 @@
         public string UserId { get; set; }
 
         [Required]
-        [MaxLength(15)]
-        [MinLength(7)]
-        [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
+        [MaxLength(16)]
+        [Index(IsUnique = true)]
         public string Ip { get; set; }
 
         [MaxLength(500)]

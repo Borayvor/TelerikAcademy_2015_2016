@@ -25,6 +25,30 @@
             return allComments;
         }
 
+        public IQueryable<Comment> GetAllWithCodedAuthorsEmail()
+        {
+            var allComments = this.GetAll();
+
+            foreach (var comment in allComments)
+            {
+
+                string pattern = @"(\b\w{3})(\w+\b)";
+
+                var email = string.Empty;
+
+                if (!string.IsNullOrWhiteSpace(comment.AuthorEmail))
+                {
+                    email = comment.AuthorEmail;
+                }
+
+                ////var repl = "$2";
+
+                ////var text = Regex.Replace(email, pattern);
+            }
+
+            return allComments;
+        }
+
         public Comment GetById(string idTitle)
         {
             var intId = this.identifierProvider.DecodeIdTitle(idTitle);

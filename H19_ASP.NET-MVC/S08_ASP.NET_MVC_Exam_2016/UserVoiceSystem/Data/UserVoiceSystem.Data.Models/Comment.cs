@@ -11,9 +11,7 @@
         public string Content { get; set; }
 
         [Required]
-        [MaxLength(15)]
-        [MinLength(7)]
-        [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
+        [MaxLength(16)]
         public string AuthorIp { get; set; }
 
         [MaxLength(500)]

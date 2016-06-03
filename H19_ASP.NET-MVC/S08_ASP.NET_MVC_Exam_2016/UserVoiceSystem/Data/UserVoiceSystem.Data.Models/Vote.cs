@@ -6,9 +6,7 @@
     public class Vote : BaseModel<int>
     {
         [Required]
-        [MaxLength(15)]
-        [MinLength(7)]
-        [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
+        [MaxLength(16)]
         public string AuthorIp { get; set; }
 
         [Range(1, 3, ErrorMessage = "Out of range !")]

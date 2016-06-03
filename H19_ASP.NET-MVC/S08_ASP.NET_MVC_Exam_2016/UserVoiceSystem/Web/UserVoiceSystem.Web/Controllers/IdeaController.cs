@@ -52,7 +52,6 @@
             return this.PartialView();
         }
 
-        [Authorize]
         [AjaxPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IdeaPostViewModel ideaModel)
@@ -67,20 +66,26 @@
 
                     var author = this.authors.GetAll().FirstOrDefault(x => x.UserId == currentUserId);
 
-                    if (author != null)
-                    {
-                        idea.AuthorIp = author.Ip;
-                    }
-                    else
+                    idea.AuthorIp = author.Ip;
+                }
+                else
+                {
+                    var author = this.authors.GetAll().FirstOrDefault(x => x.Ip == this.Request.UserHostAddress);
+
+                    if (author == null)
                     {
                         var newAuthor = new Author
                         {
-                            Ip = this.Request.UserHostAddress
+                            Ip = this.Request.UserHostAddress,
+                            VotePoints = 10
                         };
 
                         this.authors.Create(newAuthor);
-
                         idea.AuthorIp = this.Request.UserHostAddress;
+                    }
+                    else
+                    {
+                        idea.AuthorIp = author.Ip;
                     }
                 }
 

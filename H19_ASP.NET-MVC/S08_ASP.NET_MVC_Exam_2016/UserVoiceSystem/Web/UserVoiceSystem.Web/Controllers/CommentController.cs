@@ -73,24 +73,32 @@
 
                     var author = this.authors.GetAll().FirstOrDefault(x => x.UserId == currentUserId);
 
-                    if (author != null)
-                    {
-                        comment.AuthorEmail = author.Email;
-                        comment.AuthorIp = author.Ip;
-                    }
-                    else
+                    comment.AuthorEmail = author.Email;
+                    comment.AuthorIp = author.Ip;
+                }
+                else
+                {
+                    var author = this.authors.GetAll().FirstOrDefault(x => x.Ip == this.Request.UserHostAddress);
+
+                    if (author == null)
                     {
                         var newAuthor = new Author
                         {
                             Email = commentModel.AuthorEmail,
-                            Ip = this.Request.UserHostAddress
+                            Ip = this.Request.UserHostAddress,
+                            VotePoints = 10
                         };
 
                         this.authors.Create(newAuthor);
 
-                        comment.AuthorEmail = commentModel.AuthorEmail;
                         comment.AuthorIp = this.Request.UserHostAddress;
                     }
+                    else
+                    {
+                        comment.AuthorIp = author.Ip;
+                    }
+
+                    comment.AuthorEmail = commentModel.AuthorEmail;
                 }
 
                 comment.IdeaId = commentModel.IdeaId;
