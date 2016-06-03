@@ -12,7 +12,7 @@
             <div class="idea-vote-status">
                 @using (Ajax.BeginForm(
                     "Vote",
-                    "Idea",
+                    "Votes",
                     new AjaxOptions
                     {
                         UpdateTargetId = "idea-votes-count",
@@ -27,15 +27,14 @@
                         <fieldset>
                             <legend>Vote</legend>
                             <div class="idea-vote-buttons">
-
-                                <button class="idea-vote-button-1-votes btn" name="voteValue" type="submit" value="1">1 vote</button>
-
-                                <button class="idea-vote-button-2-votes btn" name="voteValue" type="submit" value="2">2 votes</button>
-
-                                <button class="idea-vote-button-3-votes btn" name="voteValue" type="submit" value="3">3 votes</button>
-
-                                <button class="idea-vote-button-0-votes btn" name="voteValue" type="submit" value="0">Remove votes</button>
-
+                                <button class="btn" name="points" type="submit" value="1">1 vote</button>
+                                <button class="btn" name="points" type="submit" value="2">2 votes</button>
+                                <button class="btn" name="points" type="submit" value="3">3 votes</button>
+                                <button class="btn" name="points" type="submit" value="0">Remove votes</button>
+                                <div hidden="hidden">
+                                    @Html.TextBoxFor(m => m.Author.Ip, new { @Name = "AuthorIp" })
+                                    @Html.TextBoxFor(m => m.Id, new { @Name = "IdeaId" })
+                                </div>
                                 <div class="idea-vote-meta">
                                     <span class="idea-votes-remaining">
                                         You have 10 votes left !

@@ -2,11 +2,10 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using AutoMapper;
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class CommentInputViewModel : IMapFrom<Comment>, IMapTo<Comment>, IHaveCustomMappings
+    public class CommentInputViewModel : IMapFrom<Comment>, IMapTo<Comment>
     {
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
@@ -23,14 +22,5 @@
 
         [HiddenInput(DisplayValue = false)]
         public int IdeaId { get; set; }
-
-        public void CreateMappings(IMapperConfiguration configuration)
-        {
-            configuration.CreateMap<Comment, CommentInputViewModel>()
-                .ForMember(
-                m => m.AuthorEmail,
-                options => options.MapFrom(x => x.Author.Email))
-                .ReverseMap();
-        }
     }
 }

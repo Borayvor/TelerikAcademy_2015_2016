@@ -16,11 +16,13 @@
     public class CommentController : BaseController
     {
         private readonly ICommentsService comments;
+        private readonly IAuthorsService authors;
         private readonly IIdentifierProvider identifier;
 
-        public CommentController(ICommentsService comments, IIdentifierProvider identifier)
+        public CommentController(ICommentsService comments, IAuthorsService authors, IIdentifierProvider identifier)
         {
             this.comments = comments;
+            this.authors = authors;
             this.identifier = identifier;
         }
 
@@ -67,7 +69,28 @@
 
                 if (this.User.Identity.IsAuthenticated)
                 {
-                    comment.AuthorId = this.User.Identity.GetUserId();
+                    var currentUserId = this.User.Identity.GetUserId();
+
+                    var author = this.authors.GetAll().FirstOrDefault(x => x.UserId == currentUserId);
+
+                    if (author != null)
+                    {
+                        comment.AuthorEmail = author.Email;
+                        comment.AuthorIp = author.Ip;
+                    }
+                    else
+                    {
+                        var newAuthor = new Author
+                        {
+                            Email = commentModel.AuthorEmail,
+                            Ip = commentModel.AuthorIp
+                        };
+
+                        this.authors.Create(newAuthor);
+
+                        comment.AuthorEmail = commentModel.AuthorEmail;
+                        comment.AuthorIp = commentModel.AuthorIp;
+                    }
                 }
 
                 comment.IdeaId = commentModel.IdeaId;

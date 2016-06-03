@@ -1,27 +1,26 @@
 ﻿namespace UserVoiceSystem.Data.Models
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using Common.Models;
 
-    public class Comment : BaseModel<int>
+    public class Author : BaseModel<int>
     {
-        [Required]
-        [MaxLength(10000)]
-        [MinLength(5)]
-        public string Content { get; set; }
+        [MaxLength(50)]
+        public string UserId { get; set; }
 
         [Required]
         [MaxLength(15)]
         [MinLength(7)]
         [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
-        public string AuthorIp { get; set; }
+        public string Ip { get; set; }
 
         [MaxLength(500)]
         [RegularExpression(@"^(?("")("".+?(?<!\\)""@)|(([0-9A-Za-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9A-Za-z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9A-Za-z][-\w]*[0-9A-Za-z]*\.)+[A-Za-z0-9][\-a-zA-Z0-9]{0,22}[A-Za-z0-9]))$", ErrorMessage = "Invalid Email address !")]
-        public string AuthorEmail { get; set; }
+        public string Email { get; set; }
 
-        public int IdeaId { get; set; }
-
-        public virtual Idea Idea { get; set; }
+        [Range(0, 10, ErrorMessage = "Out of range !")]
+        [DefaultValue(10)]
+        public int VotePoints { get; set; }
     }
 }

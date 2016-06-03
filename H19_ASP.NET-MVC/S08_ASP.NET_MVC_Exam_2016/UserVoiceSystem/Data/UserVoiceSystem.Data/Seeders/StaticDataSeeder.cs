@@ -11,9 +11,13 @@
     internal static class StaticDataSeeder
     {
         private const string Alphabet = "abcdefghijklmnopqrstuvwxyz";
+        private const string UserIp = "127.0.100.42";
+        private const string UserNameEmail = "user1@site.com";
+        private const int AuthorsCount = 10;
 
         private static readonly Random Random = new Random();
 
+        private static List<Author> authorsList = new List<Author>();
         private static List<int> ideasId = new List<int>();
 
         internal static void SeedUsers(ApplicationDbContext context)
@@ -23,19 +27,15 @@
                 return;
             }
 
-            const string UserNameEmail = "user1@site.com";
             const string UserPassword = "user111";
-            const string UserIp = "127.0.100.42";
 
             // Create user
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
             var user = new ApplicationUser
             {
-                Ip = UserIp,
                 UserName = UserNameEmail,
-                Email = UserNameEmail,
-                VotePoints = 10
+                Email = UserNameEmail
             };
 
             userManager.Create(user, UserPassword);
@@ -45,15 +45,44 @@
 
         internal static void SeedData(ApplicationDbContext context)
         {
+            SeedAuthors(context);
             SeedIdeas(context);
-
-            foreach (var item in context.Ideas)
-            {
-                ideasId.Add(item.Id);
-            }
-
             SeedComments(context);
             SeedVotes(context);
+        }
+
+        private static void SeedAuthors(ApplicationDbContext context)
+        {
+            if (context.Authors.Any())
+            {
+                return;
+            }
+
+            var author = new Author
+            {
+                UserId = context.Users.FirstOrDefault().Id,
+                Ip = UserIp,
+                Email = UserNameEmail,
+                VotePoints = 10
+            };
+
+            authorsList.Add(author);
+            context.Authors.Add(author);
+
+            for (int i = 0; i < AuthorsCount; i++)
+            {
+                author = new Author
+                {
+                    Ip = Random.Next(0, 256) + "." + Random.Next(0, 256) + "." + Random.Next(0, 256) + "." + Random.Next(0, 256),
+                    Email = GetWord() + "@" + GetWord(false, 8) + "." + GetWord(false, 4),
+                    VotePoints = 10
+                };
+
+                authorsList.Add(author);
+                context.Authors.Add(author);
+            }
+
+            context.SaveChanges();
         }
 
         private static void SeedIdeas(ApplicationDbContext context)
@@ -67,7 +96,7 @@
             {
                 Title = "XNA 5",
                 Description = @"Please continue to work on XNA. It's a great way for indie game developers like myself to make games and give them to the world. XNA gave us the ability to put our games, easily, on the most popular platforms, and to just dump XNA would be therefor heartbreaking... I implore you to keep working on XNA so we C# developers can still make amazing games!",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea1);
@@ -80,7 +109,7 @@
 As we don't know yet the details about this indie developer program for Xbox One, we would love to use .NET on this platform - with everything accessible, from latest 4.5 with async, to unsafe code and native code access through DLLImport (and not only through WinRT components)
 
 Please make.NET a compelling game development alternative on Xbox One!",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea2);
@@ -89,7 +118,7 @@ Please make.NET a compelling game development alternative on Xbox One!",
             {
                 Title = "Support web.config style Transforms on any file in any project type",
                 Description = @"Web.config Transforms offer a great way to handle environment-specific settings. XML and other files frequently warrant similar changes when building for development (Debug), SIT, UAT, and production (Release). It is easy to create additional build configurations to support multiple environments via transforms. Unfortunately, not everything can be handled in web.config files many settings need to be changed in xml or other ""config"" files.",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea3);
@@ -108,7 +137,7 @@ However there is still a section of the .Net community that would like to see fu
 * Microsoft connect list of active Silverlight feature requests: http://connect.microsoft.com/VisualStudio/SearchResults.aspx?KeywordSearchIn=2&SearchQuery=%22silverlight%22&FeedbackType=2&Status=1&Scope=0&SortOrder=10&TabView=1 
 Rather than letting Silverlight decay in a locked up source control in the Microsoft vaults, I call on them to instead release it into the hands of the community to see what they can build with it. Microsoft may no longer have a long term vision for it, but the community itself may find ways to extend it in ways Microsoft didn’t envision. 
 Earlier this year Microsoft open sourced RIA Services on Outer Curve http://www.outercurve.org/Galleries/ASPNETOpenSourceGallery/OpenRIAServices, it would be great to see this extended to the entire Silverlight framework.",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea4);
@@ -117,7 +146,7 @@ Earlier this year Microsoft open sourced RIA Services on Outer Curve http://www.
             {
                 Title = "Make WPF open-source and accept pull-requests from the community",
                 Description = @"Please follow the footsteps of the ASP .NET team and make WPF open-source with the source code on GitHub, and accept pull-requests from the community.",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea5);
@@ -128,7 +157,7 @@ Earlier this year Microsoft open sourced RIA Services on Outer Curve http://www.
                 Description = @"in 2013 WPF still work on DX9, and this have a lot of inconvenience. First of all it is almost impossible to make interaction with native DX11 C++ and WPF. Axisting D3DImage class support only DX 9, but not higher and for now it is a lot of pain to attach DX 11 engine to WPF.
 
 Please, make nativa support for DX 11 in WOF by default and update D3DImage class to have possibility to work with nativa C++ DX 11 engine and make render directly to WPF control (controls) without pain with C++ dll.",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea6);
@@ -139,7 +168,7 @@ Please, make nativa support for DX 11 in WOF by default and update D3DImage clas
                 Description = @"Same description as here:
 
 http://visualstudio.uservoice.com/forums/121579-visual-studio/suggestions/2156195-fix-260-character-file-name-length-limitation",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea7);
@@ -148,7 +177,7 @@ http://visualstudio.uservoice.com/forums/121579-visual-studio/suggestions/215619
             {
                 Title = "Support for ES6 modules",
                 Description = @"Add support for the new JavaScript ES6 module syntax, including module definition and imports.",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea8);
@@ -206,7 +235,7 @@ When you release a new product version, ADD the new version and additional decis
 Please don't tell us why it CAN'T be done.Rather, figure out a way to do it, and then make it happen, just like every other software company out there has already done for their products. Even FREEware providers have better uninstall processes than Microsoft.This is a sad state for Microsoft and it should be rectified SOON.
 
 Thank you.",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea9);
@@ -223,7 +252,7 @@ Not to mention there's probably licensing considerations we're just ignoring by 
 http://nickberardi.com/a-net-build-server-without-visual-studio/
 
 Please make it easy (and legal) to build .NET projects on a server without requiring a Visual Studio installation (or license) on that server.",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea10);
@@ -236,7 +265,7 @@ Please make it easy (and legal) to build .NET projects on a server without requi
 MSBuild already respects this, but the IDE will always modify the project file.
 
 For numerous scenarios this could simplify the diff / merge process.",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea11);
@@ -246,7 +275,7 @@ For numerous scenarios this could simplify the diff / merge process.",
                 Title = "Resolve Airspace iusse to full integrate OpenGL inside WPF",
                 Description = @"There are many programmers and company that develop applications based on geometrical kernels that use OpenGL for drawing (like CAD/CAM applications) often they have an old MFC application, and to pass to a modern view for their applications and give a new user experience for the user they could make new WPF interfaces very quickly but they can't rewrite an entire kernel to pass from OpenGL to DirectX, so often they prefer to remain with MFC without pass to WPF. This could be a very special thing to have the possibility to use OpenGL fully supported by WPF, without airspace iusse. 
 Now it's possible the integration using HwndHost or WindowsFormsHost but it's not possible to have other WPF control over this, and it's impossible to apply effects and transitions.",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea12);
@@ -255,7 +284,7 @@ Now it's possible the integration using HwndHost or WindowsFormsHost but it's no
             {
                 Title = "Improve WPF performance",
                 Description = @"I have a high end PC and still WPF is not always fluent. Just compare it with QT 4.6 QML (Declarative UI) it is sooo FAST!",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea13);
@@ -293,7 +322,7 @@ For more information around this idea and the qualities above, a series of artic
 http://blog.developers.win/series/bridge-to-dotnet-ubiquity/
 
 Finally, this is intended to be a starting point for discussion, and not a final solution. THAT is meant for the experts there at Microsoft. :) Thank you for any support, dialogue, and feedback around this idea!",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea14);
@@ -308,12 +337,17 @@ public void ProvaDefaults([Optional, DefaultParameterValue(true)] bool value)
 but in this way the compiler don't use the DefaultParameterValue for setting the correct default value in the metadata (II.15.4.1.4 The .para m directive) that is visible in C#
 
 so in C# the deault parameter is visible but only with the system default value (in the sample reported it is false instead of the wanted true)",
-                AuthorId = context.Users.FirstOrDefault().Id
+                AuthorIp = GetRandomAuthor().Ip
             };
 
             context.Ideas.Add(idea15);
 
             context.SaveChanges();
+
+            foreach (var idea in context.Ideas)
+            {
+                ideasId.Add(idea.Id);
+            }
         }
 
         private static void SeedComments(ApplicationDbContext context)
@@ -325,7 +359,7 @@ so in C# the deault parameter is visible but only with the system default value 
 
             foreach (var ideaId in ideasId)
             {
-                var comments = AddComments(context.Users.FirstOrDefault().Id, ideaId);
+                var comments = AddComments(ideaId);
 
                 foreach (var comment in comments)
                 {
@@ -356,17 +390,20 @@ so in C# the deault parameter is visible but only with the system default value 
             }
         }
 
-        private static ICollection<Comment> AddComments(string userId, int ideaId)
+        private static ICollection<Comment> AddComments(int ideaId)
         {
             var comments = new List<Comment>();
 
             for (int i = 0; i < 10; i++)
             {
+                var author = GetRandomAuthor();
+
                 comments.Add(new Comment
                 {
                     IdeaId = ideaId,
                     Content = GetText(),
-                    AuthorId = userId
+                    AuthorIp = author.Ip,
+                    AuthorEmail = author.Email
                 });
             }
 
@@ -379,15 +416,28 @@ so in C# the deault parameter is visible but only with the system default value 
 
             for (int i = 0; i < 100; i++)
             {
+                var author = GetRandomAuthor();
+
+                var points = Random.Next(1, 4);
+
                 votes.Add(new Vote
                 {
                     IdeaId = ideaId,
-                    Points = Random.Next(1, 4),
-                    AuthorIp = Random.Next(0, 256) + "." + Random.Next(0, 256) + "." + Random.Next(0, 256) + "." + Random.Next(0, 256),
+                    Points = points,
+                    AuthorIp = author.Ip,
                 });
             }
 
             return votes;
+        }
+
+        private static Author GetRandomAuthor()
+        {
+            var randomAuthorNumber = Random.Next(0, AuthorsCount);
+
+            var author = authorsList[randomAuthorNumber];
+
+            return author;
         }
 
         private static string GetText()
@@ -427,11 +477,11 @@ so in C# the deault parameter is visible but only with the system default value 
             return sb.ToString().Trim();
         }
 
-        private static string GetWord(bool isFirst = false)
+        private static string GetWord(bool isFirst = false, int wordMaxSize = 12)
         {
             StringBuilder sb = new StringBuilder();
 
-            var wordLength = Random.Next(2, 12);
+            var wordLength = Random.Next(2, wordMaxSize + 1);
 
             for (int i = 0; i < wordLength; i++)
             {

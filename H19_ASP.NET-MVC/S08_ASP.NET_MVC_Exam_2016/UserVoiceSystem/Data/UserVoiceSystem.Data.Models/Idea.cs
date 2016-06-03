@@ -25,9 +25,11 @@
         [MinLength(2)]
         public string Description { get; set; }
 
-        public string AuthorId { get; set; }
-
-        public virtual ApplicationUser Author { get; set; }
+        [Required]
+        [MaxLength(15)]
+        [MinLength(7)]
+        [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
+        public string AuthorIp { get; set; }
 
         public virtual ICollection<Comment> Comments
         {

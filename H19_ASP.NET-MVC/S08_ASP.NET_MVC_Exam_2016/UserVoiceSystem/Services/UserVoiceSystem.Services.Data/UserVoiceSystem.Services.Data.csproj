@@ -32,6 +32,7 @@
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorsService.cs" />
     <Compile Include="CommentsService.cs" />
+    <Compile Include="Common\IAuthorsService.cs" />
     <Compile Include="Common\ICommentsService.cs" />
     <Compile Include="Common\IIdeasService.cs" />
     <Compile Include="Common\IVotesService.cs" />

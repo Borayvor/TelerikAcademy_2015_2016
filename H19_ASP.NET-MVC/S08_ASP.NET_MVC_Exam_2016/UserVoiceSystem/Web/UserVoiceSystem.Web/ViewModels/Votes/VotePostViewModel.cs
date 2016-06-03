@@ -6,10 +6,10 @@
 
     public class VotePostViewModel : IMapFrom<Vote>, IMapTo<Vote>
     {
-        [Range(1, 3, ErrorMessage = "Invalid value !")]
-        public int VoteValue { get; set; }
-
         public int IdeaId { get; set; }
+
+        [Range(1, 3, ErrorMessage = "Invalid value !")]
+        public int Points { get; set; }
 
         [Required]
         [MaxLength(15)]

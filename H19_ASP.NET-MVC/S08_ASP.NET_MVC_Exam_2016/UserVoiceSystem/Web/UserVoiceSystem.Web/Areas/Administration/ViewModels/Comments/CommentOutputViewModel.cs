@@ -25,9 +25,6 @@
         {
             configuration.CreateMap<Comment, CommentOutputViewModel>()
                 .ForMember(
-                m => m.AuthorEmail,
-                options => options.MapFrom(x => x.Author.Email))
-                .ForMember(
                 m => m.Idea,
                 opt => opt.MapFrom(x => x.Idea.Title))
                 .ReverseMap();

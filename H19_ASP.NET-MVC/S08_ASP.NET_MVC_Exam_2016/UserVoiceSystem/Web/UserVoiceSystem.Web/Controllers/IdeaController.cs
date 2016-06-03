@@ -16,11 +16,13 @@
     public class IdeaController : BaseController
     {
         private readonly IIdeasService ideas;
+        private readonly IAuthorsService authors;
         private readonly IIdentifierProvider identifier;
 
-        public IdeaController(IIdeasService ideas, IIdentifierProvider identifier)
+        public IdeaController(IIdeasService ideas, IAuthorsService authors, IIdentifierProvider identifier)
         {
             this.ideas = ideas;
+            this.authors = authors;
             this.identifier = identifier;
         }
 
@@ -61,7 +63,25 @@
 
                 if (this.User.Identity.IsAuthenticated)
                 {
-                    idea.AuthorId = this.User.Identity.GetUserId();
+                    var currentUserId = this.User.Identity.GetUserId();
+
+                    var author = this.authors.GetAll().FirstOrDefault(x => x.UserId == currentUserId);
+
+                    if (author != null)
+                    {
+                        idea.AuthorIp = author.Ip;
+                    }
+                    else
+                    {
+                        var newAuthor = new Author
+                        {
+                            Ip = ideaModel.AuthorIp
+                        };
+
+                        this.authors.Create(newAuthor);
+
+                        idea.AuthorIp = ideaModel.AuthorIp;
+                    }
                 }
 
                 this.ideas.Create(idea);

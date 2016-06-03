@@ -1,10 +1,11 @@
 ﻿namespace UserVoiceSystem.Web.Controllers
 {
-    using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
-    using Data.Models;
     using Infrastructure.Filters;
+    using Microsoft.AspNet.Identity;
     using Services.Data.Common;
+    using ViewModels.Votes;
 
     [Authorize]
     public class VotesController : BaseController
@@ -18,42 +19,18 @@
 
         [AjaxPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Vote(int voteValue, int ideaId, string authorIp)
+        public ActionResult Vote(VotePostViewModel model)
         {
-            if (voteValue < 0)
+            if (model != null && this.ModelState.IsValid)
             {
-                voteValue = 0;
+                var userId = this.User.Identity.GetUserId();
+
+
+
+                return this.Json(new { Count = 5 });
             }
 
-            if (voteValue > 3)
-            {
-                voteValue = 3;
-            }
-
-            var user = this.User;
-
-            var vote = this.votes.GetAll()
-                .FirstOrDefault(x => x.IdeaId == ideaId && x.AuthorIp == authorIp);
-
-            if (vote == null)
-            {
-                vote = new Vote
-                {
-                    IdeaId = ideaId,
-                    AuthorIp = authorIp,
-                    Points = voteValue
-                };
-            }
-            else
-            {
-                vote.Points = voteValue;
-            }
-
-            var ideaVotes = this.votes.GetAll()
-                .Where(x => x.IdeaId == ideaId)
-                .Sum(x => x.Points);
-
-            return this.Json(new { Count = ideaVotes });
+            throw new HttpException(404, "not found !");
         }
     }
 }

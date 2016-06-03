@@ -17,6 +17,8 @@
         {
         }
 
+        public IDbSet<Author> Authors { get; set; }
+
         public IDbSet<Idea> Ideas { get; set; }
 
         public IDbSet<Comment> Comments { get; set; }

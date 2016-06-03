@@ -24,5 +24,16 @@
         [MaxLength(10000)]
         [MinLength(5)]
         public string Content { get; set; }
+
+        [Required]
+        [MaxLength(15)]
+        [MinLength(7)]
+        [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
+        public string AuthorIp { get; set; }
+
+        [Required]
+        [MaxLength(500)]
+        [RegularExpression(@"^(?("")("".+?(?<!\\)""@)|(([0-9A-Za-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9A-Za-z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9A-Za-z][-\w]*[0-9A-Za-z]*\.)+[A-Za-z0-9][\-a-zA-Z0-9]{0,22}[A-Za-z0-9]))$", ErrorMessage = "Invalid Email address !")]
+        public string AuthorEmail { get; set; }
     }
 }

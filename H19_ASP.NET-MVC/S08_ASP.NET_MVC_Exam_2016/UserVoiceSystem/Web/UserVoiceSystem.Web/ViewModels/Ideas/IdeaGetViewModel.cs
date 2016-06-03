@@ -19,7 +19,7 @@
         public string Description { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public ApplicationUser Author { get; set; }
+        public Author Author { get; set; }
 
         public int VotesCount { get; set; }
 
