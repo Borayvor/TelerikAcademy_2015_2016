@@ -10,11 +10,5 @@
 
         [Range(1, 3, ErrorMessage = "Invalid value !")]
         public int Points { get; set; }
-
-        [Required]
-        [MaxLength(15)]
-        [MinLength(7)]
-        [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ErrorMessage = "Invalid IP address !")]
-        public string AuthorIp { get; set; }
     }
 }
