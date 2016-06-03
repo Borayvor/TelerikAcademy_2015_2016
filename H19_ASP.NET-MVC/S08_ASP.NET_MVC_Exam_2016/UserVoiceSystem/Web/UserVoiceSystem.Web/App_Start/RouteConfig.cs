@@ -12,7 +12,7 @@
             routes.MapRoute(
                 name: "IdeaDetails",
                 url: "suggestions/{idAndTitle}",
-                defaults: new { controller = "Idea", action = "Suggestions", idAndTitle = UrlParameter.Optional });
+                defaults: new { controller = "Idea", action = "Suggestions" });
 
             routes.MapRoute(
                 name: "Default",

@@ -83,13 +83,13 @@
                         var newAuthor = new Author
                         {
                             Email = commentModel.AuthorEmail,
-                            Ip = commentModel.AuthorIp
+                            Ip = this.Request.UserHostAddress
                         };
 
                         this.authors.Create(newAuthor);
 
                         comment.AuthorEmail = commentModel.AuthorEmail;
-                        comment.AuthorIp = commentModel.AuthorIp;
+                        comment.AuthorIp = this.Request.UserHostAddress;
                     }
                 }
 

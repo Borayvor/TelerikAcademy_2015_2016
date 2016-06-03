@@ -75,12 +75,12 @@
                     {
                         var newAuthor = new Author
                         {
-                            Ip = ideaModel.AuthorIp
+                            Ip = this.Request.UserHostAddress
                         };
 
                         this.authors.Create(newAuthor);
 
-                        idea.AuthorIp = ideaModel.AuthorIp;
+                        idea.AuthorIp = this.Request.UserHostAddress;
                     }
                 }
 
