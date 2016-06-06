@@ -9,6 +9,8 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
+    using Recaptcha.Web;
+    using Recaptcha.Web.Mvc;
     using ViewModels.Account;
 
     [Authorize]
@@ -171,6 +173,21 @@
         {
             if (this.ModelState.IsValid)
             {
+                RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
+
+                if (string.IsNullOrEmpty(recaptchaHelper.Response))
+                {
+                    this.ModelState.AddModelError(string.Empty, "Captcha answer cannot be empty.");
+                    return this.View(model);
+                }
+
+                RecaptchaVerificationResult recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
+
+                if (recaptchaResult != RecaptchaVerificationResult.Success)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Incorrect captcha answer.");
+                }
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await this.UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
