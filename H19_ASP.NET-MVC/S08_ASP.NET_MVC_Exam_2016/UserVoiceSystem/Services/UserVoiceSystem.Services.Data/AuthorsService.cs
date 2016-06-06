@@ -24,8 +24,7 @@
 
         public Author GetById(string id)
         {
-            var intId = this.identifierProvider.DecodeId(id);
-            var author = this.authors.GetById(intId);
+            var author = this.authors.GetById(id);
 
             return author;
         }

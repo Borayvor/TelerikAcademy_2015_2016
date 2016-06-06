@@ -16,6 +16,12 @@
             return int.Parse(bytesAsString);
         }
 
+        public string EncodeId(int id)
+        {
+            var plainTextBytes = Encoding.UTF8.GetBytes(id + Salt);
+            return Convert.ToBase64String(plainTextBytes);
+        }
+
         public int DecodeIdTitle(string urlIdTitle)
         {
             var urlArray = urlIdTitle.Split('-');
@@ -25,12 +31,6 @@
             int.TryParse(urlArray[0], out id);
 
             return id;
-        }
-
-        public string EncodeId(int id)
-        {
-            var plainTextBytes = Encoding.UTF8.GetBytes(id + Salt);
-            return Convert.ToBase64String(plainTextBytes);
         }
 
         public string EncodeIdTitle(int id, string title)
