@@ -23,8 +23,6 @@
         [HttpGet]
         public ActionResult Index(int order = 0, int page = 1, string search = "")
         {
-            var usersList = this.users.GetAll().ToList();
-
             var newViewModel = this.GetIdeas(order, page, search);
 
             return this.View(newViewModel);
