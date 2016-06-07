@@ -31,21 +31,34 @@
             {
                 var userId = this.User.Identity.GetUserId();
 
-                var author = this.authors.GetAll().FirstOrDefault(x => x.UserId == userId);
+                var author = this.authors.GetAll()
+                    .FirstOrDefault(x => x.UserId == userId);
 
                 if ((author.VotePoints - model.Points) > 0)
                 {
                     author.VotePoints -= model.Points;
                     this.authors.Update(author);
 
-                    var vote = new Vote
-                    {
-                        AuthorIp = author.Ip,
-                        IdeaId = model.IdeaId,
-                        Points = model.Points
-                    };
+                    var vote = this.votes.GetAll()
+                        .FirstOrDefault(x => x.IdeaId == model.IdeaId && x.AuthorIp == author.Ip);
 
-                    this.votes.Create(vote);
+                    if (vote == null)
+                    {
+                        vote = new Vote
+                        {
+                            AuthorIp = author.Ip,
+                            IdeaId = model.IdeaId,
+                            Points = model.Points
+                        };
+
+                        this.votes.Create(vote);
+                    }
+                    else
+                    {
+                        vote.Points = model.Points;
+
+                        this.votes.Update(vote);
+                    }
                 }
 
                 var newIdeaVotes = this.votes

@@ -12,12 +12,10 @@
     public class HomeController : BaseController
     {
         private readonly IIdeasService ideas;
-        private readonly IUsersService users;
 
-        public HomeController(IIdeasService ideas, IUsersService users)
+        public HomeController(IIdeasService ideas)
         {
             this.ideas = ideas;
-            this.users = users;
         }
 
         [HttpGet]

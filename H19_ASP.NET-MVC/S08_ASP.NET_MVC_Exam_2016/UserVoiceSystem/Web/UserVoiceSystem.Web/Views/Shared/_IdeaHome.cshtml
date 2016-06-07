@@ -3,8 +3,8 @@
 
 <div class="idea-form-display">
     <div class="idea-vote-badge col-sm-1 col-xs-1">
-        <div id="idea-votes-count">
-            <strong>@Model.VotesCount</strong>
+        <div>
+            <strong id="idea-votes-count">@Model.VotesCount</strong>
             <span>votes</span>
         </div>
         @if (User.Identity.IsAuthenticated)

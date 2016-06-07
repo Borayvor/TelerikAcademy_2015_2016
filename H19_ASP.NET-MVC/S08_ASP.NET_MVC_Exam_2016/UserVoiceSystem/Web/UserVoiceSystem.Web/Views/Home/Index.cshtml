@@ -67,10 +67,11 @@
         })
 
         $(".idea-vote-form-close").click(function () {
+            var $btn = $(this);
             
-            $(".idea-vote-form-triger").show();
-
-            $(".idea-vote-form-toggle").hide();
+            $btn.parent().parent().children(".idea-vote-form-triger").show();
+            
+            $btn.parent().hide();
         })
     </script>
 }

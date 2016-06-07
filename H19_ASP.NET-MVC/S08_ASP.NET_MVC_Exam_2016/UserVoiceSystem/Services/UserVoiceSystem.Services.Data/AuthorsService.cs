@@ -22,7 +22,7 @@
             return this.authors.All();
         }
 
-        public Author GetById(string id)
+        public Author GetById(int id)
         {
             var author = this.authors.GetById(id);
 

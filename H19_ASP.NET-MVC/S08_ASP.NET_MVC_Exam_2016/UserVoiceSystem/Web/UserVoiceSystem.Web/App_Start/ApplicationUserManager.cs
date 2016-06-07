@@ -28,6 +28,8 @@
                 RequireUniqueEmail = true
             };
 
+            manager.PasswordValidator = new MinimumLengthValidator(5);
+
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {

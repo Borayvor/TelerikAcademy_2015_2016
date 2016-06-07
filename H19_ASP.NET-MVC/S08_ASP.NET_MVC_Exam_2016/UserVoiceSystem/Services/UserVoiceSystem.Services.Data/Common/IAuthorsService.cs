@@ -7,7 +7,7 @@
     {
         IQueryable<Author> GetAll();
 
-        Author GetById(string id);
+        Author GetById(int id);
 
         void Create(Author author);
 

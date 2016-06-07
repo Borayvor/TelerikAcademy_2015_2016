@@ -26,7 +26,7 @@
                 return;
             }
 
-            const string UserPassword = "user111";
+            const string UserPassword = "user1";
 
             var passwordHash = new PasswordHasher();
             string password = passwordHash.HashPassword(UserPassword);
@@ -36,6 +36,7 @@
                 UserName = UserNameEmail,
                 Email = UserNameEmail,
                 PasswordHash = password,
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             context.Users.Add(user);
