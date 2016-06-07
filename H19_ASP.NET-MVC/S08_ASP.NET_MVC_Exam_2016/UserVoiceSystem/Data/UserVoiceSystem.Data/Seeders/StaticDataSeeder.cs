@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
 
     internal static class StaticDataSeeder
@@ -28,18 +29,17 @@
 
             const string UserPassword = "user1";
 
-            var passwordHash = new PasswordHasher();
-            string password = passwordHash.HashPassword(UserPassword);
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+            userManager.PasswordValidator = new MinimumLengthValidator(5);
 
             var user = new ApplicationUser
             {
                 UserName = UserNameEmail,
-                Email = UserNameEmail,
-                PasswordHash = password,
-                SecurityStamp = Guid.NewGuid().ToString()
+                Email = UserNameEmail
             };
 
-            context.Users.Add(user);
+            userManager.Create(user, UserPassword);
             context.SaveChanges();
         }
 

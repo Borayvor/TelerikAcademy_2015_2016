@@ -11,6 +11,7 @@
     using Microsoft.Owin.Security;
     using Recaptcha.Web;
     using Recaptcha.Web.Mvc;
+    using Services.Data.Common;
     using ViewModels.Account;
 
     [Authorize]
@@ -18,6 +19,8 @@
     {
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
+
+        private readonly IUsersService users;
 
         private readonly Random randomGenerator = new Random();
 
@@ -29,10 +32,11 @@
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUsersService users)
         {
             this.UserManager = userManager;
             this.SignInManager = signInManager;
+            this.users = users;
         }
 
         public ApplicationSignInManager SignInManager

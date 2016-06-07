@@ -1,10 +1,11 @@
 ﻿@using UserVoiceSystem.Web.ViewModels.Ideas
+
 @model IdeaGetViewModel
 
 <div class="idea-form-display">
     <div class="idea-vote-badge col-sm-1 col-xs-1">
-        <div>
-            <strong id="idea-votes-count">@Model.VotesCount</strong>
+        <div id="idea-votes-count">
+            <strong>@Model.VotesCount</strong>
             <span>votes</span>
         </div>
         @if (User.Identity.IsAuthenticated)
