@@ -18,3 +18,14 @@ function onButtonClick() {
         answer.style.backgroundColor = "red";
     }
 }
+
+function solve(args) {
+    var number = parseInt(args);
+
+    if (number % 35 === 0) {
+        console.log('true ' + number);
+    }
+    else {
+        console.log('false ' + number);
+    }
+}

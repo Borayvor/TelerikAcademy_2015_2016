@@ -24,3 +24,22 @@ function onButtonClick() {
         answer.innerHTML = number + " is composite number.";
     }
 }
+
+function solve(args) {
+    var number = parseFloat(args);
+
+    function isPrime(num) {
+        if (num < 2) return false;
+
+        if (num % 2 == 0) return false;
+
+        for (var i = 3; i * i <= num; i += 2) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    console.log(isPrime(number));
+}
