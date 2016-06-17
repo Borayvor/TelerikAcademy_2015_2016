@@ -28,3 +28,26 @@ function onButtonClickNameOfDigit() {
         }
     }
 }
+
+function solve(args) {
+    var number = parseFloat(args);
+    var numberAsString = '';
+
+   switch (number) {
+        case 0: numberAsString = "zero"; break;
+        case 1: numberAsString = "one"; break;
+        case 2: numberAsString = "two"; break;
+        case 3: numberAsString = "three"; break;
+        case 4: numberAsString = "four"; break;
+        case 5: numberAsString = "five"; break;
+        case 6: numberAsString = "six"; break;
+        case 7: numberAsString = "seven"; break;
+        case 8: numberAsString = "eight"; break;
+        case 9: numberAsString = "nine"; break;
+        default: {
+            numberAsString = "not a digit"; break;
+        }
+    }
+
+    console.log(numberAsString);    
+}

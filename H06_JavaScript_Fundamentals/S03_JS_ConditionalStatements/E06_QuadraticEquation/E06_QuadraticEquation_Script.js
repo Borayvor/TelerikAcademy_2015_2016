@@ -29,3 +29,30 @@ function onButtonClickQuadraticEquation() {
         answer.innerHTML += "There are  no real roots.";
     }
 }
+
+function solve(args) {
+    var a = parseFloat(args[0]);
+    var b = parseFloat(args[1]);
+    var c = parseFloat(args[2]);
+
+var D = (b * b) - (4 * a * c);
+
+    if (D >= 0) {
+        var x1 = (-b - Math.sqrt(D)) / (2 * a);
+
+        var x2 = (-b + Math.sqrt(D)) / (2 * a);
+
+        var x1String = "x1=" + x1.toFixed(2);
+        var x2string = "x2=" + x2.toFixed(2);
+
+        if (x1 === x2) {
+            console.log("x1=" + x2string);
+        }
+        else {
+            console.log(x1String + '; ' + x2string);
+        }        
+    }
+    else {
+        console.log("no real roots");
+    }
+}

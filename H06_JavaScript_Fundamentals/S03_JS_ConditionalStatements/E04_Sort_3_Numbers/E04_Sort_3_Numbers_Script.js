@@ -46,3 +46,42 @@ function onButtonClickSortDescending() {
     answer.innerHTML += "<br />";
     answer.innerHTML += "Thrid variable : " + thirdNumber;
 }
+
+function solve(args) {
+    var firstNumber = parseFloat(args[0]);
+    var secondNumber = parseFloat(args[1]);
+    var thirdNumber = parseFloat(args[2]);
+
+   if (firstNumber < secondNumber) {
+        var variable = firstNumber;
+        firstNumber = secondNumber;
+        secondNumber = variable;
+
+        if (secondNumber < thirdNumber) {
+            variable = secondNumber;
+            secondNumber = thirdNumber;
+            thirdNumber = variable;
+
+            if (firstNumber < secondNumber) {
+                variable = firstNumber;
+                firstNumber = secondNumber;
+                secondNumber = variable;
+            }
+        }
+    }
+    else {
+        if (secondNumber < thirdNumber) {
+            var variable = secondNumber;
+            secondNumber = thirdNumber;
+            thirdNumber = variable;
+
+            if (firstNumber < secondNumber) {
+                variable = firstNumber;
+                firstNumber = secondNumber;
+                secondNumber = variable;
+            }
+        }
+    }
+
+    console.log(firstNumber + ' ' + secondNumber + ' ' + thirdNumber);    
+}
