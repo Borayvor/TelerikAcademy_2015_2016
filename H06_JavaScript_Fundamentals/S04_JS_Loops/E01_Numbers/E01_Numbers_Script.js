@@ -16,3 +16,19 @@ function onButtonClickGetN() {
         answer.innerHTML += "\"N\" must be larger than 0 !";
     }
 }
+
+function solve(args) {
+    var number = parseInt(args);
+    var result = '';    
+
+    for (var index = 1; index <= number; index++) {
+        if (index === number){
+            result += index;
+            break;
+        }
+        
+        result += index + " ";
+    }
+
+    console.log(result);
+}
