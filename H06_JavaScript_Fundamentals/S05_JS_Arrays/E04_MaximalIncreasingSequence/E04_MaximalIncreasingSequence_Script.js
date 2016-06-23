@@ -28,7 +28,7 @@ function onButtonClickPrintAnswer() {
             count = size;
             sequence = [];
 
-            for (var index = value, seqIndex = 0; index < (value + count) ; index++, seqIndex++) {
+            for (var index = value, seqIndex = 0; index < (value + count); index++ , seqIndex++) {
                 sequence[seqIndex] = array[index];
             }
         }
@@ -42,4 +42,35 @@ function onButtonClickPrintAnswer() {
     }
 
     answer.innerHTML += "- is the maximal increasing sequence in the array.";
+}
+
+function solve(args) {
+    var array = args[0].split('\n').map(function(num){
+        return parseInt(num, 10);
+    });
+    var arrLength = array.shift();
+    
+    var countIncreasingMembers = 0;
+    var sequenceMaxLength = 0;    
+    var index = 0;
+
+    for (index = 1; index < arrLength; index += 1) {
+        if (array[index] > array[index - 1]) {
+            countIncreasingMembers++;
+
+            if (sequenceMaxLength < countIncreasingMembers) {
+                sequenceMaxLength = countIncreasingMembers;                
+            }
+        }
+        else {            
+            countIncreasingMembers = 0;
+        }
+    }
+
+    if (sequenceMaxLength !== 0){
+        console.log(sequenceMaxLength + 1);
+    }    
+    else {
+        console.log(sequenceMaxLength);
+    }
 }

@@ -44,3 +44,39 @@ function onButtonClickPrintAnswer() {
         answer.innerHTML += "Searched value is on position: " + position;
     }
 }
+
+function solve(args) {
+    var array = args[0].split('\n').map(function (num) {
+        return parseInt(num);
+    });
+    var arrLength = parseInt(array.shift());
+    var element = parseInt(array.pop());
+
+    function binarySearch(array, value, left, right) {
+        var middle = 0;
+
+        if (left > right) // Когато са обходени елементите на масива и търсения елемент не е намерен.
+        {                 //  В този случай може да заключим, че търсеният елемент го няма в масива.
+            return -1;
+        }
+
+        middle = Math.floor((left + right) / 2);
+
+        if (array[middle] === value) // Взима средния елемент на масива.
+        {                            // Ако средният елемент е търсената стойност, алгоритъма завършва.
+            return middle;
+        }
+        else if (array[middle] > value) // Търсената стойност е по-малка от средният елемент. 
+        {                               // В този случай стъпка 1 се повтаря с частта от масива преди средният елемент.
+            return binarySearch(array, value, left, middle - 1);
+        }
+        else // Търсената стойност е по-голяма от средният елемент. 
+        {    // В този случай стъпка 1 се повтаря с частта от масива след средният елемент.
+            return binarySearch(array, value, middle + 1, right);
+        }
+    }
+
+    var position = binarySearch(array, element, 0, arrLength - 1);
+
+    console.log(position);
+}

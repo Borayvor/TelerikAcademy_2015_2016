@@ -15,3 +15,13 @@ function onButtonClickPrintArray() {
         answer.innerHTML += "<br />";
     }
 }
+
+function solve(args) {
+    var array = new Array(parseInt(args));
+    var length = array.length;
+
+    for (var index = 0; index < length; index += 1) {
+        array[index] = index * 5;
+        console.log(array[index]);
+    }
+}

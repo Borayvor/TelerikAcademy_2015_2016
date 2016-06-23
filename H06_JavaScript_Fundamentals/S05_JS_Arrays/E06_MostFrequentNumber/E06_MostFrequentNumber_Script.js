@@ -30,9 +30,37 @@ function onButtonClickPrintAnswer() {
             mostFreqIndex = 0;
         }
     }
-    
+
     for (var index = 0; index < mostFrequent.length; index++) {
         answer.innerHTML += "<br />";
-        answer.innerHTML += mostFrequent[index] + " - " + count + " times";        
+        answer.innerHTML += mostFrequent[index] + " - " + count + " times";
     }
+}
+
+function solve(args) {
+    var array = args[0].split('\n');
+    var arrLength = parseInt(array.shift());
+
+    var index = 0;
+    var mostFrequent = 0;
+    var count = 0;    
+    var tempCount = 0;
+    var position = 0;
+
+    for (index = 0; index < arrLength - 1; index += 1) {
+        tempCount = 0;
+
+        for (position = index; position < arrLength; position += 1) {
+            if (array[index] === array[position]) {
+                tempCount += 1;
+            }
+        }
+
+        if (count <= tempCount) {
+            mostFrequent = array[index];            
+            count = tempCount;
+        }
+    }
+
+    console.log(mostFrequent + " (" + count + " times)");
 }
