@@ -1,6 +1,6 @@
 ﻿var task = document.getElementById('task');
 task.innerHTML = "6. Write a function that checks if the element at given " +
-    "position in given array of integers is bigger than its two " + 
+    "position in given array of integers is bigger than its two " +
     "neighbours (when such exist).";
 
 var answer = document.getElementById("answer");
@@ -25,9 +25,9 @@ function checkElement(array, position) {
         var rightSign = "";
 
         if (array[position] > neighborLeft && array[position] > neighborRight) {
-            answer.innerHTML += "The element at position " + position + 
+            answer.innerHTML += "The element at position " + position +
                 " is bigger than its two neighbors:  ";
-            answer.innerHTML += neighborLeft + " < " + array[position] + 
+            answer.innerHTML += neighborLeft + " < " + array[position] +
                 " > " + neighborRight;
         }
         else {
@@ -54,7 +54,39 @@ function onButtonClickPrintResult() {
         answer.innerHTML += "<br />";
     }
     else {
-        answer.innerHTML += "The value of position must be in the range [0.." + 
+        answer.innerHTML += "The value of position must be in the range [0.." +
             (array.length - 1) + "] !";
     }
+}
+
+function solve(args) {
+    var arr = args[0].split('\n');
+    var arrLength = parseInt(arr.shift());
+    var count = 0;
+
+    arr = arr[0].split(" ").map(function (num) {
+        return parseInt(num);
+    });
+
+    function checkElement(array, len, position) {
+        var neighborLeft = 0;
+        var neighborRight = 0;
+        var count = 0;
+
+        neighborLeft = array[position - 1];
+        neighborRight = array[position + 1];
+
+        if (array[position] > neighborLeft && array[position] > neighborRight) {
+            count = 1;
+        }
+
+        return count;
+    }
+
+    for (var i = 0; i < arrLength; i += 1) {
+
+        count += checkElement(arr, arrLength, i)
+    }
+
+    return count;
 }

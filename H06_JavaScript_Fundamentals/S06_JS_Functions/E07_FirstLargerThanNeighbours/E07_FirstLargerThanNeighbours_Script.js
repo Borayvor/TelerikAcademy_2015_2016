@@ -44,3 +44,39 @@ function onButtonClickPrintResult() {
     answer.innerHTML += "Position : " + checkElement(array);
     answer.innerHTML += "<br />";
 }
+
+
+function solve(args) {
+    var arr = args[0].split('\n');
+    var arrLength = parseInt(arr.shift());
+    var index = 0;
+
+    arr = arr[0].split(" ").map(function (num) {
+        return parseInt(num);
+    });
+
+    function checkElement(array, len, position) {
+        var neighborLeft = 0;
+        var neighborRight = 0;        
+
+        neighborLeft = array[position - 1];
+        neighborRight = array[position + 1];
+
+        if (array[position] > neighborLeft && array[position] > neighborRight) {
+            return position;
+        }
+
+        return -1;
+    }
+
+    for (var i = 0; i < arrLength; i += 1) {
+
+        index = checkElement(arr, arrLength, i);
+
+        if (index > -1){
+            return index;
+        }
+    }
+
+    return index;
+}
