@@ -30,3 +30,23 @@ function onButtonClickPrintResult() {
     answer.innerHTML += '<br />';
     answer.innerHTML += "Resource : " + urlInJsonObject.resource;
 }
+
+//// ============================================================= ////
+
+function solve(args) {
+    var url = args[0];
+    var protokol = url.substring(0, url.indexOf("://"));
+    var server = url.substring(url.indexOf("://") + 3,
+        url.indexOf("/", url.indexOf("://") + 3));
+    var resource = url.substr(url.indexOf("/", url.indexOf("://") + 3));
+
+    var urlInJsonObject = {
+        "protokol": protokol,
+        "server": server,
+        "resource": resource
+    };
+
+    console.log("protocol: " + urlInJsonObject.protokol);
+    console.log("server: " + urlInJsonObject.server);
+    console.log("resource: " + urlInJsonObject.resource);
+}
