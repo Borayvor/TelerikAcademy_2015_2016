@@ -47,52 +47,30 @@
 
 function solve(args) {
     var options = JSON.parse(args[0]);
-    var inputStr = args[1];
+    var inputStr = args[1].replace(/'/, '"');
 
     String.prototype.bind = function (parameters) {
-        var regExContent,
-            regExAttrs = [],
-            prop,
-            result = this,
-            contentBefore = result.split('>')[0],
-            testRegEx = new RegExp('.*?data-bind-(.*?)=.*?', 'gi'),
-            dataBinds = contentBefore.split('<')[1].split(' '),
-            tempContent = '';
+        var result = this;
+        var currentMatch;
+        
+        regExAttr = new RegExp('data-bind-(.*?)="(.*?)"', 'gmi');
 
-        dataBinds.shift();
+        while (currentMatch = regExAttr.exec(result)) {
+            var arr;
+            var index = result.indexOf('>');
 
-        var matches, dataBindNames = [];
-        while (matches = testRegEx.exec(contentBefore)) {
-            dataBindNames.push(matches[1]);
-        }
+            if (result[index - 1] === '/') {
+                index--;
+            }
 
-        for (prop in parameters) {
-            regExContent = new RegExp('(<.*?data-bind-content="' + prop + '".*?>)(.*?)(</.*?>)', 'g');
-
-            result = result
-                .replace(regExContent, function (none, opening, content, closing) {
-                    content = parameters[prop];
-                    var res = opening + content + closing;
-                    return res;
-                });
-
-            for (var i = 0; i < dataBindNames.length; i += 1) {
-                regExAttrs[i] = new RegExp('(<.*?(data-bind-' + dataBindNames[i] + '="' + prop + '").*?)>', 'g');
-
-                result = result
-                    .replace(regExAttrs[i], function (none, test, currentDataBind) {
-                        var res = none;
-
-                        for (var j =  0; j < dataBinds.length; j += 1) {
-                            if (dataBinds[j] === currentDataBind &&
-                                dataBinds[j] !== 'data-bind-content="name"') {
-                                contentBefore += ' ' + dataBindNames[i] + '="' + parameters[prop] + '"';
-                                res = contentBefore + '>';
-                            }
-                        }
-
-                        return res;
-                    });
+            if (currentMatch[1] !== 'content') {
+                arr = result.split('');
+                arr.splice(index, 0, " " + currentMatch[1] + '="' + parameters[currentMatch[2]] + '"');
+                result = arr.join('');
+            } else {
+                arr = result.split('');
+                arr.splice(index + 1, 0, parameters[currentMatch[2]]);
+                result = arr.join('');
             }
         }
 
