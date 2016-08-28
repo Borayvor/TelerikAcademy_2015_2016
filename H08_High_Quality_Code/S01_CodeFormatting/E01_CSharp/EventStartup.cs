@@ -2,7 +2,7 @@ namespace E01_CSharp
 {
     using System;
 
-    public class EventsMainProgram
+    public class EventStartup
     {
         private static EventHolder events = new EventHolder();
 
@@ -10,7 +10,7 @@ namespace E01_CSharp
         {
             while (ExecuteNextCommand())
             {
-                Console.WriteLine(Messages.Output);
+                Console.WriteLine(EventMessages.Output);
             }
         }
 

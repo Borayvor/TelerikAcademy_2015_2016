@@ -2,7 +2,7 @@
 {
     using System.Text;
 
-    public static class Messages
+    public static class EventMessages
     {
         private static StringBuilder output = new StringBuilder();
 
