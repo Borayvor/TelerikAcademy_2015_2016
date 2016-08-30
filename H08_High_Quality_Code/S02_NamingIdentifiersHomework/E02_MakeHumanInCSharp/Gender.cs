@@ -1,4 +1,4 @@
-﻿namespace E02_Task_2_Make_ЧуекInCSharp
+﻿namespace E02_MakeHumanInCSharp
 {
     public enum Gender
     {

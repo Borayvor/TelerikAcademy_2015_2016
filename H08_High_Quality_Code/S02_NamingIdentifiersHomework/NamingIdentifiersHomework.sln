@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E03_ClickON_TheButtonInJavaScript", "E03_ClickON_TheButtonInJavaScript\E03_ClickON_TheButtonInJavaScript.csproj", "{D92C2481-CF19-4868-A3B2-210A8DA955B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E01_class_123inCSharp", "E01_class_123inCSharp\E01_class_123inCSharp.csproj", "{9263B290-E8F9-4CF5-8357-BB7EEB86AA54}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E02_Make_ЧуекInCSharp", "E02_Make_ЧуекInCSharp\E02_Make_ЧуекInCSharp.csproj", "{F2365CDB-E9E6-4784-B595-3569FBA6734D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E01_Class_123inCSharp", "E01_class_123inCSharp\E01_Class_123inCSharp.csproj", "{9263B290-E8F9-4CF5-8357-BB7EEB86AA54}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E04_Re_factorAndImproveTheCode", "E04_Re_factorAndImproveTheCode\E04_Re_factorAndImproveTheCode.csproj", "{75552C34-8592-42FB-B85B-DA3CA73B0D95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E02_MakeHumanInCSharp", "E02_MakeHumanInCSharp\E02_MakeHumanInCSharp.csproj", "{F2365CDB-E9E6-4784-B595-3569FBA6734D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{9263B290-E8F9-4CF5-8357-BB7EEB86AA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9263B290-E8F9-4CF5-8357-BB7EEB86AA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9263B290-E8F9-4CF5-8357-BB7EEB86AA54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2365CDB-E9E6-4784-B595-3569FBA6734D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2365CDB-E9E6-4784-B595-3569FBA6734D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2365CDB-E9E6-4784-B595-3569FBA6734D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2365CDB-E9E6-4784-B595-3569FBA6734D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75552C34-8592-42FB-B85B-DA3CA73B0D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75552C34-8592-42FB-B85B-DA3CA73B0D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75552C34-8592-42FB-B85B-DA3CA73B0D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75552C34-8592-42FB-B85B-DA3CA73B0D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2365CDB-E9E6-4784-B595-3569FBA6734D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2365CDB-E9E6-4784-B595-3569FBA6734D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2365CDB-E9E6-4784-B595-3569FBA6734D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2365CDB-E9E6-4784-B595-3569FBA6734D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
