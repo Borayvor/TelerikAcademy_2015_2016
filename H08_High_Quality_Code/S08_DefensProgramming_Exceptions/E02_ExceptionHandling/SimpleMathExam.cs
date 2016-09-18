@@ -58,7 +58,5 @@ public class SimpleMathExam : Exam
         {
             throw new ArgumentException("Invalid number of problems solved!");
         }
-
-        //return new ExamResult(0, 0, 1, "Invalid number of problems solved!");
     }
 }
