@@ -26,8 +26,8 @@ var data = (function () {
     });
   }
 
-  function threadById(id) {   
-     return new Promise((resolve, reject) => {
+  function threadById(id) {
+    return new Promise((resolve, reject) => {
       $.getJSON(`api/threads/${id}`)
         .done(resolve)
         .fail(reject);
@@ -41,8 +41,8 @@ var data = (function () {
       var body = {
         title,
         user
-      };      
-      
+      };
+
       $.ajax({
         url: 'api/threads',
         method: 'POST',
@@ -51,15 +51,13 @@ var data = (function () {
           'x-authkey': localStorage.getItem(USERNAME_STORAGE_KEY)
         },
         contentType: 'application/json',
-        success: function (res) {
-          resolve(res);
-        }
-      });
+      }).done(data => resolve(data))
+        .fail(err => reject(err));
     });
   }
 
   function threadsAddMessage(threadId, content) {
-    return new Promise(function (resolve, reject) { 
+    return new Promise(function (resolve, reject) {
       var user = localStorage.getItem(USERNAME_STORAGE_KEY);
 
       var body = {
@@ -75,10 +73,8 @@ var data = (function () {
         headers: {
           'x-authkey': localStorage.getItem(USERNAME_STORAGE_KEY)
         },
-        success: function(res) {
-          resolve(res);
-        }
-      });
+      }).done(data => resolve(data))
+        .fail(err => reject(err));
     });
   }
   // end threads

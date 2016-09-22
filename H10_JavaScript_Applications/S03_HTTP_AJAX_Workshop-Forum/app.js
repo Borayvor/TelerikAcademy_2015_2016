@@ -75,7 +75,7 @@ app.post('/api/threads', function(req, res) {
   var thread = req.body;
 
   //console.log(req);
-  //thread.user = { username: req.body.username };
+  // thread.user = { username: req.body.username };
 
   db.threads.create(thread)
     .then(function(thread) {

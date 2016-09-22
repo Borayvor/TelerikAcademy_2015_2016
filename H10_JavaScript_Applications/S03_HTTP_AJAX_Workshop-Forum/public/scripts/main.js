@@ -37,24 +37,13 @@
     let container = $($('#threads-container-template').text()),
       threadsContainer = container.find('#threads');
 
-    function getThreadUI(title, id, creator, date) {
-      date = _formatDate(date);
-
-      let template = $($('#thread-template').text()).attr('data-id', id),
-        threadTitle = template.find('.thread-title').text(title),
-        threadCreator = template.find('.thread-creator').text(creator || 'anonymous'),
-        threadDate = template.find('.thread-date').text(date || 'unknown');
-
-      return template.clone(true);
-    }
-
     function getAddNewThreadUI() {
       let template = $($('#thread-new-template').html());
       return template.clone(true);
     }
 
     threads.forEach((th) => {
-      let currentThreadUI = getThreadUI(th.title, th.id, th.user, th.postDate);
+      let currentThreadUI = _getThreadUI(th.title, th.id, th.user, th.postDate);
       threadsContainer.append(currentThreadUI);
     });
 
@@ -69,16 +58,6 @@
       messagesContainer = container.find('.panel-body');
     container.attr('data-thread-id', data.result.id);
 
-    function getMsgUI(msg, author, date) {
-      date = _formatDate(date);
-
-      let template = $($('#messages-template').text());
-      template.find('.message-content').text(msg);
-      template.find('.message-creator').text(author || 'anonymous');
-      template.find('.message-date').text(date || 'unknown');
-      return template.clone(true);
-    }
-
     function getAddNewMsgUI() {
       let template = $($('#message-new-template').html());
       return template.clone(true);
@@ -86,10 +65,10 @@
 
     if (data.result.messages && data.result.messages.length > 0) {
       data.result.messages.forEach((msg) => {
-        messagesContainer.append(getMsgUI(msg.content, msg.user, msg.postDate));
+        messagesContainer.append(_getMsgUI(msg.content, msg.user, msg.postDate));
       });
     } else {
-      messagesContainer.append(getMsgUI('No messages!'));
+      messagesContainer.append(_getMsgUI('No messages!'));
     }
 
     messagesContainer.append(getAddNewMsgUI());
@@ -116,44 +95,62 @@
     contentContainer.html('').append(containerGallery);
   }
 
-  function addThreadToUI(data) {
-    function getThreadUI(title, id, creator, date) {
-      date = _formatDate(date);
+  function addThreadToUI(data) {    
+      let th = data.result;
+      let currentThreadUI = _getThreadUI(th.title, th.id, th.user, th.postDate);
+      $('#input-add-thread').val('');
+      $('.new-thread-add').before(currentThreadUI);
 
-      let template = $($('#thread-template').text()).attr('data-id', id),
-        threadTitle = template.find('.thread-title').text(title),
-        threadCreator = template.find('.thread-creator').text(creator || 'anonymous'),
-        threadDate = template.find('.thread-date').text(date || 'unknown');
-
-      return template.clone(true);
-    }
-
-    let th = data.result;
-    let currentThreadUI = getThreadUI(th.title, th.id, th.user, th.postDate);
-    $('#input-add-thread').val('');
-    $('.new-thread-add').before(currentThreadUI);
+      showMsg('Successfuly added the new thread', 'Success', 'alert-success');
   }
 
   function addMessageToUI(data) {
     let container = $('.container-messages');
     container.attr('data-thread-id', data.id);
 
-    function getMsgUI(msg, author, date) {
-      date = _formatDate(date);
-
-      let template = $($('#messages-template').text());
-      template.find('.message-content').text(msg);
-      template.find('.message-creator').text(author || 'anonymous');
-      template.find('.message-date').text(date || 'unknown');
-
-      return template.clone(true);
-    }
-
     container.find('.input-add-message').val('');
 
-    let msg = data.messages[data.messages.length - 1];
-    let currentMessageUI = getMsgUI(msg.content, msg.user, msg.postDate);
+    let currentMessageUI;
+
+    if (data.messages && data.messages.length > 0) {
+      let msg = data.messages[data.messages.length - 1];
+
+      if (msg.content.length === 0) {
+        msg.content = 'No messages!';
+      }
+
+      currentMessageUI = _getMsgUI(msg.content, msg.user, msg.postDate);
+    }
+
     container.find('.new-message-add').before(currentMessageUI);
+
+    showMsg('Successfuly added the new mssagee', 'Success', 'alert-success')
+  }
+
+  function _getThreadUI(title, id, creator, date) {
+    if (date) {
+      date = _formatDate(date);
+    }
+
+    let template = $($('#thread-template').text()).attr('data-id', id),
+      threadTitle = template.find('.thread-title').text(title),
+      threadCreator = template.find('.thread-creator').text(creator || 'anonymous'),
+      threadDate = template.find('.thread-date').text(date || 'unknown');
+
+    return template.clone(true);
+  }
+
+  function _getMsgUI(msg, author, date) {
+    if (date) {
+      date = _formatDate(date);
+    }
+
+    let template = $($('#messages-template').text());
+    template.find('.message-content').text(msg);
+    template.find('.message-creator').text(author || 'anonymous');
+    template.find('.message-date').text(date || 'unknown');
+
+    return template.clone(true);
   }
 
   function _formatDate(date) {
@@ -189,7 +186,6 @@
     let title = $(ev.target).parents('form').find('input#input-add-thread').val() || null;
     data.threads.add(title)
       .then(addThreadToUI)
-      .then(showMsg('Successfuly added the new thread', 'Success', 'alert-success'))
       .catch((err) => showMsg(JSON.parse(err.responseText).err, 'Error', 'alert-danger'));
   });
 
@@ -210,7 +206,6 @@
 
     data.threads.addMessage(thId, msg)
       .then(addMessageToUI)
-      .then(showMsg('Successfuly added the new mssagee', 'Success', 'alert-success'))
       .catch((err) => showMsg(JSON.parse(err.responseText).err, 'Error', 'alert-danger'));
   });
 
