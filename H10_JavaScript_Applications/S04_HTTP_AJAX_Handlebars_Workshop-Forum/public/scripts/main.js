@@ -38,6 +38,20 @@ $(() => { // on document ready
     }, delay || 2000);
   }
 
+  function updateThreadsUi(data) {
+    console.log(data.result);
+    tl.get('thread')
+      .then((threadTemplate) => {
+        let threadHtml = threadTemplate(data.result);
+        $('#threads form').before(threadHtml);
+      });      
+  }
+
+  function updateMessagesUi(data) {
+    console.log(data.result);
+   
+  }
+
   navbar.on('click', 'li', (ev) => {
     let $target = $(ev.target);
     $target.parents('nav').find('li').removeClass('active');
@@ -48,7 +62,7 @@ $(() => { // on document ready
   contentContainer.on('click', '#btn-add-thread', (ev) => {
     let title = $(ev.target).parents('form').find('#input-add-thread').val() || null;
     data.threads.add(title)
-      .then(/*  */)
+      .then(updateThreadsUi)
       .catch((err) => showMsg(JSON.parse(err.responseText).err, 'Error', 'alert-danger'));
   });
 
@@ -59,7 +73,7 @@ $(() => { // on document ready
       msg = $container.find('.input-add-message').val();
 
     data.threads.addMessage(thId, msg)
-      .then(/*  */)
+      .then(/** */)
       .catch((err) => showMsg(JSON.parse(err.responseText).err, 'Error', 'alert-danger'));
   });
 

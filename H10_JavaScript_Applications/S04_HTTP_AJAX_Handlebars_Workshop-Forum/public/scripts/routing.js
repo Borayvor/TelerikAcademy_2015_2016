@@ -17,10 +17,13 @@ var router = (() => {
                     .catch(console.log);
             })
             .on('/threads', () => {
-                Promise.all([data.threads.get(), tl.get('threads')])
-                    .then(([data, template]) => {
-                        let html = template(data);
+                Promise.all([data.threads.get(), tl.get('threads'), tl.get('thread')])
+                    .then(([data, template, threadTemplate]) => {
+                        let html = template();
                         $('#content').html(html);
+
+                        let threadHtml = threadTemplate(data.result);                       
+                        $('#threads form').before(threadHtml);
                     })
                     .catch(console.log);
             })

@@ -3,29 +3,7 @@
         <div class="panel-heading">
           <h3 class="panel-title">Threads</h3>
         </div>
-        <div id="threads" class="panel-body">
-        {{#result}}
-          <div class="thread" data-id={{this.id}}>
-            <div>
-              <h3><a href="#/threads/{{this.id}}">{{this.title}}</a></h3>
-            </div>
-              <div>
-                <p>
-                  {{#if this.postDate}}
-                  <span>Created on </span><span>{{this.postDate}}</span>
-                  {{else}}
-                  <span>Created on </span><span>unknown</span>
-                  {{/if}}
-                  by 
-                  {{#if this.author}}
-                  <a href="#/users/{{this.author}}">{{this.author}}</a>
-                  {{else}}
-                  <a href="#">anonymous</a>
-                  {{/if}}
-                </p>
-              </div>
-          </div>
-        {{/result}}
+        <div id="threads" class="panel-body">                         
 
             <form class="navbar-form navbar-left" role="search">
               <h4>Create new Thread:</h4>

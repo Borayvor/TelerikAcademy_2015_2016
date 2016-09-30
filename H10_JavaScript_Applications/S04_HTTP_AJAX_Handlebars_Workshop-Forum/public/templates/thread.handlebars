@@ -1,0 +1,22 @@
+{{#this}}
+          <div class="thread" data-id={{id}}>
+            <div>
+              <h3><a href="#/threads/{{id}}">{{title}}</a></h3>
+            </div>
+              <div>
+                <p>
+                  {{#if postDate}}
+                  <span>Created on </span><span>{{postDate}}</span>
+                  {{else}}
+                  <span>Created on </span><span>unknown</span>
+                  {{/if}}
+                  by 
+                  {{#if author}}
+                  <a href="#/users/{{author}}">{{author}}</a>
+                  {{else}}
+                  <a href="#">anonymous</a>
+                  {{/if}}
+                </p>
+              </div>
+          </div>
+{{/this}}
