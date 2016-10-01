@@ -22,8 +22,22 @@ var router = (() => {
                         let html = template();
                         $('#content').html(html);
 
-                        let threadHtml = threadTemplate(data.result);                       
+                        let threadHtml = threadTemplate(data.result);
                         $('#threads form').before(threadHtml);
+                    })
+                    .then(() => {
+                        $("#btn-add-thread").on("click", (ev) => {
+                            let title = $(ev.target).parents('form').find('#input-add-thread').val() || null;
+                            
+                            data.threads.add(title)
+                                .then((currentData) => {
+                                    tl.get('thread')
+                                        .then((currentThreadTemplate) => {
+                                            let currentThreadHtml = currentThreadTemplate(currentData.result);
+                                            $('#threads form').before(currentThreadHtml);
+                                        });
+                                });
+                        });
                     })
                     .catch(console.log);
             })
