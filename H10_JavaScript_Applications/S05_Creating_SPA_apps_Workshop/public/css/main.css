@@ -8,6 +8,10 @@
     margin: 0 auto;
 }
 
+#addCookie {
+    text-align: initial;
+}
+
 .list-cookies {
     list-style-type: none;
 }

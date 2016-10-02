@@ -27,11 +27,14 @@ var dataService = {
         return requester.putJSON("/api/cookies/" + cookieId, { type }, options);
 
     },
+    category() {
+        return requester.getJSON("/api/categories");
+    },
     login(user) {
         return requester.putJSON("/api/auth", user)
             .then(respUser => {
-                localStorage.setItem("username", respUser.result.username);
-                localStorage.setItem("authKey", respUser.result.authKey);
+                localStorage.setItem(KEY_STORAGE_USERNAME, respUser.result.username);
+                localStorage.setItem(KEY_STORAGE_AUTH_KEY, respUser.result.authKey);
             });
     },
     register(user) {
@@ -40,14 +43,14 @@ var dataService = {
     logout() {
         return Promise.resolve()
             .then(() => {
-                localStorage.removeItem("username");
-                localStorage.removeItem("authKey");
+                localStorage.removeItem(KEY_STORAGE_USERNAME);
+                localStorage.removeItem(KEY_STORAGE_AUTH_KEY);
             });
     },
     isLoggedIn() {
         return Promise.resolve()
             .then(() => {
-                return !!localStorage.getItem("username");
+                return !!localStorage.getItem(KEY_STORAGE_USERNAME);
             });
     }
 };

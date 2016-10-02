@@ -1,17 +1,28 @@
 /* globals dataService templates $ Handlebars console */
 
+const KEY_STORAGE_HOURLY_FORTUNE_COOKIE_TIME = "hourly-fortune-cookie-time";
+const KEY_STORAGE_HOURLY_FORTUNE_COOKIE_ID = "hourly-fortune-cookie-id";
 var handlebars = handlebars || Handlebars;
+
+function _getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 let controllers = {
     get(dataService, templates) {
         return {
-            home() {
-                var cookies;
+            home(params) {
+                console.log(params);
+                let cookies;
                 dataService.cookies()
                     .then((cookiesResponse) => {
                         cookies = cookiesResponse;
-                        console.log(cookies);
-
+                        cookies.result.sort((a, b) => {
+                            return a.shareDate < b.shareDate;
+                        });
+                       
                         return templates.get("home");
                     })
                     .then((templateHtml) => {
@@ -19,19 +30,65 @@ let controllers = {
                         let html = templateFunc(cookies);
                         $("#container").html(html);
 
-                        $(".btn-like-dislike").on("click", function(ev) {
+                        $(".btn-like-dislike").on("click", function (ev) {
                             let type = $(this).attr("data-type");
                             let cookieId = $(this).parents("li").attr("data-id");
-                            console.log(type);
-                            console.log(cookieId);
+
                             dataService.rateCookie(cookieId, type)
                                 .then();
-
                         });
                     });
             },
+            category(params) {
+                console.log("Category");
+                console.log(params);
+                // dataService.cookies()
+                //     .then((cookiesResponse) => {
+                //         cookies = cookiesResponse;
+                       
+                //         return templates.get("home");
+                //     });
+            },
             myCookie() {
-                console.log("My Cookie");
+                let currentTimeHours = new Date().getHours();
+                let lastTime = localStorage.getItem(KEY_STORAGE_HOURLY_FORTUNE_COOKIE_TIME);
+                let lastCookieId = localStorage.getItem(KEY_STORAGE_HOURLY_FORTUNE_COOKIE_ID);
+                let cookie;
+
+                if (lastTime < currentTimeHours || lastTime === null) {
+                    localStorage.setItem(KEY_STORAGE_HOURLY_FORTUNE_COOKIE_TIME, currentTimeHours);
+
+                    dataService.cookies()
+                        .then((cookiesResponse) => {
+                            let cookies = cookiesResponse.result;
+                            let randNumber = _getRandomIntInclusive(0, cookies.length);
+                            
+                            cookie = cookies[randNumber];
+                            localStorage.setItem(KEY_STORAGE_HOURLY_FORTUNE_COOKIE_ID, cookie.id);
+
+                            return templates.get("my-cookie")
+                                .then((templateHtml) => {
+                                    let templateFunc = handlebars.compile(templateHtml);
+                                    let html = templateFunc(cookie);
+                                    $("#container").html(html);
+                                });
+                        });                        
+                } else {
+                    dataService.cookies()
+                        .then((cookiesResponse) => {
+                            let cookies = cookiesResponse.result;
+                            cookie = cookies.find((cookie) => {                               
+                                return cookie.id === lastCookieId;
+                            });
+
+                            templates.get("my-cookie")
+                                .then((templateHtml) => {
+                                    let templateFunc = handlebars.compile(templateHtml);
+                                    let html = templateFunc(cookie);
+                                    $("#container").html(html);
+                                });
+                        });
+                }
             },
             addCookie() {
                 templates.get("cookie-add")
@@ -42,10 +99,19 @@ let controllers = {
                         $("#container").html(html);
 
                         $("#btn-add").on("click", () => {
-                            var cookie = {
+                            let cookie = {
                                 text: $("#tb-text").val(),
-                                img: $("#tb-img-url").val()
+                                img: $("#tb-img-url").val(),
+                                category: $("#tb-category").val()
                             };
+
+                            validator.validateFortuneCookieText(cookie.text);
+                            validator.validateFortuneCookieCategory(cookie.category);
+                            validator.validateFortuneCookieImgUrl(cookie.img);
+
+                            if (cookie.img.length === 0) {
+                                cookie.img = null;
+                            }
 
                             dataService.addCookie(cookie)
                                 .then(() => {
