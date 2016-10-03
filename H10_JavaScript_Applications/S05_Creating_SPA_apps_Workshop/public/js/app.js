@@ -7,6 +7,7 @@ let controllersInstance = controllers.get(dataService, templates);
 router
     .on("login", controllersInstance.login)
     .on("home", controllersInstance.home)
+    .on("home/category/:categoryName", controllersInstance.cookiesByCategory)
     .on("my-cookie", controllersInstance.myCookie)
     .on("cookie-add", controllersInstance.addCookie)
     .on(() => {

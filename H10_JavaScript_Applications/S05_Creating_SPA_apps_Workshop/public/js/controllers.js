@@ -13,16 +13,16 @@ function _getRandomIntInclusive(min, max) {
 let controllers = {
     get(dataService, templates) {
         return {
-            home(params) {
-                console.log(params);
+            home() {
                 let cookies;
+                let categories;
                 dataService.cookies()
                     .then((cookiesResponse) => {
                         cookies = cookiesResponse;
                         cookies.result.sort((a, b) => {
                             return a.shareDate < b.shareDate;
                         });
-                       
+
                         return templates.get("home");
                     })
                     .then((templateHtml) => {
@@ -37,17 +37,49 @@ let controllers = {
                             dataService.rateCookie(cookieId, type)
                                 .then();
                         });
+
+                        dataService.categories()
+                            .then((categoriesResponse) => {
+                                categories = categoriesResponse.result;
+                            });
+
+                        return templates.get("categories-dropdown");
+                    })
+                    .then((templateHtml) => {
+                        let templateFunc = handlebars.compile(templateHtml);
+                        let html = templateFunc(categories);
+                        $("#container .list-cookies").before(html);
                     });
             },
-            category(params) {
-                console.log("Category");
-                console.log(params);
-                // dataService.cookies()
-                //     .then((cookiesResponse) => {
-                //         cookies = cookiesResponse;
-                       
-                //         return templates.get("home");
-                //     });
+            cookiesByCategory(params) {
+                let cookies;
+                dataService.cookies()
+                    .then((cookiesResponse) => {
+                        cookies = cookiesResponse.result;
+                        cookies.result = cookiesResponse.result.filter((item) => {
+                            return item.category === params.categoryName;
+                        });
+
+                        return templates.get("home");
+                    })
+                    .then((templateHtml) => {
+                        let templateFunc = handlebars.compile(templateHtml);
+                        let html = templateFunc(cookies);
+                        $("#container").html(html);
+
+                         dataService.categories()
+                            .then((categoriesResponse) => {
+                                categories = categoriesResponse.result;
+                            });
+
+                        return templates.get("categories-dropdown");
+                    })
+                    .then((templateHtml) => {
+                        let templateFunc = handlebars.compile(templateHtml);
+                        let html = templateFunc(categories);
+                        $("#container .list-cookies").before(html);
+                    });
+
             },
             myCookie() {
                 let currentTimeHours = new Date().getHours();
@@ -62,7 +94,7 @@ let controllers = {
                         .then((cookiesResponse) => {
                             let cookies = cookiesResponse.result;
                             let randNumber = _getRandomIntInclusive(0, cookies.length);
-                            
+
                             cookie = cookies[randNumber];
                             localStorage.setItem(KEY_STORAGE_HOURLY_FORTUNE_COOKIE_ID, cookie.id);
 
@@ -72,12 +104,12 @@ let controllers = {
                                     let html = templateFunc(cookie);
                                     $("#container").html(html);
                                 });
-                        });                        
+                        });
                 } else {
                     dataService.cookies()
                         .then((cookiesResponse) => {
                             let cookies = cookiesResponse.result;
-                            cookie = cookies.find((cookie) => {                               
+                            cookie = cookies.find((cookie) => {
                                 return cookie.id === lastCookieId;
                             });
 

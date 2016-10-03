@@ -1,0 +1,13 @@
+<div class="dropdown">
+  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by category
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dLabel">
+    {{#this}}
+    <li>
+      <a href="#/home/category/{{this}}">{{this}}</a>
+    </li>
+    {{/this}}
+  </ul>
+</div>

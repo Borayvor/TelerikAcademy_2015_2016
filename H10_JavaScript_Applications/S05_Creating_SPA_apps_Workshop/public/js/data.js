@@ -27,7 +27,7 @@ var dataService = {
         return requester.putJSON("/api/cookies/" + cookieId, { type }, options);
 
     },
-    category() {
+    categories() {
         return requester.getJSON("/api/categories");
     },
     login(user) {

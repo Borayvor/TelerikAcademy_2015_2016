@@ -62,6 +62,13 @@
       "usernameToLower": "qweqwe",
       "id": "f75f1e94-a784-4ebd-bc65-22e9b9969cbe",
       "authKey": "f75f1e94-a784-4ebd-bc65-22e9b9969cbeRijCiuBPkZORVLmfVuDKCNyc"
+    },
+    {
+      "username": "qweqweq",
+      "passHash": "qweqwe",
+      "usernameToLower": "qweqweq",
+      "id": "cb21d56a-4718-4910-8372-90047e5a2ef0",
+      "authKey": "cb21d56a-4718-4910-8372-90047e5a2ef0qFKnsEweOfeCsVsktmZnOeMB"
     }
   ],
   "cookies": [
