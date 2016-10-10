@@ -18,6 +18,8 @@
 
         public const string NullParsers = "Parser cannot be null !";
 
+        public const string NullDataBase = "Database cannot be null !";
+
         public const string NullOrEmptyCommand = "Command cannot be null or empty !";
     }
 }

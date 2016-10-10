@@ -24,6 +24,11 @@
                 throw new ArgumentNullException(ExceptionMessages.NullParsers);
             }
 
+            if (db == null)
+            {
+                throw new ArgumentNullException(ExceptionMessages.NullDataBase);
+            }
+
             this.interfaceProvider = interfaceProvider;
             this.parser = parser;
             this.db = db;
