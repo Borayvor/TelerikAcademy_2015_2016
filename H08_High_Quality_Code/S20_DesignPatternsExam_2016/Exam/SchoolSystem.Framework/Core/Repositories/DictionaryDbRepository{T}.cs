@@ -6,8 +6,8 @@
     public class DictionaryDbRepository<T> : IDbRepository<T>
         where T : class
     {
-        private static IDictionary<int, T> entities;
-        private static int currentEntityId;
+        private readonly IDictionary<int, T> entities;
+        private int currentEntityId;
 
         public DictionaryDbRepository()
         {
