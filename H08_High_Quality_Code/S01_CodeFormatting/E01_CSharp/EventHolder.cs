@@ -16,7 +16,7 @@
             this.holdByTitle.Add(title.ToLower(), newEvent);
             this.holdByDate.Add(newEvent);
 
-            Messages.EventAdded();
+            EventMessages.EventAdded();
         }
 
         public void DeleteEvents(string titleToDelete)
@@ -32,7 +32,7 @@
 
             this.holdByTitle.Remove(title);
 
-            Messages.EventDeleted(removed);
+            EventMessages.EventDeleted(removed);
         }
 
         public void ListEvents(DateTime date, int count)
@@ -49,13 +49,13 @@
                     break;
                 }
 
-                Messages.PrintEvent(eventToShow);
+                EventMessages.PrintEvent(eventToShow);
                 showed++;
             }
 
             if (showed == 0)
             {
-                Messages.NoEventsFound();
+                EventMessages.NoEventsFound();
             }
         }
     }

@@ -25,3 +25,28 @@ function onFindBiggestButtonClick() {
     }
     answer.innerHTML = "The biggest is: " + biggestNumber;
 }
+
+function solve(args) {
+    var firstNumber = parseFloat(args[0]);
+    var secondNumber = parseFloat(args[1]);
+    var thirdNumber = parseFloat(args[2]);
+
+    var biggestNumber = firstNumber;
+
+    if ((firstNumber === secondNumber) && (secondNumber === thirdNumber)) {
+        console.log('');
+    }
+    else {
+        if ((firstNumber >= secondNumber) && (firstNumber >= thirdNumber)) {
+            biggestNumber = firstNumber;
+        }
+        if ((secondNumber >= firstNumber) && (secondNumber >= thirdNumber)) {
+            biggestNumber = secondNumber;
+        }
+        if ((thirdNumber >= firstNumber) && (thirdNumber >= secondNumber)) {
+            biggestNumber = thirdNumber;
+        }
+    }
+
+    console.log(biggestNumber);    
+}

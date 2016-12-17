@@ -1,7 +1,7 @@
 ﻿var task = document.getElementById('task');
 task.innerHTML = "8. Write an expression that calculates trapezoid's area by given sides a and b and height h.";
 
-function onButtonClick() {    
+function onButtonClick() {
     var answer = document.getElementById("answer");
 
     var sideA = parseInt(document.getElementById("input-a").value);
@@ -16,4 +16,14 @@ function onButtonClick() {
     else {
         answer.innerHTML = "The side A or B or 'height' can't be less or equal than 0 !";
     }
+}
+
+function solve(args) {
+    var sideA = parseFloat(args[0]);
+    var sideB = parseFloat(args[1]);
+    var height = parseFloat(args[2]);
+
+    var result = (((sideA + sideB) * height) / 2).toFixed(7);
+
+    console.log(result);
 }

@@ -24,9 +24,9 @@ public class ExamResult
 
         private set
         {
-            if(value < 0)
+            if(value <= 0)
             {
-                throw new ArgumentException("The Grade cannot be negative !");
+                throw new ArgumentException("The Grade cannot be negative, or zero !");
             }
 
             this.grade = value;
@@ -42,9 +42,9 @@ public class ExamResult
 
         private set
         {
-            if(value < 0)
+            if(value <= 0)
             {
-                throw new ArgumentException("The MinGrade cannot be negative !");
+                throw new ArgumentException("The MinGrade cannot be negative, or zero !");
             }
 
             this.minGrade = value;
@@ -60,9 +60,9 @@ public class ExamResult
 
         private set
         {
-            if(value < 0)
+            if(value <= 0)
             {
-                throw new ArgumentException("The MaxGrade cannot be negative !");
+                throw new ArgumentException("The MaxGrade cannot be negative, or zero !");
             }
 
             if(value <= this.MinGrade)

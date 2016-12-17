@@ -16,7 +16,7 @@ answer.innerHTML += "The substring is:  " + substring;
 function checkForSubstring(textString, substring, isCaseSensitive) {
 
     var regEx = new RegExp(substring, "gi");
-   
+
     return textString.match(regEx).length;
 }
 
@@ -30,4 +30,17 @@ function onButtonClickPrintResult() {
     var matchSubstringInText = checkForSubstring(text, substring, true);
 
     answer.innerHTML += "The result is : " + matchSubstringInText;
+}
+
+function solve(args) {
+    function checkForSubstring(textString, substring) {
+
+        var regEx = new RegExp(substring, "gi");
+
+        return textString.match(regEx).length;
+    }
+
+    var result = checkForSubstring(args[1], args[0]);
+
+    return result;
 }

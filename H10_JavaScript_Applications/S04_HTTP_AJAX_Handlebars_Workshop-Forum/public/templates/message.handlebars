@@ -1,0 +1,24 @@
+{{#this.messages}}
+            <div class="message">
+              <div>
+                {{#if content}}
+                <p class="message-content">{{content}}</p>
+                {{else}}
+                <p class="message-content">No messages !</p>
+                {{/if}}
+                <p>
+                  {{#if postDate}}
+                  <span>Created on </span><span class="message-date">{{postDate}}</span>
+                  {{else}}
+                  <span>Created on </span><span class="message-date">unknown</span>
+                  {{/if}}
+                  by 
+                  {{#if author}}
+                  <a class="message-creator" href="#">{{author}}</a>
+                  {{else}}
+                  <a class="message-creator" href="#">anonymous</a>
+                  {{/if}}
+                </p>
+              </div>
+            </div>
+{{/this.messages}}

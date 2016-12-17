@@ -17,3 +17,13 @@ function onButtonClick() {
         answer.innerHTML = "Third bit is " + bit;
     }
 }
+
+function solve(args) {
+    var number = parseInt(args);
+
+    var mask = 1 << 3;
+    var numberAndMask = number & mask;
+    var bit = numberAndMask >> 3;
+
+    console.log(bit);
+}

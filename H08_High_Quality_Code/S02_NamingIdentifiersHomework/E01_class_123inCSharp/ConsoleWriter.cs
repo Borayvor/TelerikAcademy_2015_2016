@@ -1,4 +1,4 @@
-﻿namespace E01_Task_1_class_123inCSharp
+﻿namespace E01_Task_1_Class_123inCSharp
 {
     using System;
 

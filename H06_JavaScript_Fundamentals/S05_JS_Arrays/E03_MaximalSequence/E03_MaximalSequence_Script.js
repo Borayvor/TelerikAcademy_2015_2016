@@ -56,3 +56,31 @@ function onButtonClickPrintAnswer() {
 
     answer.innerHTML += "<br />";
 }
+
+function solve(args) {
+    var array = args[0].split('\n');
+    var arrLength = array.shift();   
+    var size = 0;
+    var count = 1;
+    var value = 0;
+    var index = 0;
+
+    for (value = 0; value < arrLength - 1; value += 1) {
+        size = 0;
+
+        for (index = value; index < arrLength; index++) {
+            if (array[value] === (array[index])) {
+                size++;
+            }
+            else {
+                break;
+            }
+        }
+
+        if ((count < size) && (array[value] === (array[value + 1]))) {
+            count = size;           
+        }
+    }
+
+    console.log(count);    
+}

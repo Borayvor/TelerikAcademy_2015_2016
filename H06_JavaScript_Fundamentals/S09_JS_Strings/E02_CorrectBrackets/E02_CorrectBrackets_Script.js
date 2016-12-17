@@ -12,7 +12,7 @@ function CheckBrackets(string) {
         if (string[index] == ')') stack--;
     }
 
-    return stack == 0;
+    return stack === 0;
 }
 
 function onButtonClickPrintResult() {
@@ -24,4 +24,22 @@ function onButtonClickPrintResult() {
     answer.innerHTML += "(a+b))(  ==> " + CheckBrackets("(a+b))(");
     answer.innerHTML += "<br />";
     answer.innerHTML += "(a+b)((  ==> " + CheckBrackets("(a+b)((");
+}
+
+function solve(args) {
+    function checkBrackets(str) {
+        var stack = 0,
+            len = str.length;
+
+        for (var index = 0; index < len && stack >= 0; index++) {
+            if (str[index] == '(') stack++;
+            if (str[index] == ')') stack--;
+        }
+
+        return stack === 0;
+    }
+
+    var result = checkBrackets(args[0]) === true ? "Correct" : "Incorrect";
+
+    return result;
 }

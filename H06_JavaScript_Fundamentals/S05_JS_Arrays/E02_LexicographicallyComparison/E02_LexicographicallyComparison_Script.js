@@ -32,3 +32,33 @@ function onButtonClickPrintAnswer() {
     compareTwoArrays(["Y", "B", "S", "S"], ["y", "b", "s", "s"]);
     compareTwoArrays(["Y", "B", "S", "S"], [5, 7, 89, -34]);
 }
+
+function solve(args) {
+    var arr = args[0].split('\n');
+    var arr1 = arr[0];
+    var arr2 = arr[1];
+
+    function compareTwoArrays(firstArray, secondArray) {
+        // var result = firstArray.localeCompare(secondArray);
+
+        // if (result > 0) {
+        //     console.log('>');
+        // }
+        // else if (result < 0) {
+        //     console.log('<');
+        // }
+        // else {
+        //     console.log('=');
+        // }
+
+        if (firstArray > secondArray) {
+            console.log('>');
+        } else if (firstArray < secondArray) {
+            console.log('<');
+        } else {
+            console.log('=');
+        }
+    }
+
+    compareTwoArrays(arr1, arr2);
+}

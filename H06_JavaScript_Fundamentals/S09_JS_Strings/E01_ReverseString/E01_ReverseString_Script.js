@@ -18,3 +18,15 @@ function onButtonClickPrintResult() {
     answer.innerHTML += "<br />";
     answer.innerHTML += "Reversed string :  " + reversedString;
 }
+
+function solve(args) {    
+    var reversedString = '',
+        len = args[0].length;
+
+    for (var index = len - 1; index >= 0 ; index--) {
+
+        reversedString += args[0][index];
+    }
+
+    return reversedString;
+}

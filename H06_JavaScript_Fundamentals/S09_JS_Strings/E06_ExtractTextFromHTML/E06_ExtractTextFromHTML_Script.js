@@ -33,3 +33,17 @@ function onButtonClickPrintResult() {
 
     console.log(extractHtmlContent(testText));
 }
+
+//// =================================================================== ////
+
+function solve(args) {
+    var newText = '';
+    var len = args.length;
+    var matchTags = /<.*?>/ig;
+
+    for (var i = 0; i < len; i += 1) {
+        newText += args[i].replace(matchTags, '').trim();
+    }
+
+    console.log(newText);
+}

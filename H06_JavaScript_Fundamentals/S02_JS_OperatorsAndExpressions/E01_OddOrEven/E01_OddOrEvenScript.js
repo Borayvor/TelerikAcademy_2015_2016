@@ -12,3 +12,14 @@ function onButtonClick() {
         answer.innerHTML = "The number " + number + " is odd.";        
     }
 }
+
+function solve(args) {
+    var number = parseInt(args);
+
+    if (number % 2 === 0) {
+        console.log('even ' + number);
+    }
+    else {
+        console.log('odd ' + number);
+    }
+}

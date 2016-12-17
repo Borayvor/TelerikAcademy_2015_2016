@@ -1,6 +1,6 @@
 ﻿var task = document.getElementById('task');
-task.innerHTML = "5. Write a function that counts how many times given number " + 
-    "appears in given array. Write a test function to check if the function " + 
+task.innerHTML = "5. Write a function that counts how many times given number " +
+    "appears in given array. Write a test function to check if the function " +
     "is working correctly.";
 
 function countNumber(array, number) {
@@ -49,4 +49,23 @@ function onButtonClickPrintResult() {
     else {
         answer.innerHTML += "The number must be in the range [1..9] !";
     }
+}
+
+function solve(args) {
+    var arr = args[0].split('\n');
+    var arrLength = parseInt(arr.shift());
+    var number = parseInt(arr.pop());
+    var count = 0;
+
+    arr = arr[0].split(" ").map(function (num) {
+        return parseInt(num);
+    });
+
+    for (var i = 0; i < arrLength; i += 1) {
+        if (arr[i] === number) {
+            count += 1;
+        }
+    }
+
+    return count;
 }

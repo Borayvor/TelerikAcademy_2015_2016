@@ -11,7 +11,7 @@ function solve() {
         '{{#animals}}' +
         '<li>' +
         '<a href="{{#if url}}{{url}}{{else}}' + defaultURL + '{{/if}}">' +
-        '{{#if url}}See a {{name}}{{else}}No link for {{name}} , here is Batman!{{/if}}</a>' +
+        '{{#if url}}See a {{name}}{{else}}No link for {{name}}, here is Batman!{{/if}}</a>' +
         '</li>' +
         '{{/animals}}' +
         '</ul>' +
@@ -19,6 +19,6 @@ function solve() {
 
         $( selector ).html( template );
     };
-};
+}
 
 module.exports = solve;

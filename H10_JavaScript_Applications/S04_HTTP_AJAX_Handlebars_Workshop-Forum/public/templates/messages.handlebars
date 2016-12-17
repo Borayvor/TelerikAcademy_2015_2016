@@ -1,0 +1,49 @@
+{{#result}}
+<div class="container-messages col-xs-8" data-thread-id={{this.id}}>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Messages for <strong class="thread-title">{{this.title}}</strong>
+            <button class="btn-close-msg btn btn-danger btn-xs pull-right glyphicon glyphicon-remove" title="close"></button>
+            <button class="btn-collapse-msg btn btn-xs pull-right glyphicon glyphicon-chevron-up" title="collapse"></button>
+          </h3>
+        </div>
+        <div class="messages panel-body">  
+          {{#this.messages}}
+            <div class="message">
+              <div>
+                {{#if content}}
+                <p class="message-content">{{content}}</p>
+                {{else}}
+                <p class="message-content">No messages !</p>
+                {{/if}}
+                <p>
+                  {{#if postDate}}
+                  <span>Created on </span><span class="message-date">{{postDate}}</span>
+                  {{else}}
+                  <span>Created on </span><span class="message-date">unknown</span>
+                  {{/if}}
+                  by 
+                  {{#if author}}
+                  <a class="message-creator" href="#">{{author}}</a>
+                  {{else}}
+                  <a class="message-creator" href="#">anonymous</a>
+                  {{/if}}
+                </p>
+              </div>
+            </div>
+          {{/this.messages}}        
+          
+            <form class="" role="search">
+              <div class="input-group">
+                <input class="input-add-message message-content form-control" placeholder="Add new message..." />
+                <span class="input-group-btn">
+                  <button class="btn-add-message btn btn-success " type="submit">Add</button>
+                </span>
+              </div>
+            </form>
+            
+        </div>
+      </div>
+    </div>
+{{/result}}
